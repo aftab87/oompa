@@ -1,7 +1,7 @@
 # OompaDB
 
 ### First run:
-`npm install` when you first download this project. This will install all the node libraries missing.
+`npm install` when you first download this project. This will install all the node libraries that are missing.
 
 
 ### Running the application:
