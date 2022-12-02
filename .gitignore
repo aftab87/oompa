@@ -2,6 +2,10 @@
 
 #individual config
 .env
+.vscode
+.idea
+.vscode/*
+.idea/*
 
 # dependencies
 /node_modules
