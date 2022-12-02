@@ -1,3 +1,19 @@
+# OompaDB
+`npm start` runs the backend and the frontend simultaneously
+
+## Database Setup
+create a `.env` file in the server folder and add values for the following:
+
+`MONGODB_USERNAME=XXX`
+
+`MONGODB_PWD=XXX`
+
+##
+
+
+---
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
