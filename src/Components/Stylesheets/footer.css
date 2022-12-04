@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Roboto:wght@300;400&display=swap');
+
+
+.footer {
+
+    margin-top: auto;
+    height: 2.5rem;
+    text-align: center;
+    background-color: lightgray;
+  
+  }

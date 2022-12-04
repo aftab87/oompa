@@ -1,10 +1,12 @@
 import Header from "./Header";
-import "./Stylesheets/Main.css"
+import Footer from "./Footer";
+import "./Stylesheets/main.css"
 
 function Main () {
     return (
-    <div>
+    <div className="mainContainer">
         <Header />
+        <Footer />
     </div>
     )
 }

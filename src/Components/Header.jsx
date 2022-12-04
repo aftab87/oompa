@@ -3,9 +3,9 @@ import "./Stylesheets/header.css";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 // import Button from 'react-bootstrap/Button';
-// import logo from "./images/testLogoImage.png";
+// import logo from "./images/yourImage.png";
 
-
+// Things to do:
 // Need to include a dark and light mode
 
 function Header() {
