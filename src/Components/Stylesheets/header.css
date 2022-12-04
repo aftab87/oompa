@@ -1,0 +1,36 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Roboto:wght@300;400&display=swap');
+
+.nav-con{
+    width: 100% ;
+    margin: 0 ;
+    display: flex;
+    padding: 16px;
+    height: 72px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+}
+
+.loginButton {
+    height: 39px;
+    background-color: #6610F2;
+    border: transparent;
+    color: white;
+    border-radius: 4px;
+    width: 71px;
+}
+
+
+
+
+
+
+
+
+

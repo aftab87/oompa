@@ -1,10 +1,13 @@
 import './App.css';
+import Main from "./Components/Main"
 
 function App() {
   return (
-    <div className="App">
-      <p>Hello Oompas</p>
+    
+    <div>
+      <Main />
     </div>
+
   );
 }
 
