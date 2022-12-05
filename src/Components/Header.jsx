@@ -1,11 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
 
 // Need to include a dark and light mode
 
@@ -17,13 +14,13 @@ function Header() {
           <Form.Check type="switch" id="custom-switch" label="Dark Mode" />
         </div>
         <Navbar.Brand href="#home" className="m-0 col-6 text-center">
-          React-Bootstrap
+          O ompa
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="m-0 col-3" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="m-0 col-3 text-end border-0" />
         <Navbar.Collapse id="basic-navbar-nav justify-content-end" className="m-0 col-3 justify-content-end">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+          <Nav className="ms-auto text-center">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
