@@ -1,12 +1,12 @@
-import Header from "./Header";
-import "./Stylesheets/Main.css"
+import Header from "Components/Header";
+import "Components/Stylesheets/Main.css";
 
-function Main () {
-    return (
+function Main() {
+  return (
     <div>
-        <Header />
+      <Header />
     </div>
-    )
+  );
 }
 
 export default Main;
