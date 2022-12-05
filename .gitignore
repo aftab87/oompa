@@ -6,7 +6,6 @@
 .idea
 .vscode/*
 .idea/*
-Tests
 
 # dependencies
 /node_modules
