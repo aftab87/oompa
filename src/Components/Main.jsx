@@ -3,9 +3,9 @@ import "./Stylesheets/Main.css"
 
 function Main () {
     return (
-    <div>
+    <>
         <Header />
-    </div>
+    </>
     )
 }
 
