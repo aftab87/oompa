@@ -1,6 +1,6 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import "./Stylesheets/Main.css"
+import Footer from "Components/Footer";
+import Header from "Components/Header";
+import "Components/Stylesheets/Main.css"
 
 function Main () {
     return (
