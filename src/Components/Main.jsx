@@ -4,7 +4,7 @@ import "./Stylesheets/Main.css"
 
 function Main () {
     return (
-    <div>
+    <div className="mainContainer">
         <Header />
         <Footer />
     </div>
