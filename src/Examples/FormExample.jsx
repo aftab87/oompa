@@ -18,8 +18,11 @@ function FormExample() {
 
     return (
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <InputGroup type="text" label="Input Example" placeholder="Username" required />
-            <InputGroup type="text" as="textArea" label="TextArea Example" placeholder="This is a long text" required />
+            {/* Input with regex example */}
+            <InputGroup type="text" label="Input Example" placeholder="Username" required pattern={/^\d{3}$/} pattern_message="Please input 3 digits" />
+            {/* Textarea example */}
+            <InputGroup type="text" as="textarea" rows={21} label="TextArea Example" placeholder="This is a long text" required />
+
             <Button type="submit">Submit form</Button>
         </Form>
     );
