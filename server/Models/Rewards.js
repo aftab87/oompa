@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 // ***********Rewards SCHEMA ****************
 
 const RewardsSchema = new mongoose.Schema({
-    uid: {
-        type: String,
-        required: true,
-    },
+
     parent_uid: {
         type: String,
         required: true,

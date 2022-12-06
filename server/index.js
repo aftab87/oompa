@@ -4,12 +4,17 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors"); //cross-origin resource sharing
+
+// +++++++++++++++++++++++++++++++++++++++++ Chores Constants+++++++++++++++++++++++++++++++++
+
 const choresModel = require("./Models/Chores");
 const kidsModel = require("./Models/Kids");
 const Kids = require("./Models/Kids");
 const ChoresCompletedModel = require("./Models/Chores_completed");
 
-// +++++++++++++++++++++++++++++++++++++++++ Rewards +++++++++++++++++++++++++++++++++
+
+// +++++++++++++++++++++++++++++++++++++++++ Rewards Constants+++++++++++++++++++++++++++++++++
+const rewardsModel = require("./Models/Rewards");
 
 
 const app = express();
@@ -136,5 +141,36 @@ app.post("/chores/completed", async (req, res) => {
   }
   res.send(chores_completed);
 });
+
+//                                                 ==========================  REWARDS CRUD ==========================================
+
+app.post("/rewards/add", async (req, res) => {
+  const parent_uid = req.body.parent_uid;
+  const kids = req.body.kids;
+  const title = req.body.title;
+  const description = req.body.description;
+  const image = req.body.image;
+  const points = req.body.points;
+  const should_persist = req.body.should_persist;
+
+  const rewards = {
+    parent_uid: parent_uid,
+    kids: kids,
+    title: title,
+    description: description,
+    image: image,
+    points: points,
+    should_persist: should_persist,
+  };
+  try {
+    await rewardsModel.create(rewards);
+  } catch (err) {
+    console.log(err);
+  }
+  res.send(rewards);
+});
+
+
+
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

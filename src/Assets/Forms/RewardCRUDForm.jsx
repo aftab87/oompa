@@ -24,9 +24,26 @@ function RewardsCRUDForm() {
             <InputGroup type="text" label="Image" placeholder="Insert image..." required />
             <InputGroup type="number" label="Points" placeholder="Number of points..." required />
       
-            <Button type="submit">Submit form</Button>
+            <Button type="submit" onClick={registeringReward}>Submit form</Button>
         </Form>
     );
 }
 
 export default RewardsCRUDForm;
+
+
+async function registeringReward() {
+
+    fetch("http://localhost:3001/rewards", {
+        method: "POST",
+        body: JSON.stringify({
+            username: "NEWBenny2022",
+            password: "Rocks100@@100",
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    })
+        .then((data) => data.json())
+        .then((json) => alert(JSON.stringify(json)));
+}
