@@ -4,9 +4,14 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Home(props) {
-  // const isLoggedIn = true;
-  // TODO: add consts to hold content for last section if loggedin
-  const flex_center = "d-flex justify-content-center align-items-center"; // TODO: check if some styles can be grouped like this one
+  const isLoggedIn = true;
+  const ctaTitle = isLoggedIn ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
+  const ctaButtonLabel = isLoggedIn ? "Dashboard" : "Sign Up";
+  const ctaButtonLink = isLoggedIn ? "/dashboard" : "/sugnup";
+  const ctaText = isLoggedIn
+    ? "You can do a lot in your dashboard"
+    : " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris";
+  const flex_center = "d-flex justify-content-center align-items-center";
   return (
     <main className="home text-center">
       <section className="bg-primary welcome">
@@ -49,13 +54,10 @@ function Home(props) {
               <img className="mb-n5" src="images/illustration2.svg" alt="" />
             </div>
             <div className="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center p-5 gap-2">
-              <h2>Do you have an Oompa Account?!</h2>
-              <p className="">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.
-                Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum.
-              </p>
-              <Button as={Link} variant="primary" className="m-2" to="/signup">
-                Sign Up
+              <h2>{ctaTitle}</h2>
+              <p className="">{ctaText}</p>
+              <Button as={Link} variant="primary" className="m-2" to={ctaButtonLink}>
+                {ctaButtonLabel}
               </Button>
             </div>
           </div>

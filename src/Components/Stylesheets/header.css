@@ -24,9 +24,12 @@
     border-radius: 4px;
     width: 71px;
 } */
-
-.navbar-nav .active_j{
-    color: #6610F2;
+.navbar-nav {
+    font-weight: 500;
+}
+.navbar-nav .active {
+    color: var(--bs-indigo)!important;
+    font-weight: 900;
 }
 
 
