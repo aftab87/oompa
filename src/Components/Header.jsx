@@ -1,22 +1,31 @@
-import Button from "react-bootstrap/Button";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import "Components/Stylesheets/header.css";
+import { DarkModeContext } from "../App";
+import { Button } from "react-bootstrap";
 
 // Need to include a dark and light mode
 function Header() {
   const isLoggedIn = true;
+
+  const [darkMode, setDarkMode] = useContext(DarkModeContext);
+
+  const darkModeToggleHandler = () => {
+    darkMode ? setDarkMode(false) : setDarkMode(true)
+  }
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg={darkMode ? 'dark' : 'light'} expand="lg" className="navbar-dark">
       {/* <NavLink className={({ isActive }) => (isActive ? "link-active" : "link-inactive")} to="/">
         Home
       </NavLink> */}
-      <Container>
-        <div href="#home" className="m-0 col-3">
-          <Form.Check type="switch" id="custom-switch" label="Dark Mode" />
+      <Container fluid>
+        <div className="m-0 col-3">
+          <Form.Check type="switch" id="custom-switch" label="Dark Mode"  onInput={darkModeToggleHandler} />
         </div>
         <Navbar.Brand as={Link} to="/" className="m-0 col-6 text-center">
           O ompa
