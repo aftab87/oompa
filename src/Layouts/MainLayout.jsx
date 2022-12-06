@@ -7,10 +7,7 @@ function MainLayout(props) {
   return (
     <div>
       <Header />
-      <div className="">
-        <Outlet />
-      </div>
-
+      <Outlet />
       <Footer />
     </div>
   );
