@@ -44,6 +44,9 @@ function Header() {
                 <Nav.Link as={Link} to="/dashboard" className="d-flex align-items-center active justify-content-center">
                   Dashboard
                 </Nav.Link>
+                <Nav.Link as={Link} to="/rewards" className="d-flex align-items-center active justify-content-center">
+                  Rewards
+                </Nav.Link>
                 <Button as={Link} variant="danger" className="m-2" to="/logout">
                   Logout
                 </Button>

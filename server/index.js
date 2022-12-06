@@ -9,6 +9,9 @@ const kidsModel = require("./Models/Kids");
 const Kids = require("./Models/Kids");
 const ChoresCompletedModel = require("./Models/Chores_completed");
 
+// +++++++++++++++++++++++++++++++++++++++++ Rewards +++++++++++++++++++++++++++++++++
+
+
 const app = express();
 const port = 3001; // Must be different from the port of the React app
 

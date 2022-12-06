@@ -8,11 +8,13 @@ import SignUp from "Pages/SignUp";
 import Login from "Pages/Login";
 import Page404 from "Pages/Page404";
 import Dashboard from "Pages/Dashboard";
+import Rewards from "Pages/RewardsForm";
 import EmailConfirmation from "Pages/EmailConfirmation";
 import MainLayout from "Layouts/MainLayout";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Components/GlobalStyles";
 import { lightTheme, darkTheme } from "./Components/Theme";
+
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -36,6 +38,7 @@ function App() {
               <Route path="signup" element={<SignUp />} />
               <Route path="login" element={<Login />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="rewards" element={<Rewards />} />
               <Route path="emailconfirmation" element={<EmailConfirmation />} />
               <Route path="*" element={<Page404 />} />
             </Route>
