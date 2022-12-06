@@ -9,6 +9,7 @@ import EmailConfirmation from "Pages/EmailConfirmation";
 import MainLayout from "Layouts/MainLayout";
 import Dashboard from "Pages/Dashboard";
 
+
 function App() {
   return (
     <>
