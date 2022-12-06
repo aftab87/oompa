@@ -12,11 +12,8 @@ export const GlobalStyles = createGlobalStyle
   .navbar-brand, .nav-link, span {
     color: ${({ theme }) => theme.text} !important;
   }
-
-  `
-
     
-
+`
 
 
 
