@@ -1,14 +1,22 @@
 require("dotenv").config();
 
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors"); //cross-origin resource sharing
 const choresModel = require("./Models/Chores");
+const kidsModel = require("./Models/Kids");
+const Kids = require("./Models/Kids");
+const ChoresCompletedModel = require("./Models/Chores_completed");
 
 const app = express();
 const port = 3001; // Must be different from the port of the React app
 
 app.use(cors()); // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+app.use(express.json()); // Allows express to read a request body
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //mongodb+srv://aftab514:<password>@cluster0.zljjuju.mongodb.net/?retryWrites=true&w=majority
 //mongodb+srv://<username>:<password>@cluster0.ke8kg2c.mongodb.net/OompaDb?retryWrites=true&w=majority
@@ -23,18 +31,19 @@ db.once("open", function () {
   console.log("Connected successfully");
 });
 
-// API POST
+// *********ADD CHORE*******************
 
-app.post("/chores", async (req, res) => {
+app.post("/chores/add", async (req, res) => {
   const parent_uid = req.body.parent_uid;
   const title = req.body.title;
   const points = req.body.points;
   const image = req.body.image;
-  const kids = req.body.kid;
+  const kids = req.body.kids;
   const start_date = req.body.start_date;
-  const end_date = req.body.endDate;
+  const end_date = req.body.end_date;
   const repetition = req.body.repetition;
-  const chore = {
+  const funny = req.body.funny;
+  const chores = {
     parent_uid: parent_uid,
     title: title,
     points: points,
@@ -43,13 +52,55 @@ app.post("/chores", async (req, res) => {
     start_date: start_date,
     end_date: end_date,
     repetition: repetition,
+    funny: funny,
   };
   try {
-    await choresModel.create(chore);
+    await choresModel.create(chores);
   } catch (err) {
     console.log(err);
   }
-  res.send(chore);
+  res.send(chores);
+});
+
+//*********ADD KID TEST******************* */
+app.post("/kids/addkid", async (req, res) => {
+  const name = req.body.name;
+
+  const kid = {
+    name: name,
+  };
+  try {
+    await kidsModel.create(kid);
+  } catch (err) {
+    console.log(err);
+  }
+  res.send(kid);
+});
+
+//***************CHORE COMPLETED ADD****************** */
+app.post("/chores/completed", async (req, res) => {
+  const chores_uid = req.body.chores_uid;
+  // const title = req.body.title;
+  // const points = req.body.points;
+  // const image = req.body.image;
+  const kids_uid = req.body.kids_uid;
+  const date_completed = req.body.date_completed;
+  const verified = req.body.verified;
+  const chores_completed = {
+    //   title: title,
+    //   points: points,
+    //   image: image,
+    chores_uid: chores_uid,
+    kids_uid: kids_uid,
+    date_completed: date_completed,
+    verified: verified,
+  };
+  try {
+    await choresModel.create(chores_completed);
+  } catch (err) {
+    console.log(err);
+  }
+  res.send(chores_completed);
 });
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
