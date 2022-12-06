@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import FramedScreenshot from "Components/FramedScreenshot";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { LoggedInContext } from "App";
 
 function Home(props) {
-  const isLoggedIn = true;
+  const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
+
+  // useEffect(() => {
+  //   // setIsLoggedIn(sessionStorage.getItem("isLoggedIn"));
+  // }, []);
+
   const ctaTitle = isLoggedIn ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
   const ctaButtonLabel = isLoggedIn ? "Dashboard" : "Sign Up";
   const ctaButtonLink = isLoggedIn ? "/dashboard" : "/sugnup";

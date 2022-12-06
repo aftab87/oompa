@@ -4,7 +4,7 @@ import React from "react";
 function Dashboard(props) {
   return (
     <div>
-      <h1> This is the Dashboard Page</h1>
+      <h1>Dashboard page</h1>
       <AddChore />
     </div>
   );
