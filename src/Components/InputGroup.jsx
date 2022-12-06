@@ -44,14 +44,13 @@ const InputGroup = React.forwardRef((props, ref) => {
     }
 
     const onInput = (e) => {
-        if (!shouldShowLabel)
+        if (shouldShowLabel)
             validate(e)
     }
 
     const getFormControl = () => {
         const inputProps = { ...props }
 
-        inputProps.onInput = onInput;
         inputProps.ref = ref;
         // inputProps.validated = "validated";
         // inputProps.controlId = props.label.replace(" ", "")
@@ -66,16 +65,18 @@ const InputGroup = React.forwardRef((props, ref) => {
             case "radio":
                 return React.createElement(Form.Check, inputProps);
             default:
+                inputProps.onInput = onInput;
                 return React.createElement(Form.Control, inputProps);
         }
     }
 
     // TODO: Add a success message prop?
+    // FIXME: GlobalStyle.jsx is overwriting the span's font color
     return (
-        <Form.Group className={props.className} controlId={props.id}>
+        <Form.Group className={props.className + " mb-4"} controlId={props.id}>
 
             {shouldShowLabel() &&
-                <Form.Label htmlFor={props.id}>
+                <Form.Label>
                     <strong>{props.label}
                         {isRequired() && <span style={{ color: '#D63384' }}> *</span>}
                     </strong>

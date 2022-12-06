@@ -7,7 +7,7 @@ function Home(props) {
   const isLoggedIn = true;
   const ctaTitle = isLoggedIn ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
   const ctaButtonLabel = isLoggedIn ? "Dashboard" : "Sign Up";
-  const ctaButtonLink = isLoggedIn ? "/dashboard" : "/sugnup";
+  const ctaButtonLink = isLoggedIn ? "/dashboard" : "/signup";
   const ctaText = isLoggedIn
     ? "You can do a lot in your dashboard"
     : " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris";
