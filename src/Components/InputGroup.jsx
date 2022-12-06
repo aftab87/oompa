@@ -26,16 +26,16 @@ const InputGroup = React.forwardRef((props, ref) => {
         let value = e.target.value;
         
         if (isRequired() && !value){
-            e.target.classList.add("invalid")
-            e.target.classList.remove("valid")
+            e.target.classList.add("is-invalid")
+            e.target.classList.remove("is-valid")
             setError(props.label + " is required")
         }else if (!checkRegex(value)) {
-            e.target.classList.add("invalid")
-            e.target.classList.remove("valid")
-            setError(props.errorMessage)
+            e.target.classList.add("is-invalid")
+            e.target.classList.remove("is-valid")
+            setError(props.pattern_message)
         } else {
-            e.target.classList.add("valid")
-            e.target.classList.remove("invalid")
+            e.target.classList.add("is-valid")
+            e.target.classList.remove("is-invalid")
             setError(null)
         }
     }
@@ -48,6 +48,8 @@ const InputGroup = React.forwardRef((props, ref) => {
         const inputProps = { ...props }
 
         inputProps.onInput = onInput;
+        inputProps.validated = true;
+        inputProps.controlId = props.label.replace(" ", "")
         return React.createElement(Form.Control, inputProps);
     }
 
@@ -60,10 +62,8 @@ const InputGroup = React.forwardRef((props, ref) => {
                 </strong>
             </Form.Label>
             {getFormControl()}
+            <Form.Control.Feedback type="valid">Looks Good!</Form.Control.Feedback>
             <Form.Control.Feedback type="invalid">{error ? error : props.label + " is required"}</Form.Control.Feedback>
-            <Form.Control.Feedback type="valid">
-                Looks Good!
-            </Form.Control.Feedback>
         </Form.Group>
     )
 });
