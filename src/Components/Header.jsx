@@ -1,22 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import "Components/Stylesheets/header.css";
-import { DarkModeContext } from "../App";
+import { DarkModeContext, LoggedInContext } from "../App";
 import { Button } from "react-bootstrap";
 
 // Need to include a dark and light mode
 function Header() {
-  const isLoggedIn = true;
-
   const [darkMode, setDarkMode] = useContext(DarkModeContext);
 
   const darkModeToggleHandler = (e) => {
     setDarkMode(e.target.checked);
   };
+
+  const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
+  function logout() {
+    setIsLoggedIn(false);
+  }
+
+  function login() {
+    setIsLoggedIn(true);
+  }
 
   return (
     <Navbar collapseOnSelect bg={darkMode ? "dark" : "light"} variant={darkMode ? "dark" : "light"} expand="lg">
@@ -43,12 +50,12 @@ function Header() {
                 <Nav.Link as={NavLink} to="/dashboard" className="d-flex align-items-center justify-content-center">
                   Dashboard
                 </Nav.Link>
-                <Button as={NavLink} variant="danger" className="m-2" to="/logout">
+                <Button onClick={logout} variant="danger" className="m-2">
                   Logout
                 </Button>
               </>
             ) : (
-              <Button as={NavLink} variant="primary" className="m-2" to="/login">
+              <Button onClick={login} variant="primary" className="m-2">
                 Login
               </Button>
             )}
