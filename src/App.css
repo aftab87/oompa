@@ -18,6 +18,11 @@
         height: 400px;
         padding: 20px;
     }
+    .about .contact img {
+        height: 600px;
+        padding: 20px;
+        transform: scaleX(-1) rotate(55deg) translate(-30%,30%);
+    }
  }
 @media (max-width: 991.98px) { 
     
