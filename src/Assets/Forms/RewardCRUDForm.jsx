@@ -1,17 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'Components/InputGroup';
 
 
-function RewardsCRUDForm() {
-
+function RewardsCRUDForm(props) {
+    
+    const {reward } = props;    
     const [validated, setValidated] = useState(false);
     const titleRef = useRef();
     const descriptionRef = useRef();
     const childRef = useRef();
     const imageRef = useRef();
     const pointsRef = useRef();
+
+    
+   useEffect(()=>{
+    if(!reward)
+    return 
+    titleRef.current.value=reward.title
+    descriptionRef.current.value=reward.description
+    imageRef.current.value=reward.image
+    pointsRef.current.value=reward.points
+   }, [reward])
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -24,12 +35,14 @@ function RewardsCRUDForm() {
     };
 
 
+
     const registeringReward = (event) => {
+        const url = reward ? "http://localhost:3001/rewards/"+ reward._id : "http://localhost:3001/rewards/"
 
         event.preventDefault(); // prevent page reload
         // to fill in based on callPostBody
-        fetch("http://localhost:3001/rewards", {
-            method: "POST",
+        fetch(url, {
+            method: reward ? "PUT": "POST",
             body: JSON.stringify({
                 title: titleRef.current.value,
                 description: descriptionRef.current.value,
@@ -45,8 +58,9 @@ function RewardsCRUDForm() {
     
     };
         return (
+            <>
             <Form noValidate validated={validated} onSubmit={handleSubmit} >
-
+               
                 <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef}/>
                 <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef}/>
                 <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef}/>
@@ -55,6 +69,8 @@ function RewardsCRUDForm() {
 
                 <Button type="submit" onClick={registeringReward}>Submit form</Button>
             </Form>
+               <a href={"http://localhost:3000/rewards/"+ reward?._id + "/edit" } >link to edit page</a>
+           </>
         );
     }
 
