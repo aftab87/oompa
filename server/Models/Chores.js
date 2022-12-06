@@ -34,10 +34,6 @@ const ChoresSchema = new mongoose.Schema({
     type: [Number],
     required: true,
   },
-  funny: {
-    type: [String],
-    required: true,
-  },
 });
 
 // Mongoose will assume there is a collection called the plural of this name (i.e.,

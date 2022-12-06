@@ -10,18 +10,17 @@ function AddChore() {
 }
 
 function addChore() {
-  fetch("http://localhost:3001/chores/add", {
+  fetch("http://localhost:3001/chores", {
     method: "POST",
     body: JSON.stringify({
-      parent_uid: "23",
+      parent_uid: "ugly paatrick",
       title: "kill cat",
       points: 2,
-      image: "kid washing dishes",
-      kids: ["jason", "Maria"],
+      image: "jesus on a BBC",
+      kids: "Jason",
       start_date: new Date(),
       end_date: new Date(),
       repetition: 2,
-      funny: "test",
     }),
     headers: {
       "Content-type": "application/json;charset=UTF-8",
@@ -32,14 +31,14 @@ function addChore() {
 }
 
 function updateChore() {
-  fetch("http://localhost:3001/chores/add", {
-    method: "POST",
+  fetch("http://localhost:3001/chores", {
+    method: "PUT",
     body: JSON.stringify({
       parent_uid: "26",
-      title: "kill dog",
+      title: "kill aftab",
       points: 2,
-      image: "kid washing mother",
-      kids: ["jason", "Maria"],
+      image: "kid washing hooker",
+      kids: "jason",
       start_date: new Date(),
       end_date: new Date(),
       repetition: 2,

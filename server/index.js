@@ -33,7 +33,7 @@ db.once("open", function () {
 
 // *********ADD CHORE*******************
 
-app.post("/chores/add", async (req, res) => {
+app.post("/chores", async (req, res) => {
   const parent_uid = req.body.parent_uid;
   const title = req.body.title;
   const points = req.body.points;
@@ -42,7 +42,6 @@ app.post("/chores/add", async (req, res) => {
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
   const repetition = req.body.repetition;
-  const funny = req.body.funny;
   const chores = {
     parent_uid: parent_uid,
     title: title,
@@ -52,10 +51,9 @@ app.post("/chores/add", async (req, res) => {
     start_date: start_date,
     end_date: end_date,
     repetition: repetition,
-    funny: funny,
   };
   try {
-    await choresModel.create(kids);
+    await choresModel.create(chores);
   } catch (err) {
     console.log(err);
   }
@@ -63,8 +61,8 @@ app.post("/chores/add", async (req, res) => {
 });
 
 // *********UPDATE CHORE*******************
-app.post("/chores/update", async (req, res) => {
-  const filter = { _id: "638e50e3f865950f20bf73f0" };
+app.put("/chores", async (req, res) => {
+  const filter = { _id: "638ec59468ff75d89808c139" };
   const parent_uid = req.body.parent_uid;
   const title = req.body.title;
   const points = req.body.points;
@@ -73,7 +71,6 @@ app.post("/chores/update", async (req, res) => {
   const start_date = req.body.start_date;
   const end_date = req.body.end_date;
   const repetition = req.body.repetition;
-  const funny = req.body.funny;
   const update = {
     parent_uid: parent_uid,
     title: title,
@@ -83,14 +80,13 @@ app.post("/chores/update", async (req, res) => {
     start_date: start_date,
     end_date: end_date,
     repetition: repetition,
-    funny: funny,
   };
   try {
     await choresModel.findOneAndUpdate(filter, update);
   } catch (err) {
     console.log(err);
   }
-  // res.send(update);
+  res.send(update);
 });
 
 //*********ADD KID TEST******************* */
