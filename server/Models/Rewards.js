@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 
 const RewardsSchema = new mongoose.Schema({
 
-    parent_uid: {
-        type: String,
-        required: true,
-    },
+    // parent_uid: {
+    //     type: String,
+    //     required: true,
+    // },
     kids: {
         type: [String],
         required: true,
@@ -21,17 +21,14 @@ const RewardsSchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        type: Date,
+        type: String,
         required: true,
     },
     points: {
         type: Number,
         required: true,
     },
-    should_persist: {
-        type: Boolean,
-        required: true,
-    },
+
 });
 
 

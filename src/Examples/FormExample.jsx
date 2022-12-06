@@ -19,7 +19,7 @@ function FormExample() {
     return (
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <InputGroup type="text" label="Input Example" placeholder="Username" required />
-            <InputGroup type="text" as="textArea" label="TextArea Example" placeholder="This is a long text" required />
+            <InputGroup type="text" as="textarea" label="TextArea Example" placeholder="This is a long text" required />
             <Button type="submit">Submit form</Button>
         </Form>
     );

@@ -144,30 +144,31 @@ app.post("/chores/completed", async (req, res) => {
 
 //                                                 ==========================  REWARDS CRUD ==========================================
 
-app.post("/rewards/add", async (req, res) => {
-  const parent_uid = req.body.parent_uid;
+app.post("/rewards", async (req, res) => {
+  // const parent_uid = req.body.parent_uid;
   const kids = req.body.kids;
   const title = req.body.title;
   const description = req.body.description;
   const image = req.body.image;
   const points = req.body.points;
-  const should_persist = req.body.should_persist;
-
+//const parentuid = req.user_id
   const rewards = {
-    parent_uid: parent_uid,
+    // parent_uid: parent_uid,
     kids: kids,
     title: title,
     description: description,
     image: image,
     points: points,
-    should_persist: should_persist,
+    //parent_uid: parentuid
   };
   try {
     await rewardsModel.create(rewards);
+    res.send(rewards);
   } catch (err) {
     console.log(err);
+    res.status(400).send({message: err.message})
   }
-  res.send(rewards);
+ 
 });
 
 

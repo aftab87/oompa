@@ -46,7 +46,7 @@ const InputGroup = React.forwardRef((props, ref) => {
 
     const getFormControl = () => {
         const inputProps = { ...props }
-
+        inputProps.ref=ref;
         inputProps.onInput = onInput;
         return React.createElement(Form.Control, inputProps);
     }

@@ -8,7 +8,7 @@ function RewardsForm() {
   return (
     <div>
         <h1>Testing CRUD on rewards database with Mongodb</h1>
-        <p><RewardsCRUDForm /></p>
+        <RewardsCRUDForm />
     </div>
   );
 }
