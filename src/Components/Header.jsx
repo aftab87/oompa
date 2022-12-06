@@ -28,7 +28,7 @@ function Header() {
           <Form.Check type="switch" id="custom-switch" label="Dark Mode" onInput={darkModeToggleHandler} />
         </div>
         <Navbar.Brand as={Link} to="/" className="m-0 col-6 text-center">
-          O ompa
+          <img className="" src={darkMode ? "./images/logo-oompa-light.svg" : "./images/logo-oompa-dark.svg"} alt="Oompa Logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="m-0 col-3 text-end border-0" />
         <Navbar.Collapse id="basic-navbar-nav justify-content-end" className="m-0 col-3 justify-content-end">
