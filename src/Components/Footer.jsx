@@ -4,9 +4,9 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className="footer">
+        <footer className="footer">
             <small> &copy; Copyright Phenomenal Jaz 2022</small>
-        </div>
+        </footer>
     )
 }
 
