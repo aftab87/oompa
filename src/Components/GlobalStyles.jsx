@@ -1,7 +1,6 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyles = createGlobalStyle
-  `
+export const GlobalStyles = createGlobalStyle`
 
   body {
     background: ${({ theme }) => theme.body};
@@ -12,8 +11,9 @@ export const GlobalStyles = createGlobalStyle
   .navbar-brand, .nav-link, span {
     color: ${({ theme }) => theme.text} !important;
   }
+
+  footer {
+    background-color: ${({ theme }) => theme.footerBg} !important;
+  }
     
-`
-
-
-
+`;
