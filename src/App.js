@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "Pages/Home";
@@ -8,6 +7,7 @@ import Login from "Pages/Login";
 import Page404 from "Pages/Page404";
 import EmailConfirmation from "Pages/EmailConfirmation";
 import MainLayout from "Layouts/MainLayout";
+import Dashboard from "Pages/Dashboard";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<Login />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="emailconfirmation" element={<EmailConfirmation />} />
           <Route path="*" element={<Page404 />} />
         </Route>

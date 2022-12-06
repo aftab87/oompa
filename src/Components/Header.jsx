@@ -4,9 +4,11 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
+import "Components/Stylesheets/header.css";
 
 // Need to include a dark and light mode
 function Header() {
+  const isLoggedIn = true;
   return (
     <Navbar bg="light" expand="lg">
       {/* <NavLink className={({ isActive }) => (isActive ? "link-active" : "link-inactive")} to="/">
@@ -25,15 +27,23 @@ function Header() {
             <Nav.Link as={Link} to="/" className="d-flex align-items-center justify-content-center">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/about" className="d-flex align-items-center justify-content-center">
+            <Nav.Link as={Link} to="/about" className="d-flex align-items-center active justify-content-center">
               About
             </Nav.Link>
-            <Button as={Link} variant="primary" className="m-2" to="/login">
-              Login
-            </Button>
-            <Button as={Link} variant="danger" className="m-2" to="/logout">
-              Logout
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Nav.Link as={Link} to="/dashboard" className="d-flex align-items-center active justify-content-center">
+                  Dashboard
+                </Nav.Link>
+                <Button as={Link} variant="danger" className="m-2" to="/logout">
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button as={Link} variant="primary" className="m-2" to="/login">
+                Login
+              </Button>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
