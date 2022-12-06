@@ -27,7 +27,9 @@ function Header() {
         <Navbar.Brand as={Link} to="/" className="m-0 col-6 text-center">
           <img className="" src={darkMode ? "./images/logo-oompa-light.svg" : "./images/logo-oompa-dark.svg"} alt="Oompa Logo" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="m-0 col-3 text-end border-0" />
+        <div className="m-0 col-3 text-end border-0">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        </div>
         <Navbar.Collapse id="basic-navbar-nav" className="m-0 col-3 justify-content-end">
           <Nav className="ms-auto text-center">
             <Nav.Link as={NavLink} to="/" className="d-flex align-items-center justify-content-center">

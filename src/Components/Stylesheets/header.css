@@ -27,7 +27,7 @@
 .navbar-nav {
     font-weight: 500;
 }
-.navbar-nav .active {
+.navbar-nav .nav-link.active {
     color: var(--bs-indigo)!important;
     font-weight: 900;
 }
