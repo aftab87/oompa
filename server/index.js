@@ -55,11 +55,42 @@ app.post("/chores/add", async (req, res) => {
     funny: funny,
   };
   try {
-    await choresModel.create(chores);
+    await choresModel.create(kids);
   } catch (err) {
     console.log(err);
   }
   res.send(chores);
+});
+
+// *********UPDATE CHORE*******************
+app.post("/chores/update", async (req, res) => {
+  const filter = { _id: "638e50e3f865950f20bf73f0" };
+  const parent_uid = req.body.parent_uid;
+  const title = req.body.title;
+  const points = req.body.points;
+  const image = req.body.image;
+  const kids = req.body.kids;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
+  const repetition = req.body.repetition;
+  const funny = req.body.funny;
+  const update = {
+    parent_uid: parent_uid,
+    title: title,
+    points: points,
+    image: image,
+    kids: kids,
+    start_date: start_date,
+    end_date: end_date,
+    repetition: repetition,
+    funny: funny,
+  };
+  try {
+    await choresModel.findOneAndUpdate(filter, update);
+  } catch (err) {
+    console.log(err);
+  }
+  // res.send(update);
 });
 
 //*********ADD KID TEST******************* */
