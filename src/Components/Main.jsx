@@ -5,6 +5,7 @@ function Main () {
     return (
     <>
         <Header />
+        <p>TEST</p>
     </>
     )
 }

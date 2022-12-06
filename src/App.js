@@ -1,20 +1,30 @@
 import './App.css';
-import React, { useContext } from 'react';
+import React, { createContext, useState } from "react";
 import Main from "./Components/Main"
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./components/Globalstyle";
-import { lightTheme, darkTheme } from "./components/Themes"
+import { GlobalStyles } from "./Components/GlobalStyles";
+import { lightTheme, darkTheme } from "./Components/Theme"
 
+
+export const DarkModeContext = createContext({
+    darkMode: false,
+    setDarkMode: () => {}
+});
 
 function App() {
+    const [darkMode, setDarkMode] = useState(false);
+    const ThemeContextProvider = [darkMode, setDarkMode];
 
-    const [theme, setTheme] = useContext('light');
-    
+
     return (
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-                <GlobalStyles />
-                <Main />
-        </ThemeProvider>
+        <DarkModeContext.Provider value={ThemeContextProvider}>
+            <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+                <>
+                    <GlobalStyles />
+                    <Main />
+                </>
+            </ThemeProvider>
+        </DarkModeContext.Provider>
     );
 }
 
