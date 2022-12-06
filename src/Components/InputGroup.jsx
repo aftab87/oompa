@@ -64,7 +64,7 @@ const InputGroup = React.forwardRef((props, ref) => {
             case "switch":
                 return React.createElement(Form.Switch, inputProps);
             case "radio":
-                return React.createElement(Form.Radio, inputProps);
+                return React.createElement(Form.Check, inputProps);
             default:
                 return React.createElement(Form.Control, inputProps);
         }

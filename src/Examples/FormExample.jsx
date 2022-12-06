@@ -32,8 +32,14 @@ function FormExample() {
             </InputGroup>
 
             {/* Check example */}
-            <InputGroup type="checkbox" label="Check Example" />
+            <InputGroup type="checkbox" label="Check Example"  />
 
+            {/* Switch example */}
+            <InputGroup type="switch" label="Switch Example" />
+
+            {/* Check example - Not sure how to make this work */}
+            {/* TODO: Create a radio example */}
+            <InputGroup type="radio" label="Radio Example" />
 
             <Button type="submit">Submit form</Button>
         </Form>
