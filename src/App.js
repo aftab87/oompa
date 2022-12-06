@@ -1,3 +1,4 @@
+import "./App.scss";
 import "./App.css";
 import React, { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
