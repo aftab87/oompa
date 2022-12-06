@@ -1,4 +1,3 @@
-import KidsSchema from "./Kids.js";
 const mongoose = require("mongoose");
 
 // ***********CHORES SCHEMA ****************
@@ -12,7 +11,7 @@ const ChoresSchema = new mongoose.Schema({
     required: true,
   },
   points: {
-    type: String,
+    type: Number,
     required: true,
   },
   image: {
@@ -20,7 +19,8 @@ const ChoresSchema = new mongoose.Schema({
     required: true,
   },
   kids: {
-    type: [KidsSchema],
+    type: [String],
+    required: true,
   },
   start_date: {
     type: Date,
@@ -32,6 +32,10 @@ const ChoresSchema = new mongoose.Schema({
   },
   repetition: {
     type: [Number],
+    required: true,
+  },
+  funny: {
+    type: [String],
     required: true,
   },
 });
