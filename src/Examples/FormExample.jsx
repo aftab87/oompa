@@ -21,7 +21,19 @@ function FormExample() {
             {/* Input with regex example */}
             <InputGroup type="text" label="Input Example" placeholder="Username" required pattern={/^\d{3}$/} pattern_message="Please input 3 digits" />
             {/* Textarea example */}
-            <InputGroup type="text" as="textarea" rows={21} label="TextArea Example" placeholder="This is a long text" required />
+            <InputGroup type="text" as="textarea" rows={5} label="TextArea Example" placeholder="This is a long text" required />
+
+            {/* Select example */}
+            <InputGroup type="select" label="Select Example" required>
+                <option></option>
+                <option value="a">One</option>
+                <option value="b">Two</option>
+                <option value="c">Three</option>
+            </InputGroup>
+
+            {/* Check example */}
+            <InputGroup type="checkbox" label="Check Example" />
+
 
             <Button type="submit">Submit form</Button>
         </Form>
