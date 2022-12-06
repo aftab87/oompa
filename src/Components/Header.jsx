@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import "Components/Stylesheets/header.css";
-import { DarkModeContext, LoggedInContext } from "../App";
+import { DarkModeContext, userContext } from "../App";
 import { Button } from "react-bootstrap";
 
 // Need to include a dark and light mode
@@ -16,13 +16,24 @@ function Header() {
     setDarkMode(e.target.checked);
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
+  const [user, setUser] = useContext(userContext);
+
   function logout() {
-    setIsLoggedIn(false);
+    setUser(null);
   }
 
   function login() {
-    setIsLoggedIn(true);
+    //find user in db
+    //if user found
+    //get data
+    //parse json to object
+    const CurrentUser = {
+      type: "parent",
+      username: "aftab",
+      kids: ["b1", "b2"],
+    };
+
+    setUser(CurrentUser);
   }
 
   return (
@@ -45,7 +56,7 @@ function Header() {
             <Nav.Link as={NavLink} to="/about" className="d-flex align-items-center justify-content-center">
               About
             </Nav.Link>
-            {isLoggedIn ? (
+            {user ? (
               <>
                 <Nav.Link as={NavLink} to="/dashboard" className="d-flex align-items-center justify-content-center">
                   Dashboard

@@ -20,33 +20,33 @@ export const DarkModeContext = createContext({
   setDarkMode: () => {},
 });
 
-export const LoggedInContext = createContext({
-  isLoggedIn: null,
-  setIsLoggedIn: () => {},
+export const userContext = createContext({
+  user: null,
+  setUser: () => {},
 });
 
 function App() {
   const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("dark_mode")) || false);
   const ThemeContextProvider = [darkMode, setDarkMode];
 
-  const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem("is_logged_in")) || false);
-  const LoggedInContextProvider = [isLoggedIn, setIsLoggedIn];
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")) || false);
+  const userContextProvider = [user, setUser];
 
   useEffect(() => {
     localStorage.setItem("dark_mode", JSON.stringify(darkMode));
-    sessionStorage.setItem("is_logged_in", JSON.stringify(isLoggedIn));
-    !isLoggedIn && sessionStorage.clear();
-  }, [darkMode, isLoggedIn]);
+    sessionStorage.setItem("user", JSON.stringify(user));
+    !user && sessionStorage.clear();
+  }, [darkMode, user]);
 
   return (
     <>
-      <LoggedInContext.Provider value={LoggedInContextProvider}>
+      <userContext.Provider value={userContextProvider}>
         <DarkModeContext.Provider value={ThemeContextProvider}>
           <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <GlobalStyles />
             <Routes>
               <Route path="/" element={<MainLayout />}>
-                {/* <Route index element={isLoggedIn ? <Home /> : <Signin />} /> */}
+                {/* <Route index element={user ? <Home /> : <Signin />} /> */}
                 <Route index element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="signup" element={<SignUp />} />
@@ -60,7 +60,7 @@ function App() {
             </Routes>
           </ThemeProvider>
         </DarkModeContext.Provider>
-      </LoggedInContext.Provider>
+      </userContext.Provider>
     </>
   );
 }
