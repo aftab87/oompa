@@ -4,6 +4,8 @@ export const lightTheme = {
   toggleBorder: "#FFF",
   background: "#363537",
   footerBg: "#FAFAFA",
+  formControlBackground: '#FFF',
+  formControlHint: 'gray',
 };
 export const darkTheme = {
   body: "#363537",
@@ -11,4 +13,6 @@ export const darkTheme = {
   toggleBorder: "#6B8096",
   background: "#999",
   footerBg: "#282728",
+  formControlBackground: '#212529',
+  formControlHint: '#999',
 };

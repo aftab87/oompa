@@ -21,7 +21,6 @@ const InputGroup = React.forwardRef((props, ref) => {
         return !pattern || pattern.test(value)
     }
 
-    // TODO: pattern test not working correctly
     const validate = (e) => {
         let value = e.target.value;
         
@@ -48,8 +47,8 @@ const InputGroup = React.forwardRef((props, ref) => {
         const inputProps = { ...props }
 
         inputProps.onInput = onInput;
-        inputProps.validated = true;
-        inputProps.controlId = props.label.replace(" ", "")
+        // inputProps.validated = "validated";
+        // inputProps.controlId = props.label.replace(" ", "")
         return React.createElement(Form.Control, inputProps);
     }
 
