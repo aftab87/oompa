@@ -1,6 +1,6 @@
 import "./App.scss";
 import "./App.css";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "Pages/Home";
 import About from "Pages/About";
@@ -16,12 +16,22 @@ import { lightTheme, darkTheme } from "./Components/Theme";
 
 export const DarkModeContext = createContext({
   darkMode: false,
-  setDarkMode: () => {},
+  setDarkMode: () => { },
 });
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("dark_mode")) || false
+  );
+
   const ThemeContextProvider = [darkMode, setDarkMode];
+
+  
+
+  useEffect(() => {
+    localStorage.setItem("dark_mode", JSON.stringify(darkMode));
+}, [darkMode]);
 
   return (
     <>
