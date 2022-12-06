@@ -27,11 +27,11 @@ function App() {
 
   const ThemeContextProvider = [darkMode, setDarkMode];
 
-  
+
 
   useEffect(() => {
     localStorage.setItem("dark_mode", JSON.stringify(darkMode));
-}, [darkMode]);
+  }, [darkMode]);
 
   return (
     <>
