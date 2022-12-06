@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 
 function Home(props) {
   // const isLoggedIn = true;
+  // TODO: add consts to hold content for last section if loggedin
+  const flex_center = "d-flex justify-content-center align-items-center"; // TODO: check if some styles can be grouped like this one
   return (
     <main className="home text-center">
       <section className="bg-primary welcome">
         <div className="container text-light">
           <div className="row">
-            <div className="col-12 col-md-8 d-flex flex-column justify-content-center align-items-center p-5 pb-1 gap-2">
+            <div className={"col-12 col-md-8 flex-column p-5 pb-1 gap-2 " + flex_center}>
               <h1>Welcome to Oompa!</h1>
               <p className="">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.
