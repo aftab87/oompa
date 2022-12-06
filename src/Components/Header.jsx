@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import "Components/Stylesheets/header.css";
 import { DarkModeContext } from "../App";
+import { Button } from "react-bootstrap";
 
 // Need to include a dark and light mode
 function Header() {
