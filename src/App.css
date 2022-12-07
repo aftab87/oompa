@@ -14,26 +14,48 @@ main {
     align-items: stretch;
 }
 
+main.login section.login .illustration {
+transform: scale(1.20) scaleX(-1) translate(-40px,60px);
+}
+main.login section.cta {
+    min-height: 595px;
+}
 
+main.login section.cta .illustration {
+    transform: scale(1.25) translateY(30px);
+}
 
 @media (max-width: 575.98px) { 
 
  }
 @media (max-width: 767.98px) { 
-    .home .welcome {
+    main.home section.welcome {
         max-height: 500px;
         overflow: hidden;
     }
 
-    .home .cta img {
+    main.home section.cta img {
         height: 400px;
         padding: 20px;
     }
-    .about .contact img {
+    main.about section.contact img {
         height: 600px;
         padding: 20px;
         transform: scaleX(-1) rotate(55deg) translate(-30%,30%);
     }
+    main.login section.login {
+        height: 600px;
+        overflow: hidden;
+    }
+    main.login section.login .illustration  {
+        height: 400px;
+        padding: 20px;
+       transform: translate(50%,-10%) scale(1.25) scaleX(-1) rotate(-25deg);
+    }
+
+    main.login section.cta .illustration {
+        transform: scale(0.95);
+        }
  }
 @media (max-width: 991.98px) { 
     
@@ -60,5 +82,7 @@ main {
     top: 0;
     left: 0;
 }
-
+.flipX{
+    transform: scaleX(-1);
+}
 

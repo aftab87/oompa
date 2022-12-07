@@ -4,7 +4,7 @@ function FramedScreenshot({ path, altText }) {
   return (
     <div className="p-3 drop-shadow rounded-3 bg-white">
       <div className="position-relative">
-        <img className="img-fluid rounded-3" src={path} alt={altText} />
+        <img className="img-fluid rounded-3" src={path} alt={altText} width="600" height="auto" />
         <div className="inner-shadow"></div>
       </div>
     </div>
