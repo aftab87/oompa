@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "google-search-results-nodejs": "^2.1.0",
     "mongoose": "^6.7.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",

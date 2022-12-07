@@ -11,26 +11,21 @@ import Dashboard from "Pages/Dashboard";
 import Rewards from "Pages/RewardsForm";
 import EditRewardsForm from "Pages/EditRewardsForm";
 import EmailConfirmation from "Pages/EmailConfirmation";
+import TestPage from "Pages/TestPage";
 import MainLayout from "Layouts/MainLayout";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Components/GlobalStyles";
 import { lightTheme, darkTheme } from "./Components/Theme";
 
-
 export const DarkModeContext = createContext({
   darkMode: false,
-  setDarkMode: () => { },
+  setDarkMode: () => {},
 });
 
 function App() {
-
-  const [darkMode, setDarkMode] = useState(
-    JSON.parse(localStorage.getItem("dark_mode")) || false
-  );
+  const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem("dark_mode")) || false);
 
   const ThemeContextProvider = [darkMode, setDarkMode];
-
-
 
   useEffect(() => {
     localStorage.setItem("dark_mode", JSON.stringify(darkMode));
@@ -52,6 +47,7 @@ function App() {
               <Route path="rewards" element={<Rewards />} />
               <Route path="rewards/:id/edit" element={<EditRewardsForm />} />
               <Route path="emailconfirmation" element={<EmailConfirmation />} />
+              <Route path="/test" element={<TestPage />} />
               <Route path="*" element={<Page404 />} />
             </Route>
           </Routes>
