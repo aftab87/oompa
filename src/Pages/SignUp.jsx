@@ -1,5 +1,5 @@
 import InputGroup from "Components/InputGroup";
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -7,44 +7,39 @@ import { Link } from "react-router-dom";
 
 
 function SignUp() {
-    
-    const [validated, setValidated] = useState(false);
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const appellationRef =useRef();
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-           
-            addParent(event);
-        }
+  const [validated, setValidated] = useState(false);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const appellationRef = useRef();
 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    event.preventDefault();
+    event.stopPropagation();
+    if (form.checkValidity() === true) {
+      register();
+    }
     setValidated(true);
   };
 
-   function addParent() {
-        fetch("http://localhost:3001/Parents", {
-          method: "POST",
-          body: JSON.stringify({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-            isVerified: false,
-            appellation: appellationRef.current.value,
-          }),
-          
-          headers: {
-            "Content-type": "application/json;charset=UTF-8",
-          },
-        })
-          .then((data) => data.json())
-          .then((json) => alert(JSON.stringify(json)));
-          
-
-      }
+  const register = () => {
+    fetch("http://localhost:3001/Parents", {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailRef.current["value"],
+        password: passwordRef.current["value"],
+        isVerified: false,
+        avatar_uid: "100",
+        appellation: appellationRef.current["value"],
+      }),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+      },
+    })
+      .then((data) => data.json())
+      .then((json) => alert(JSON.stringify(json)));
+  }
 
 
   return (
@@ -65,8 +60,8 @@ function SignUp() {
                 */}
                 <InputGroup type="text" label="Email" placeholder="email@domain.com" required ref={emailRef} />
                 <InputGroup type="password" label="Password" placeholder="********" required ref={passwordRef} />
-                <InputGroup type="password" label="Confirm Password" placeholder="********"  />
-                <InputGroup type="text" label="What do you want you kids to call you on Oompa?" placeholder="Daddy"  required ref={appellationRef} />
+                <InputGroup type="password" label="Confirm Password" placeholder="********" />
+                <InputGroup type="text" label="What do you want you kids to call you on Oompa?" placeholder="Daddy" required ref={appellationRef} />
 
                 <div className="text-center my-5">
                   <Button type="submit">Sign Up</Button>

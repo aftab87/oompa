@@ -3,12 +3,11 @@ const parentsModel = require("../Models/Parents");
 const createParentPaths = (app, validator, bcrypt, saltRounds) => {
   // *********GET Parents*******************
   app.get("/parents", async (req, res) => {
-    const chores = await parentsModel.find({}).where("email").equals("elmo@gmail.com");
-    res.send(chores);
+    res.send(await parentsModel.find({}).where("email").equals(req.params.email))
   });
 
   //*********ADD Parent ******************* */
-  app.post("/Parents", async (req, res) => {
+  app.post("/parents", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const isVerified = req.body.isVerified;
@@ -16,12 +15,13 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
     const avatar_uid = req.body.avatar_uid;
 
     try {
-      if (email && validator.isEmail(email) && password && validator.isStrongPassword(password)) {
+      // TODO: if (email && validator.isEmail(email) && password && validator.isStrongPassword(password)) {
+      if (email && validator.isEmail(email)) {
         // Check to see if the user already exists. If not, then create it.
         const user = await parentsModel.findOne({ email: email });
         if (user) {
           console.log("Invalid registration - email " + email + " already exists.");
-          res.send({ success: false });
+          res.send({ success: false, msg: "Invalid registration - email " + email + " already exists." });
           return;
         } else {
           const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -38,11 +38,12 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
           await parentsModel.create(parent);
           return;
         }
+      } else {
+        res.send({ success: false, msg: "something went wrong" });
       }
     } catch (err) {
-      console.log(err.message);
+      res.send({ success: false, msg: err.message })
     }
-    res.send({ success: false });
   });
 
   //*********UPDATE Parent ******************* */
