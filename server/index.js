@@ -18,7 +18,7 @@ const completedChoresModel = require("./Models/Chores_completed");
 
 // +++++++++++++++++++++++++++++++++++++++++ Rewards Constants+++++++++++++++++++++++++++++++++
 const rewardsModel = require("./Models/Rewards");
-
+const RewardsHistoryModel = require("./Models/Rewards_History");
 
 const app = express();
 const port = 3001; // Must be different from the port of the React app
@@ -413,8 +413,6 @@ app.get("/rewards/:id", async (req, res) => {
 
 app.get("/rewards/", async (req, res) => {
 
-
-
   try {
     const rewards = await rewardsModel.find()
 
@@ -427,8 +425,7 @@ app.get("/rewards/", async (req, res) => {
 });
 
 
-
-
+// DELETE Reward
 app.delete("/rewards/:id", async (req, res) => {
   try {
     const id = req.params.id
@@ -441,6 +438,53 @@ app.delete("/rewards/:id", async (req, res) => {
     res.status(400).send({ message: err.message })
   }
 });
+
+//  =================  Rewards History CRUD ======================
+
+app.post("/rewards/kids", async (req, res) => {
+  // const parent_uid = req.body.parent_uid;
+  const reward_uid = req.body.reward_uid;
+  const kids_uid = req.body.kids_uid;
+  const date_redeemed = req.body.date_redeemed;
+  const date_delivered = req.body.date_delivered;
+
+
+  const rewardsHistory = {
+
+    reward_uid: reward_uid,
+    kids_uid: kids_uid,
+    date_redeemed: date_redeemed,
+    date_delivered: date_delivered,
+    should_persist: false
+  };
+  try {
+   const reward=  await RewardsHistoryModel.create(rewardsHistory);
+    res.send(reward);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: err.message })
+  }
+
+});
+
+app.put("/rewards/kids/:id", async (req, res) => {
+  // const parent_uid = req.body.parent_uid;
+  const {id } = req.params
+
+
+  try {
+    const reward = await RewardsHistoryModel.findById(id);
+    await reward.update(req.body)
+    await reward.populate()
+    res.send(reward);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: err.message })
+  }
+
+});
+
+
 
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

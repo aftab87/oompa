@@ -28,6 +28,7 @@ const RewardsSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    // need to add should persist, will test after reward landing page done
 
 });
 
