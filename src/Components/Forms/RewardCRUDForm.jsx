@@ -5,7 +5,7 @@ import InputGroup from 'Components/InputGroup';
 
 
 function RewardsCRUDForm(props) {
-
+    const [kids, setKids] = useState(null);
     const { reward } = props;
     const [validated, setValidated] = useState(false);
     const titleRef = useRef();
@@ -13,16 +13,26 @@ function RewardsCRUDForm(props) {
     const childRef = useRef();
     const imageRef = useRef();
     const pointsRef = useRef();
+    
+    async function callGetAllKids() {
+        await fetch("http://localhost:3001/kids", { method: "GET" })
+          .then((data) => data.json())
+          .then((json) => json)
+          .then((json) => setKids(json));
+      }
 
 
     useEffect(() => {
-        if (!reward)
+        if (!reward){
+        callGetAllKids();
             return
+        }else
+        callGetAllKids();    
         titleRef.current.value = reward.title
         descriptionRef.current.value = reward.description
         imageRef.current.value = reward.image
         pointsRef.current.value = reward.points
-    }, [reward])
+    }, [reward, kids])
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -68,7 +78,10 @@ function RewardsCRUDForm(props) {
 
                 <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
                 <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
-                <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} />
+                {/* TODO:MAKE CUSTOM LABEL */}
+                <Form.Label>Kids</Form.Label>
+                <div className="d-flex gap-3" >{kids && kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid.username} ref={childRef.current.append(kid.username)} /> )}</div>
+                {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
                 <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
                 <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
 
