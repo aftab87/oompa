@@ -16,12 +16,12 @@ function RewardsCRUDForm(props) {
 
 
     useEffect(() => {
-        if (!reward)
-            return
-        titleRef.current.value = reward.title
-        descriptionRef.current.value = reward.description
-        imageRef.current.value = reward.image
-        pointsRef.current.value = reward.points
+        if (reward){
+            titleRef.current.value = reward.title
+            descriptionRef.current.value = reward.description
+            imageRef.current.value = reward.image
+            pointsRef.current.value = reward.points
+        }
     }, [reward])
 
     const handleSubmit = (event) => {

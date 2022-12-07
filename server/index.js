@@ -473,10 +473,14 @@ app.put("/rewards/kids/:id", async (req, res) => {
 
 
   try {
+    // asynchronouse processes are promises
     const reward = await RewardsHistoryModel.findById(id);
+    
     await reward.update(req.body)
-    await reward.populate()
-    res.send(reward);
+
+    
+ 
+    res.send( await RewardsHistoryModel.findById(id));
   } catch (err) {
     console.log(err);
     res.status(400).send({ message: err.message })
