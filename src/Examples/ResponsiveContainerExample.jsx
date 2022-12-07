@@ -8,7 +8,7 @@ function ResponsiveContainerExample(props) {
                 <p className="p-3 text-danger bg-warning">Hello World</p>
                 <p className="p-3 text-warning bg-danger"></p>
             </ResponsiveContainer>
-        </div >
+        </div>
     );
 }
 
