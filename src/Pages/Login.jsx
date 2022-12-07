@@ -1,7 +1,5 @@
 import LoginForm from "Components/Forms/LoginForm";
-import FramedScreenshot from "Components/FramedScreenshot";
 import InformationBubble from "Components/InformationBubble";
-import ResponsiveContainer from "Components/ResponsiveContainer";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";

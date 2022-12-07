@@ -8,13 +8,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors"); //cross-origin resource sharing
+const parentsModel = require("./Models/Parents");
+const kidsModel = require("./Models/Kids");
 
 const createChoresCompletedPaths = require('./Repos/Chores_completed');
 const createChoresPaths = require('./Repos/Chores');
 const createKidsPaths = require('./Repos/Kids');
 const createParentPaths = require('./Repos/Parents');
 const createRewardsPaths = require('./Repos/Rewards');
-
 
 const app = express();
 const port = 3001; // Must be different from the port of the React app
@@ -39,7 +40,53 @@ db.once("open", function () {
 });
 
 
+app.post("/login", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(hashedPassword)
+    try {
+        let promises = [];
+        // FIXME: send hashed password to validated login
+        promises.push(kidsModel.findOne({ username: email }));
+        promises.push(parentsModel.findOne({ email: email }));
+        // promises.push(parentsModel.find({}).where("email").equals(email));
+        // const isSame = await bcrypt.compare(password, user.password);
+        await Promise.all(promises).then(results => {
+            results.forEach(result => {
+                if (result && bcrypt.compare(password, result['password'])) {
+                    res.send('yoyo')
+                }
+            })
+            // results.(result => {
+            //     // const isSame = bcrypt.compare(password, user.password);
+            //     if (result)
+            //         res.send({ results: results })
+            // })
+        })
+    } catch (error) {
+        res.send({ "error": error })
+    }
+});
 
+
+// app.post("/login", async (req, res) => {
+//     const email = req.body.email;
+//     const password = req.body.password;
+
+//     try {
+//         const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+//         // promises.push(kidsModel.find({}).where("username").equals(email));
+//         const test = await parentsModel.find({
+
+//         }).where("email").equals(email)
+
+//         res.send(test)
+//     } catch (err) {
+//         res.send({ success: false, msg: err.message })
+//     }
+// });
 
 
 createChoresCompletedPaths(app)
