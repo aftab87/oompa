@@ -27,13 +27,18 @@ function Header() {
     //if user found
     //get data
     //parse json to object
-    const CurrentUser = {
+    const parent = {
       type: "parent",
       username: "aftab",
       kids: ["b1", "b2"],
     };
 
-    setUser(CurrentUser);
+    const kid = {
+      type: "kid",
+      username: "julieta",
+    };
+
+    setUser(kid);
   }
 
   return (

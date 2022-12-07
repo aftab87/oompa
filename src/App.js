@@ -13,7 +13,14 @@ import MainLayout from "Layouts/MainLayout";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./Components/GlobalStyles";
 import { lightTheme, darkTheme } from "./Components/Theme";
-import DashboardLayout from "Layouts/DashboardLayout";
+import ParentKids from "Components/Dashboard/Parents/ParentKids";
+import KidOverview from "Components/Dashboard/Kids/KidOverview";
+import ParentRewards from "Components/Dashboard/Parents/ParentRewards";
+import ParentMissions from "Components/Dashboard/Parents/ParentMissions";
+import ParentAccountSettings from "Components/Dashboard/Parents/ParentAccountSettings";
+import KidMissions from "Components/Dashboard/Kids/KidMissions";
+import KidRewards from "Components/Dashboard/Kids/KidRewards";
+import KidSettings from "Components/Dashboard/Kids/KidSettings";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -51,9 +58,26 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
-                <Route path="/dashboard" element={<DashboardLayout />}>
-                  <Route index element={<Dashboard />} />
-                </Route>
+                {user && (
+                  <Route path="/dashboard" element={<Dashboard />}>
+                    {user.type === "parent" && (
+                      <>
+                        <Route index element={<ParentKids />} />
+                        <Route path="missions" element={<ParentMissions />} />
+                        <Route path="rewards" element={<ParentRewards />} />
+                        <Route path="settings" element={<ParentAccountSettings />} />
+                      </>
+                    )}
+                    {user.type === "kid" && (
+                      <>
+                        <Route index element={<KidOverview />} />
+                        <Route path="missions" element={<KidMissions />} />
+                        <Route path="rewards" element={<KidRewards />} />
+                        <Route path="settings" element={<KidSettings />} />
+                      </>
+                    )}
+                  </Route>
+                )}
                 <Route path="emailconfirmation" element={<EmailConfirmation />} />
                 <Route path="*" element={<Page404 />} />
               </Route>
