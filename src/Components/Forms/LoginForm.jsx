@@ -4,8 +4,8 @@ import { Button, Form } from "react-bootstrap";
 
 function LoginForm({ className, isParent, setIsParent }) {
   const [validated, setValidated] = useState(false);
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -22,7 +22,7 @@ function LoginForm({ className, isParent, setIsParent }) {
       method: "POST",
       body: JSON.stringify({
         email: emailRef.current["value"],
-        password: passwordRef.current["value"]
+        password: passwordRef.current["value"],
       }),
       headers: {
         "Content-type": "application/json;charset=UTF-8",
@@ -30,12 +30,11 @@ function LoginForm({ className, isParent, setIsParent }) {
     })
       .then((data) => data.json())
       .then((json) => console.log(JSON.stringify(json)));
-  }
+  };
 
   const isParentChangeHandler = (event) => {
     setIsParent(event.target.checked);
-  }
-
+  };
 
   return (
     <div className={className}>
@@ -51,8 +50,8 @@ function LoginForm({ className, isParent, setIsParent }) {
         )}
       </div>
       <Form className="text-start" noValidate validated={validated} onSubmit={handleSubmit}>
-        <InputGroup type="text" label={isParent ? "Email" : "Oompa name"} placeholder={isParent ? "email@domain.com" : "Woompa"} required />
-        <InputGroup type="password" label={isParent ? "Password" : "Oompa password"} placeholder="********" required />
+        <InputGroup type="text" label={isParent ? "Email" : "Oompa name"} placeholder={isParent ? "email@domain.com" : "Woompa"} required ref={emailRef} />
+        <InputGroup type="password" label={isParent ? "Password" : "Oompa password"} placeholder="********" required ref={passwordRef} />
 
         <div className="text-center my-5">
           <Button type="submit">Log In</Button>
