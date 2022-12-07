@@ -33,12 +33,10 @@ function RewardsForm() {
 
 
   return (
-    <div>
-      <h1>Edit Reward: {id} </h1>
-
-      <RewardsCRUDForm reward={reward} />
+    <>
+      <RewardsCRUDForm reward={reward} title="Edit Reward" />
       <button onClick={callDeleteParams}>Delete Button</button>
-    </div>
+    </>
   );
 }
 

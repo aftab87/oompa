@@ -7,8 +7,7 @@ import React from "react";
 function RewardsForm() {
   return (
     <div>
-        <h1>Testing CRUD on rewards database with Mongodb</h1>
-        <RewardsCRUDForm />
+      <RewardsCRUDForm title="Add Reward" />
     </div>
   );
 }
