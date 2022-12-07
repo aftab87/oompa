@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 import { userContext } from "App";
-import ParentDashNav from "Components/Dashboard/Parents/ParentDashNav";
-import KidDashNav from "Components/Dashboard/Kids/KidDashNav";
+import DashboardNav from "Components/Dashboard/DashboardNav";
 
 function Dashboard(props) {
   const [user] = useContext(userContext);
 
   return (
-    <main className="dashboard container">
-      <section className="row">
-        <div className="sidebar col-3 ">{user.type === "parent" ? <ParentDashNav /> : <KidDashNav />}</div>
+    <main className="dashboard bg-light">
+      <section className="row container">
+        <div className="sidebar col-3 ">
+          <DashboardNav />
+        </div>
 
         <div className="mainArea col-9">
           <h1> {user.username}</h1>

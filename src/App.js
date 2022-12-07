@@ -51,6 +51,7 @@ function App() {
     return (
       <>
         <Route index element={<ParentKids />} />
+        <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
         <Route path="settings" element={<ParentAccountSettings />} />
@@ -62,6 +63,7 @@ function App() {
     return (
       <>
         <Route index element={<KidOverview />} />
+        <Route path="adventures" element={<KidOverview />} />
         <Route path="missions" element={<KidMissions />} />
         <Route path="rewards" element={<KidRewards />} />
         <Route path="settings" element={<KidSettings />} />
