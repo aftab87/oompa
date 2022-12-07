@@ -24,6 +24,7 @@ import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
+import DisplayKids from "./Examples/DisplayKids";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -88,6 +89,7 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
+                <Route path="test" element={<DisplayKids />} />
                 {user && (
                   <Route path="/dashboard" element={<Dashboard />}>
                     {user.type === "parent" && ParentDashboardRoutes()}
