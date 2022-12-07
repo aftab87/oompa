@@ -34,7 +34,7 @@ function SignUp() {
                 <InputGroup type="text" label="What do you want you kids to call you on Oompa?" placeholder="Daddy" required />
 
                 <div className="text-center my-5">
-                    <Button type="submit">Submit form</Button>
+                    <Button type="submit">Sign Up</Button>
                 </div>
             </Form>
         </div>

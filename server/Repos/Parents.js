@@ -9,7 +9,7 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
     });
 
     //*********ADD Parent ******************* */
-    app.get("/Parents", async (req, res) => {
+    app.get("/parents", async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         const isVerified = req.body.isVerified;
