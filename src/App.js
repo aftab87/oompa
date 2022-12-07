@@ -54,6 +54,7 @@ function App() {
     sessionStorage.setItem("user", JSON.stringify(user));
     !user && sessionStorage.clear();
   }, [darkMode, user]);
+  /******************************** PARENTS ROUTES *******************************/
 
   const ParentDashboardRoutes = () => {
     return (
@@ -62,47 +63,74 @@ function App() {
         <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
-        {/* NOTE: to be fixed for link to rewards/add */}
+        {/* TODO: to be fixed for link to rewards/add */}
         <Route path="rewards/add" element={<AddRewardForm />} />
         <Route path="settings" element={<ParentAccountSettings />} />
       </>
     );
   };
 
+  // // // TODO: Adapt and add routes
+  // const ParentsMissionsRoutes = () => {
+  //   return (
+  //     <Route path="missions" element={<ParentMissions />}>
+  //       <Route index element={<ParentsMissionsAvailable />} />
+  //       <Route path="available" element={<ParentsMissionsAvailable />} />
+  //       <Route path="completed" element={<ParentsMissionsCompleted />} />
+  //       <Route path="approved" element={<ParentsMissionsApproved />} />
+  //       <Route path="add" element={<ParentsMissionsAdd />} />
+  //       <Route path="edit" element={<ParentsMissionsEdit />} />
+  //       {/* delete > do we need a view for that? */}
+  //     </Route>
+  //   );
+  // };
+
+  // // TODO: Adapt and add routes
+  // const ParentsRewardsRoutes = () => {
+  //   return (
+  //     <Route path="rewards" element={<ParentRewards />}>
+  //       <Route index element={<ParentsRewardsAvailable />} />
+  //       <Route path="available" element={<ParentsRewardsAvailable />} />
+  //       <Route path="claimed" element={<ParentsRewardsClaimed />} />
+  //       <Route path="awarded" element={<ParentsRewardsAwarded />} />
+  //       <Route path="add" element={<ParentsRewardsAdd />} />
+  //       <Route path="edit" element={<ParentsRewardsEdit />} />
+  //       {/* delete > do we need a view for that? */}
+  //     </Route>
+  //   );
+  // };
+
+  /******************************** KIDS ROUTES *******************************/
   const KidsDashboardRoutes = () => {
     return (
       <>
         <Route index element={<KidOverview />} />
         <Route path="adventures" element={<KidOverview />} />
-        <Route path="missions" element={<KidMissions />}>
-          {KidsMissionsRoutes()}
-        </Route>
-        <Route path="rewards" element={<KidRewards />}>
-          {KidsRewardsRoutes()}
-        </Route>
+        {KidsMissionsRoutes()}
+        {KidsRewardsRoutes()}
         <Route path="settings" element={<KidSettings />} />
       </>
     );
   };
   const KidsMissionsRoutes = () => {
     return (
-      <>
+      <Route path="missions" element={<KidMissions />}>
         <Route index element={<KidMissionsAvailable />} />
         <Route path="available" element={<KidMissionsAvailable />} />
         <Route path="completed" element={<KidMissionsCompleted />} />
         <Route path="approved" element={<KidMissionsApproved />} />
-      </>
+      </Route>
     );
   };
 
   const KidsRewardsRoutes = () => {
     return (
-      <>
+      <Route path="rewards" element={<KidRewards />}>
         <Route index element={<KidRewardsAvailable />} />
         <Route path="available" element={<KidRewardsAvailable />} />
         <Route path="claimed" element={<KidRewardsClaimed />} />
         <Route path="received" element={<KidRewardsReceived />} />
-      </>
+      </Route>
     );
   };
 
