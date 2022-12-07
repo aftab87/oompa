@@ -24,6 +24,12 @@ import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
+import KidMissionsAvailable from "Components/Dashboard/Kids/Missions/KidMissionsAvailable";
+import KidMissionsCompleted from "Components/Dashboard/Kids/Missions/KidMissionsCompleted";
+import KidMissionsApproved from "Components/Dashboard/Kids/Missions/KidMissionsApproved";
+import KidRewardsAvailable from "Components/Dashboard/Kids/Rewards/KidRewardsAvailable";
+import KidRewardsClaimed from "Components/Dashboard/Kids/Rewards/KidRewardsClaimed";
+import KidRewardsReceived from "Components/Dashboard/Kids/Rewards/KidRewardsReceived";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -56,9 +62,8 @@ function App() {
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
         {/* NOTE: to be fixed for link to rewards/add */}
-          <Route path="rewards/add" element={<AddRewardForm />} />
+        <Route path="rewards/add" element={<AddRewardForm />} />
         <Route path="settings" element={<ParentAccountSettings />} />
-        
       </>
     );
   };
@@ -68,9 +73,34 @@ function App() {
       <>
         <Route index element={<KidOverview />} />
         <Route path="adventures" element={<KidOverview />} />
-        <Route path="missions" element={<KidMissions />} />
-        <Route path="rewards" element={<KidRewards />} />
+        <Route path="missions" element={<KidMissions />}>
+          {KidsMissionsRoutes()}
+        </Route>
+        <Route path="rewards" element={<KidRewards />}>
+          {KidsRewardsRoutes()}
+        </Route>
         <Route path="settings" element={<KidSettings />} />
+      </>
+    );
+  };
+  const KidsMissionsRoutes = () => {
+    return (
+      <>
+        <Route index element={<KidMissionsAvailable />} />
+        <Route path="available" element={<KidMissionsAvailable />} />
+        <Route path="completed" element={<KidMissionsCompleted />} />
+        <Route path="approved" element={<KidMissionsApproved />} />
+      </>
+    );
+  };
+
+  const KidsRewardsRoutes = () => {
+    return (
+      <>
+        <Route index element={<KidRewardsAvailable />} />
+        <Route path="available" element={<KidRewardsAvailable />} />
+        <Route path="claimed" element={<KidRewardsClaimed />} />
+        <Route path="received" element={<KidRewardsReceived />} />
       </>
     );
   };
