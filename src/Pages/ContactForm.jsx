@@ -23,7 +23,7 @@ function ContactForm() {
                 <InputGroup type="text" placeholder="Name" required label="Name" />
                 <InputGroup type="email" placeholder="Email" required label="Email"/>
                 <InputGroup type="text" placeholder="Subject" label="Subject"/>
-                <InputGroup type="text" placeholder="Message" required row={7} label="Message"/>
+                <InputGroup type="text" placeholder="Message" required as="textarea" rows={8} label="Message"/>
                 <div className="text-center my-5">
                     <Button type="submit">Send</Button>
                 </div>
