@@ -14,6 +14,10 @@ main {
     align-items: stretch;
 }
 
+.form-control:focus {
+    background:none;
+}
+
 main.login section.login .illustration {
 transform: scale(1.20) scaleX(-1) translate(-40px,60px);
 }
@@ -84,5 +88,14 @@ main.login section.cta .illustration {
 }
 .flipX{
     transform: scaleX(-1);
+}
+
+.btn-square {
+    width: 150px !important;
+    height: 150px !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    text-align: center;
+    padding: 0px;
 }
 

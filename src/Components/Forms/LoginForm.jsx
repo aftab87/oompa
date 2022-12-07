@@ -1,20 +1,35 @@
 import InputGroup from "Components/InputGroup";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 function LoginForm({ className, isParent, setIsParent }) {
   const [validated, setValidated] = useState(false);
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
-      //Log in
+    event.preventDefault();
+    event.stopPropagation();
+    if (form.checkValidity() === true) {
+      logIn();
     }
-
     setValidated(true);
+  };
+
+  const logIn = () => {
+    fetch("http://localhost:3001/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailRef.current["value"],
+        password: passwordRef.current["value"],
+      }),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+      },
+    })
+      .then((data) => data.json())
+      .then((json) => console.log(JSON.stringify(json)));
   };
 
   const isParentChangeHandler = (event) => {
@@ -35,8 +50,8 @@ function LoginForm({ className, isParent, setIsParent }) {
         )}
       </div>
       <Form className="text-start" noValidate validated={validated} onSubmit={handleSubmit}>
-        <InputGroup type="text" label={isParent ? "Email" : "Oompa name"} placeholder={isParent ? "email@domain.com" : "Woompa"} required />
-        <InputGroup type="password" label={isParent ? "Password" : "Oompa password"} placeholder="********" required />
+        <InputGroup type="text" label={isParent ? "Email" : "Oompa name"} placeholder={isParent ? "email@domain.com" : "Woompa"} required ref={emailRef} />
+        <InputGroup type="password" label={isParent ? "Password" : "Oompa password"} placeholder="********" required ref={passwordRef} />
 
         <div className="text-center my-5">
           <Button type="submit">Log In</Button>
