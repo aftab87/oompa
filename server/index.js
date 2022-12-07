@@ -28,14 +28,14 @@ app.use(bodyParser.json());
 //mongodb+srv://aftab514:<password>@cluster0.zljjuju.mongodb.net/?retryWrites=true&w=majority
 //mongodb+srv://<username>:<password>@cluster0.ke8kg2c.mongodb.net/OompaDb?retryWrites=true&w=majority
 mongoose.connect("mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PWD + "@cluster0.ke8kg2c.mongodb.net/OompaDb?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
-  console.log("Connected successfully");
+    console.log("Connected successfully");
 });
 
 
@@ -45,23 +45,14 @@ app.post("/login", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     console.log(hashedPassword)
     try {
-        let promises = [];
         // FIXME: send hashed password to validated login
+        let promises = [];
         promises.push(kidsModel.findOne({ username: email }));
         promises.push(parentsModel.findOne({ email: email }));
-        // promises.push(parentsModel.find({}).where("email").equals(email));
-        // const isSame = await bcrypt.compare(password, user.password);
+
         await Promise.all(promises).then(results => {
-            results.forEach(result => {
-                if (result && bcrypt.compare(password, result['password'])) {
-                    res.send('yoyo')
-                }
-            })
-            // results.(result => {
-            //     // const isSame = bcrypt.compare(password, user.password);
-            //     if (result)
-            //         res.send({ results: results })
-            // })
+            const isSame = await bcrypt.compare(password, user.password);
+
         })
     } catch (error) {
         res.send({ "error": error })
@@ -69,23 +60,23 @@ app.post("/login", async (req, res) => {
 });
 
 
-// app.post("/login", async (req, res) => {
-//     const email = req.body.email;
-//     const password = req.body.password;
+app.post("/login", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
 
-//     try {
-//         const hashedPassword = await bcrypt.hash(password, saltRounds);
+    try {
+        // promises.push(kidsModel.find({}).where("username").equals(email));
+        const user = await parentsModel.findOne({ email: email })
+        const isSame = await bcrypt.compare(password, user.password);
 
-//         // promises.push(kidsModel.find({}).where("username").equals(email));
-//         const test = await parentsModel.find({
+        console.log('db pw', user.password)
+        console.log('isSame', isSame)
 
-//         }).where("email").equals(email)
-
-//         res.send(test)
-//     } catch (err) {
-//         res.send({ success: false, msg: err.message })
-//     }
-// });
+        res.send(user)
+    } catch (err) {
+        res.send({ success: false, msg: err.message })
+    }
+});
 
 
 createChoresCompletedPaths(app)
