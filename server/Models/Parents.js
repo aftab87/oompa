@@ -18,7 +18,6 @@ const ParentsSchema = new mongoose.Schema({
   },
   avatar_uid: {
     type: String,
-    required: true,
   },
   kids: {
     type: [String],

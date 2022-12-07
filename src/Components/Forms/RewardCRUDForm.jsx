@@ -48,7 +48,7 @@ function RewardsCRUDForm(props) {
             body: JSON.stringify({
                 title: titleRef.current.value,
                 description: descriptionRef.current.value,
-                child: childRef.current.value,
+                kids: childRef.current.value,
                 image: imageRef.current.value,
                 points: pointsRef.current.value,
             }),
