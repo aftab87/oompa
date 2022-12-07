@@ -50,6 +50,7 @@ function RewardsCRUDForm(props) {
 
     const registeringReward = (event) => {
         const url = reward ? "http://localhost:3001/rewards/" + reward._id : "http://localhost:3001/rewards/"
+        console.log(JSON.stringify(selectedKids))
 
         event.preventDefault(); // prevent page reload
         // to fill in based on callPostBody
@@ -108,8 +109,8 @@ function RewardsCRUDForm(props) {
                 <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
 
                 <Button type="submit" >Submit form</Button>
-                {selectedKids.map(kid => <p>{kid}</p>)}
             </Form>
+            {/* FIXME: REMOVE THIS LINK */}
             <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a>
         </div>
     );
