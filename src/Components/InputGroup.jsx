@@ -32,6 +32,11 @@ const InputGroup = React.forwardRef((props, ref) => {
             e.target.classList.add("is-invalid")
             e.target.classList.remove("is-valid")
             setError(props.pattern_message)
+        } else if (props.password && value !== props.password) {
+            console.log(value + ' - ' + props.password)
+            e.target.classList.add("is-invalid")
+            e.target.classList.remove("is-valid")
+            setError("Passwords must match")
         } else {
             e.target.classList.add("is-valid")
             e.target.classList.remove("is-invalid")
@@ -44,6 +49,10 @@ const InputGroup = React.forwardRef((props, ref) => {
     }
 
     const onInput = (e) => {
+        if (props.clear_error)
+            props.clear_error(null)
+        if (props && props.set_password)
+            props.set_password(e.target.value)
         if (shouldShowLabel)
             validate(e)
     }

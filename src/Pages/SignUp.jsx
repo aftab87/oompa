@@ -1,7 +1,8 @@
-import InputGroup from "Components/InputGroup";
 import React, { useRef, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import InputGroup from "Components/InputGroup";
+import { Button, Form } from "react-bootstrap";
 
 
 
@@ -9,21 +10,28 @@ import { Link } from "react-router-dom";
 function SignUp() {
 
   const [validated, setValidated] = useState(false);
+  const [dbError, setDbError] = useState(null)
+  const [password, setPassword] = useState(null)
+  const [registering, setRegistering] = useState(false)
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const appellationRef = useRef();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    if (form.checkValidity() === true) {
+    if (form.checkValidity() === true && !registering) {
       register();
     }
     setValidated(true);
   };
 
   const register = () => {
+    setRegistering(true)
     fetch("http://localhost:3001/Parents", {
       method: "POST",
       body: JSON.stringify({
@@ -37,11 +45,23 @@ function SignUp() {
         "Content-type": "application/json;charset=UTF-8",
       },
     })
-      .then(data => {
-        let j = await data.json()
-        console.log(j)
+      .then(data => data.json())
+      .then(json => {
+        console.log('json', json)
+        if (json.success)
+          navigate('/login')
+        else {
+          setDbError(json.msg)
+        }
+        setRegistering(false)
       })
-      // .then(json => console.log(json))
+      .catch(err => {
+        console.log('error', err)
+        setRegistering(false)
+      })
+    // .then(data => data.json())
+    // // .then(data => {return {data: data.json(), status: data.status}})
+    // .then(json => console.log(json))
   }
 
 
@@ -61,10 +81,12 @@ function SignUp() {
                     <InputGroup type="text" label="Email" placeholder="email@domain.com" required pattern={/\w+[\w-.]*@\w+((-\w+)|(\w*))(\.[a-z]{2,3}){1,3}/} pattern_message="Please enter a valid E-mail" />
                     <InputGroup type="password" label="Password" placeholder="********" pattern={/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/} pattern_message="one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces" />
                 */}
-                <InputGroup type="text" label="Email" placeholder="email@domain.com" required ref={emailRef} />
-                <InputGroup type="password" label="Password" placeholder="********" required ref={passwordRef} />
-                <InputGroup type="password" label="Confirm Password" placeholder="********" />
-                <InputGroup type="text" label="What do you want you kids to call you on Oompa?" placeholder="Daddy" required ref={appellationRef} />
+                <InputGroup type="text" label="Email" placeholder="email@domain.com" required ref={emailRef} clear_error={setDbError} />
+                <InputGroup type="password" label="Password" placeholder="********" required ref={passwordRef} clear_error={setDbError} set_password={setPassword} />
+                <InputGroup type="password" label="Confirm Password" placeholder="********" required clear_error={setDbError} password={password} />
+                <InputGroup type="text" label="What do you want you kids to call you on Oompa?" placeholder="Daddy" required ref={appellationRef} clear_error={setDbError} />
+
+                {dbError && <p className="alert alert-danger text-center">{dbError}</p>}
 
                 <div className="text-center my-5">
                   <Button type="submit">Sign Up</Button>
