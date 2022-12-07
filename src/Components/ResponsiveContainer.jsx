@@ -34,7 +34,6 @@ const ResponsiveContainer = ({children, className}) => {
      */
     const getContainerWithChildren = () => {
         let size = getSize()
-
         //Return the container with its child as is if 1 or fewer children
         if (size <= 1) {
             return (
@@ -65,7 +64,7 @@ const ResponsiveContainer = ({children, className}) => {
     const modifyChild = (child, index, colSize) => {
         return React.cloneElement(child, {
             key: index,
-            className: child.props && child.props.className ? child.props.className + ' ' + colSize : colSize
+            className: (child.props && child.props.className) ? child.props.className + ' ' + colSize : colSize
         });
     }
 
