@@ -48,6 +48,11 @@ const InputGroup = React.forwardRef((props, ref) => {
             validate(e)
     }
 
+    const onCheckboxValueChanged = (e) => {
+        console.log('onCheckboxValueChanged')
+        props.onKidChange(e.target.value, e.target.checked)
+    }
+
     const getFormControl = () => {
         const inputProps = { ...props }
 
@@ -59,6 +64,7 @@ const InputGroup = React.forwardRef((props, ref) => {
             case "select":
                 return React.createElement(Form.Select, inputProps, [props.children]);
             case "checkbox":
+                inputProps.onChange = onCheckboxValueChanged;
                 return React.createElement(Form.Check, inputProps);
             case "switch":
                 return React.createElement(Form.Switch, inputProps);
