@@ -14,36 +14,44 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
     const appellation = req.body.appellation;
     const avatar_uid = req.body.avatar_uid;
 
-    try {
-      // TODO: if (email && validator.isEmail(email) && password && validator.isStrongPassword(password)) {
-      if (email && validator.isEmail(email)) {
-        // Check to see if the user already exists. If not, then create it.
-        const user = await parentsModel.findOne({ email: email });
-        if (user) {
-          console.log("Invalid registration - email " + email + " already exists.");
-          res.send({ success: false, msg: "Invalid registration - email " + email + " already exists." });
-          return;
-        } else {
-          const hashedPassword = await bcrypt.hash(password, saltRounds);
-          console.log("Registering email " + email);
+    res.status(200)
+    res.send({msg: "Hello there"})
+    
+    // try {
+    //   // TODO: if (email && validator.isEmail(email) && password && validator.isStrongPassword(password)) {
+    //   if (email && validator.isEmail(email)) {
+    //     // Check to see if the user already exists. If not, then create it.
+    //     const user = await parentsModel.findOne({ email: email });
+    //     if (user) {
+    //       console.log("Invalid registration - email " + email + " already exists.");
+    //       res.status(304)
+    //       res.send({ success: false, msg: "Invalid registration - email " + email + " already exists." });
+    //       return;
+    //     } else {
+    //       const hashedPassword = await bcrypt.hash(password, saltRounds);
+    //       console.log("Registering email " + email);
 
-          const parent = {
-            email: email,
-            password: hashedPassword,
-            isVerified: isVerified,
-            avatar_uid: avatar_uid,
-            appellation: appellation,
-          };
+    //       const parent = {
+    //         email: email,
+    //         password: hashedPassword,
+    //         isVerified: isVerified,
+    //         avatar_uid: avatar_uid,
+    //         appellation: appellation,
+    //       };
 
-          await parentsModel.create(parent);
-          return;
-        }
-      } else {
-        res.send({ success: false, msg: "something went wrong" });
-      }
-    } catch (err) {
-      res.send({ success: false, msg: err.message })
-    }
+    //       await parentsModel.create(parent);
+    //       res.status(200)
+    //       res.send(parent)
+    //       return;
+    //     }
+    //   } else {
+    //     res.status(304)
+    //     res.send({ success: false, msg: "something went wrong" });
+    //   }
+    // } catch (err) {
+    //   res.status(400)
+    //   res.send({ success: false, msg: err.message })
+    // }
   });
 
   //*********UPDATE Parent ******************* */

@@ -37,8 +37,11 @@ function SignUp() {
         "Content-type": "application/json;charset=UTF-8",
       },
     })
-      .then((data) => data.json())
-      .then((json) => alert(JSON.stringify(json)));
+      .then(data => {
+        let j = await data.json()
+        console.log(j)
+      })
+      // .then(json => console.log(json))
   }
 
 
