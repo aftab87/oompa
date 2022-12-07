@@ -14,6 +14,7 @@ function RewardsForm() {
   const date_deliveredRef = "2022-11-09";
 
   const [rewardHistoryId, setRewardHistoryId] = useState()
+
   const registeringRewardHistory = (event) => {
     const url = "http://localhost:3001/rewards/kids";
 
@@ -52,7 +53,6 @@ const modifyReward = ()=>{
   })
     .then((data) => data.json())
 }
-
 
 
   return (
