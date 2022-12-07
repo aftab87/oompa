@@ -1,18 +1,19 @@
-import React from "react";
-
-const kids = callGetAllKids();
+import React, { useState, useEffect } from "react";
 
 function DisplayKids() {
-  kids.forEach((kid) => {
-    console.log(kid.first_name);
-  });
+  async function callGetAllKids() {
+    await fetch("http://localhost:3001/kids", { method: "GET" })
+      .then((data) => data.json())
+      .then((json) => json)
+      .then((json) => setKids(json));
+  }
 
-  return <h1>hello</h1>;
-}
+  const [kids, setKids] = useState(null);
+  useEffect(() => {
+    callGetAllKids();
+  }, [kids]);
 
-async function callGetAllKids() {
-  await fetch("http://localhost:3001/kids", { method: "GET" }).then((data) => data.json());
-  // .then((json) => alert(JSON.stringify(json)));
+  return <>{kids && kids.map((kid) => <h1 key={kid._id}>{kid.first_name}</h1>)}</>;
 }
 
 export default DisplayKids;
