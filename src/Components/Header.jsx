@@ -66,7 +66,11 @@ function Header() {
                 <Nav.Link as={NavLink} to="/dashboard" className="d-flex align-items-center justify-content-center">
                   Dashboard
                 </Nav.Link>
-                <Button onClick={logout} variant="danger" className="m-2">
+                <Button onClick={logout} variant="danger" className="m-2"></Button>
+                <Nav.Link as={Link} to="/rewards" className="d-flex align-items-center active justify-content-center">
+                  Rewards
+                </Nav.Link>
+                <Button as={Link} variant="danger" className="m-2" to="/logout">
                   Logout
                 </Button>
               </>

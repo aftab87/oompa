@@ -1,11 +1,30 @@
 const mongoose = require("mongoose");
 const KidsSchema = new mongoose.Schema({
-  name: {
+  parent_uid: {
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  first_name: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    type: String,
+    required: true,
+  },
+  points: {
+    type: Number,
+    required: true,
+  },
 });
-// Mongoose will assume there is a collection called the plural of this name (i.e.,
-// 'users' in this case).
+
 const Kids = mongoose.model("Kids", KidsSchema);
 module.exports = Kids;

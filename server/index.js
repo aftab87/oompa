@@ -1,13 +1,20 @@
+
 require("dotenv").config();
 
+const bcrypt = require("bcrypt");
+const validator = require("validator");
+const saltRounds = 10;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors"); //cross-origin resource sharing
-const choresModel = require("./Models/Chores");
-const kidsModel = require("./Models/Kids");
-const Kids = require("./Models/Kids");
-const ChoresCompletedModel = require("./Models/Chores_completed");
+
+const createChoresCompletedPaths = require('./Repos/Chores_completed');
+const createChoresPaths = require('./Repos/Chores');
+const createKidsPaths = require('./Repos/Kids');
+const createParentPaths = require('./Repos/Parents');
+const createRewardsPaths = require('./Repos/Rewards');
+
 
 const app = express();
 const port = 3001; // Must be different from the port of the React app
@@ -21,113 +28,26 @@ app.use(bodyParser.json());
 //mongodb+srv://aftab514:<password>@cluster0.zljjuju.mongodb.net/?retryWrites=true&w=majority
 //mongodb+srv://<username>:<password>@cluster0.ke8kg2c.mongodb.net/OompaDb?retryWrites=true&w=majority
 mongoose.connect("mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PWD + "@cluster0.ke8kg2c.mongodb.net/OompaDb?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
-  console.log("Connected successfully");
+    console.log("Connected successfully");
 });
 
-// *********ADD CHORE*******************
 
-app.post("/chores", async (req, res) => {
-  const parent_uid = req.body.parent_uid;
-  const title = req.body.title;
-  const points = req.body.points;
-  const image = req.body.image;
-  const kids = req.body.kids;
-  const start_date = req.body.start_date;
-  const end_date = req.body.end_date;
-  const repetition = req.body.repetition;
-  const chores = {
-    parent_uid: parent_uid,
-    title: title,
-    points: points,
-    image: image,
-    kids: kids,
-    start_date: start_date,
-    end_date: end_date,
-    repetition: repetition,
-  };
-  try {
-    await choresModel.create(chores);
-  } catch (err) {
-    console.log(err);
-  }
-  res.send(chores);
-});
 
-// *********UPDATE CHORE*******************
-app.put("/chores", async (req, res) => {
-  const filter = { _id: "638ec59468ff75d89808c139" };
-  const parent_uid = req.body.parent_uid;
-  const title = req.body.title;
-  const points = req.body.points;
-  const image = req.body.image;
-  const kids = req.body.kids;
-  const start_date = req.body.start_date;
-  const end_date = req.body.end_date;
-  const repetition = req.body.repetition;
-  const update = {
-    parent_uid: parent_uid,
-    title: title,
-    points: points,
-    image: image,
-    kids: kids,
-    start_date: start_date,
-    end_date: end_date,
-    repetition: repetition,
-  };
-  try {
-    await choresModel.findOneAndUpdate(filter, update);
-  } catch (err) {
-    console.log(err);
-  }
-  res.send(update);
-});
 
-//*********ADD KID TEST******************* */
-app.post("/kids/addkid", async (req, res) => {
-  const name = req.body.name;
 
-  const kid = {
-    name: name,
-  };
-  try {
-    await kidsModel.create(kid);
-  } catch (err) {
-    console.log(err);
-  }
-  res.send(kid);
-});
+createChoresCompletedPaths(app)
+createChoresPaths(app)
+createKidsPaths(app, validator, bcrypt, saltRounds)
+createParentPaths(app, validator, bcrypt, saltRounds)
+createRewardsPaths(app)
 
-//***************CHORE COMPLETED ADD****************** */
-app.post("/chores/completed", async (req, res) => {
-  const chores_uid = req.body.chores_uid;
-  // const title = req.body.title;
-  // const points = req.body.points;
-  // const image = req.body.image;
-  const kids_uid = req.body.kids_uid;
-  const date_completed = req.body.date_completed;
-  const verified = req.body.verified;
-  const chores_completed = {
-    //   title: title,
-    //   points: points,
-    //   image: image,
-    chores_uid: chores_uid,
-    kids_uid: kids_uid,
-    date_completed: date_completed,
-    verified: verified,
-  };
-  try {
-    await choresModel.create(chores_completed);
-  } catch (err) {
-    console.log(err);
-  }
-  res.send(chores_completed);
-});
+
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));

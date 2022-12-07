@@ -5,6 +5,10 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  parents_uid: {
+    type: String,
+    required: true,
+  },
   kids_uid: {
     type: String,
     required: true,
@@ -13,11 +17,11 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  Verified: {
+  verified: {
     type: Boolean,
     required: true,
   },
 });
 
-const ChoresCompleted = mongoose.model("ChoresCompleted", ChoresCompletedSchema);
+const ChoresCompleted = mongoose.model("Chores_Completed", ChoresCompletedSchema);
 module.exports = ChoresCompleted;
