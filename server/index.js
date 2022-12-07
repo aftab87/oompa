@@ -39,25 +39,25 @@ db.once("open", function () {
 });
 
 
-app.post("/login", async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log(hashedPassword)
-    try {
-        // FIXME: send hashed password to validated login
-        let promises = [];
-        promises.push(kidsModel.findOne({ username: email }));
-        promises.push(parentsModel.findOne({ email: email }));
+// app.post("/login", async (req, res) => {
+//     const email = req.body.email;
+//     const password = req.body.password;
+//     const hashedPassword = await bcrypt.hash(password, saltRounds);
+//     console.log(hashedPassword)
+//     try {
+//         // FIXME: send hashed password to validated login
+//         let promises = [];
+//         promises.push(kidsModel.findOne({ username: email }));
+//         promises.push(parentsModel.findOne({ email: email }));
 
-        await Promise.all(promises).then(results => {
-            const isSame = await bcrypt.compare(password, user.password);
+//         await Promise.all(promises).then(results => {
+//             const isSame = await bcrypt.compare(password, user.password);
 
-        })
-    } catch (error) {
-        res.send({ "error": error })
-    }
-});
+//         })
+//     } catch (error) {
+//         res.send({ "error": error })
+//     }
+// });
 
 
 app.post("/login", async (req, res) => {
@@ -69,10 +69,7 @@ app.post("/login", async (req, res) => {
         const user = await parentsModel.findOne({ email: email })
         const isSame = await bcrypt.compare(password, user.password);
 
-        console.log('db pw', user.password)
-        console.log('isSame', isSame)
-
-        res.send(user)
+        isSame ? res.send({ success: false, user: user }) : res.send({ success: false, msg: "Invalid Login" })
     } catch (err) {
         res.send({ success: false, msg: err.message })
     }
