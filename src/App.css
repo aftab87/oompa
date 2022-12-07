@@ -1,7 +1,18 @@
 /* @import 'bootstrap/dist/css/bootstrap.min.css'; */
 
-/*  */
-
+/* Global */
+#root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
 
 
 

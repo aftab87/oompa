@@ -47,6 +47,28 @@ function App() {
     !user && sessionStorage.clear();
   }, [darkMode, user]);
 
+  const ParentDashboardRoutes = () => {
+    return (
+      <>
+        <Route index element={<ParentKids />} />
+        <Route path="missions" element={<ParentMissions />} />
+        <Route path="rewards" element={<ParentRewards />} />
+        <Route path="settings" element={<ParentAccountSettings />} />
+      </>
+    );
+  };
+
+  const KidsDashboardRoutes = () => {
+    return (
+      <>
+        <Route index element={<KidOverview />} />
+        <Route path="missions" element={<KidMissions />} />
+        <Route path="rewards" element={<KidRewards />} />
+        <Route path="settings" element={<KidSettings />} />
+      </>
+    );
+  };
+
   return (
     <>
       <userContext.Provider value={userContextProvider}>
@@ -62,22 +84,8 @@ function App() {
                 <Route path="login" element={<Login />} />
                 {user && (
                   <Route path="/dashboard" element={<Dashboard />}>
-                    {user.type === "parent" && (
-                      <>
-                        <Route index element={<ParentKids />} />
-                        <Route path="missions" element={<ParentMissions />} />
-                        <Route path="rewards" element={<ParentRewards />} />
-                        <Route path="settings" element={<ParentAccountSettings />} />
-                      </>
-                    )}
-                    {user.type === "kid" && (
-                      <>
-                        <Route index element={<KidOverview />} />
-                        <Route path="missions" element={<KidMissions />} />
-                        <Route path="rewards" element={<KidRewards />} />
-                        <Route path="settings" element={<KidSettings />} />
-                      </>
-                    )}
+                    {user.type === "parent" && ParentDashboardRoutes()}
+                    {user.type === "kid" && KidsDashboardRoutes()}
                   </Route>
                 )}
                 <Route path="emailconfirmation" element={<EmailConfirmation />} />
