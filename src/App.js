@@ -23,6 +23,7 @@ import ParentAccountSettings from "Components/Dashboard/Parents/ParentAccountSet
 import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
+import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -54,7 +55,10 @@ function App() {
         <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
+        {/* NOTE: to be fixed for link to rewards/add */}
+          <Route path="rewards/add" element={<AddRewardForm />} />
         <Route path="settings" element={<ParentAccountSettings />} />
+        
       </>
     );
   };

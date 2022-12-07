@@ -32,13 +32,18 @@ function Header() {
       username: "aftab",
       kids: ["b1", "b2"],
     };
+    const patrick = {
+      type: "parent",
+      username: "patrick",
+      kids: ["b1", "b2", "b3"],
+    };
 
     const juju = {
       type: "kid",
       username: "julieta",
     };
 
-    setUser(aftab);
+    setUser(patrick);
   }
 
   return (
