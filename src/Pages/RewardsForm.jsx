@@ -8,7 +8,6 @@ function RewardsForm() {
   return (
     <div>
       <RewardsCRUDForm title="Add Reward" />
-      
     </div>
   );
 }
