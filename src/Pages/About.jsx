@@ -3,6 +3,7 @@ import Data from "Assets/RawData/DevData";
 import DevCard from "Components/DevCard";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ContactForm from '../Components/Forms/ContactForm';
 
 function About(props) {
   const flex_center = " d-flex justify-content-center align-items-center ";
@@ -54,12 +55,8 @@ function About(props) {
             <div className="col-12 col-md-4 col-lg-6 d-flex justify-content-center">
               <img className="mb-n5 img-fluid" src="images/illustration4.svg" alt="" />
             </div>
-            <div className="col-12 col-md-8 col-lg-6 bg-warning d-flex flex-column justify-content-center align-items-center p-5 gap-2">
-              <h2>Get in Toutch!</h2>
-              <p className="">[form]</p>
-              <Button variant="primary" className="m-2">
-                Send
-              </Button>
+            <div className="col-12 col-md-8 col-lg-6  d-flex flex-column justify-content-center align-items-center p-5 gap-2">
+              <ContactForm />
             </div>
           </div>
         </div>

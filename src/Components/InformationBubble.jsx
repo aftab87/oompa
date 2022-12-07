@@ -1,6 +1,6 @@
 import React from 'react';
 
-function InformationBubble({ title, text, src }) {
+function InformationBubble({ title, text, src, className }) {
     const customPositioning = {
         position: 'absolute',
         top: '20%',
@@ -10,7 +10,7 @@ function InformationBubble({ title, text, src }) {
     }
 
     return (
-        <div className='bg-primary position-relative' >
+        <div className={'position-relative h-auto'} >
             <div className='d-flex flex-column justify-content-center align-items-center p-3' style={customPositioning}>
                 <h2>{title}</h2>
                 <p>{text}</p>
