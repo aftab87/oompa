@@ -7,12 +7,12 @@ function DevCard(props) {
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
-      <div className={"drop-shadow p-3 rounded-4 gap-3 d-flex d-flex flex-column"}>
-        <div className="position-relative">
+      <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column"}>
+        <div className="position-relative ">
           <img src={`/images/${props.img}`} className="devImages img-fluid" alt="Developers Heroes" />
           <div className="inner-shadow"></div>
         </div>
-        <div className={"card-body text-center" + (darkMode ? " bg-dark" : "")}>
+        <div className={"card-body bg-white text-dark text-center" + (darkMode ? " bg-dark" : "")}>
           <h5 className="card-title">
             <b>{props.title}</b>
           </h5>

@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import FramedScreenshot from "Components/FramedScreenshot";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { userContext } from "App";
 
 function Home(props) {
-  const isLoggedIn = true;
-  const ctaTitle = isLoggedIn ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
-  const ctaButtonLabel = isLoggedIn ? "Dashboard" : "Sign Up";
-  const ctaButtonLink = isLoggedIn ? "/dashboard" : "/signup";
-  const ctaText = isLoggedIn
+  const [user] = useContext(userContext);
+
+  // useEffect(() => {
+  //   // setUser(sessionStorage.getItem("user"));
+  // }, []);
+
+  const ctaTitle = user ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
+  const ctaButtonLabel = user ? "Dashboard" : "Sign Up";
+  const ctaButtonLink = user ? "/dashboard" : "/signup";
+  const ctaText = user
     ? "You can do a lot in your dashboard"
     : " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris";
   const flex_center = "d-flex justify-content-center align-items-center";
@@ -18,7 +24,7 @@ function Home(props) {
         <div className="container text-light">
           <div className="row">
             <div className={"col-12 col-md-8 flex-column p-5 pb-1 gap-2 " + flex_center}>
-              <h1>Welcome to Oompa!</h1>
+              <h1>Welcome {user ? user.username : "to Oompa"}!</h1>
               <p className="">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.
                 Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum.
@@ -56,7 +62,7 @@ function Home(props) {
             <div className="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center p-5 gap-2">
               <h2>{ctaTitle}</h2>
               <p className="">{ctaText}</p>
-              <Button as={Link} variant="primary" className="m-2" to={ctaButtonLink}>
+              <Button as={Link} to={ctaButtonLink} variant="primary" className="m-2">
                 {ctaButtonLabel}
               </Button>
             </div>
