@@ -38,7 +38,7 @@ function Header() {
       username: "julieta",
     };
 
-    setUser(juju);
+    setUser(aftab);
   }
 
   return (
