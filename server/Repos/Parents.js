@@ -13,15 +13,15 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
     const isVerified = req.body.isVerified;
     const appellation = req.body.appellation;
     const avatar_uid = req.body.avatar_uid;
-
+    
     try {
       // TODO: if (email && validator.isEmail(email) && password && validator.isStrongPassword(password)) {
       if (email && validator.isEmail(email)) {
         // Check to see if the user already exists. If not, then create it.
-        const user = await parentsModel.findOne({ email: email });
+        const user = await parentsModel.findOne({ email: email});
         if (user) {
           console.log("Invalid registration - email " + email + " already exists.");
-          res.send({ success: false, msg: "Invalid registration - email " + email + " already exists." });
+          res.send({ success: false, msg: `${email} is already registered!` });
           return;
         } else {
           const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -36,6 +36,7 @@ const createParentPaths = (app, validator, bcrypt, saltRounds) => {
           };
 
           await parentsModel.create(parent);
+          res.send({success: true, parent: parent})
           return;
         }
       } else {
