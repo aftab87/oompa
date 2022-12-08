@@ -2,6 +2,10 @@ import "./App.scss";
 import "./App.css";
 import React, { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./Components/GlobalStyles";
+import { lightTheme, darkTheme } from "./Components/Theme";
+import MainLayout from "Layouts/MainLayout";
 import Home from "Pages/Home";
 import About from "Pages/About";
 import SignUp from "Pages/SignUp";
@@ -11,10 +15,6 @@ import Dashboard from "Pages/Dashboard";
 import Rewards from "Pages/RewardsForm";
 import EditRewardsForm from "Pages/EditRewardsForm";
 import EmailConfirmation from "Pages/EmailConfirmation";
-import MainLayout from "Layouts/MainLayout";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./Components/GlobalStyles";
-import { lightTheme, darkTheme } from "./Components/Theme";
 import ParentKids from "Components/Dashboard/Parents/ParentKids";
 import KidOverview from "Components/Dashboard/Kids/KidOverview";
 import ParentRewards from "Components/Dashboard/Parents/ParentRewards";
@@ -23,8 +23,8 @@ import ParentAccountSettings from "Components/Dashboard/Parents/ParentAccountSet
 import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
-import TestPage from "./Pages/TestPage";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
+import TestPage from "./Pages/TestPage";
 
 export const DarkModeContext = createContext({
   darkMode: false,
