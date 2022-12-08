@@ -13,7 +13,7 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
         <StarBadge className="text-dark" numStars={1} />
         <div className="position-relative text-center">
-          <img src={`/images/${img ? img : "mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
+          <img src={`${img ? img : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
           {img && <div className="inner-shadow"></div>}
         </div>
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
