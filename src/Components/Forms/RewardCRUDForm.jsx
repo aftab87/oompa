@@ -124,11 +124,12 @@ function RewardsCRUDForm(props) {
                     {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
                     <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
                     <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
-
-                    <Button type="submit" >Submit form</Button>
+                    <div className='text-center'>
+                        <Button type="submit" >Submit form</Button>
+                    </div>
                 </Form>
                 {/* FIXME: REMOVE THIS LINK */}
-                <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a>
+                {/* <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a> */}
             </div>
         </div>
     );
