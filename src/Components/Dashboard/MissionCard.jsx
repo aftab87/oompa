@@ -36,7 +36,7 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
           {user.type === "kid" && (
             //Possible Missions Card states for Kids
             <>
-              {state === "available" && <Button>Mark Complete</Button>}
+              {state === "available" && <Button onClick={markCompleteHandler}>Mark Complete</Button>}
               {state === "completed" && (
                 <div>
                   <p className="text-success fw-bold h5 mb-0">COMPLETED</p>
@@ -90,3 +90,8 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
 }
 
 export default MissionCard;
+
+function markCompleteHandler() {
+  //write logic for what happend when CHILD clicks mark complete
+  alert("TODO:execute mark complete logic");
+}

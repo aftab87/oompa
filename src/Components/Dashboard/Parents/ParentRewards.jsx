@@ -37,15 +37,15 @@ function ParentRewards(props) {
         ))}
 
       <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Testing Add Reward Object</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>Add Rewards</h3>
+        <p>add a reward for your child</p>
         <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
           Add New Reward
         </Button>
       </div>
       <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Testing Edit Reward Object</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>Edit Rewards</h3>
+        <p>Make changes and/or delete rewards.</p>
         <Button variant="primary" as={NavLink} to="/dashboard/rewards/edit?reward=63912e8d5d9afcff48f748d3">
           Edit Test Reward
         </Button>
