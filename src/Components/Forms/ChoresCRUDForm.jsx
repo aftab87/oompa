@@ -16,6 +16,7 @@ function ChoresCRUDForm(props) {
     const imageRef = useRef();
     const startDateRef = useRef();
     const endDateRef = useRef();
+    const repetitionRef = useRef();
 
     async function callGetAllKids() {
         // callGetAllKids
@@ -38,6 +39,7 @@ function ChoresCRUDForm(props) {
             endDateRef.current.value = missions.endDate
             imageRef.current.value = missions.image
             pointsRef.current.value = missions.points
+            repetitionRef.current.value = missions.repetition
         }
     }, [firstRun, missions])
 
@@ -69,6 +71,7 @@ function ChoresCRUDForm(props) {
                 kids: selectedKids,
                 image: imageRef.current.value,
                 points: pointsRef.current.value,
+                repetition: repetitionRef.current.value,
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
@@ -126,9 +129,9 @@ function ChoresCRUDForm(props) {
                     </div>
                     {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
                     <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
-                    <InputGroup type="date" label="Start Date" placeholder="Enter start date..." required ref={pointsRef} />
-                    <InputGroup type="date" label="End Date" placeholder="Enter end date..." required ref={pointsRef} />
-                    <InputGroup type="number" label="Repitions" placeholder="How many times..." required ref={pointsRef} />
+                    <InputGroup type="date" label="Start Date" placeholder="Enter start date..." required ref={startDateRef} />
+                    <InputGroup type="date" label="End Date" placeholder="Enter end date..." required ref={endDateRef} />
+                    <InputGroup type="number" label="Repitions" placeholder="How many times..." required ref={repetitionRef} />
 
                     <div className='text-center'>
                         <Button type="submit" >Submit form</Button>
