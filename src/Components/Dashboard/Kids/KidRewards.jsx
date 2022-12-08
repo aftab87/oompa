@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import DashboardTabButton from "../DashboardTabButton";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../SectionHeader";
 import StarCounter from "./StarCounter";
 
 function KidRewards(props) {
