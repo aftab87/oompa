@@ -80,6 +80,7 @@ const InputGroup = React.forwardRef((props, ref) => {
             case "radio":
                 return React.createElement(Form.Check, inputProps);
             default:
+                inputProps.defaultValue = props.defaultValue
                 inputProps.onInput = onInput;
                 return React.createElement(Form.Control, inputProps);
         }

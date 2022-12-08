@@ -11,12 +11,18 @@ function KidOverview(props) {
   const [user] = useContext(userContext);
   const [kids, setKids] = useState(null);
   const [firstRun, setFirstRun] = useState(true);
+
   async function callGetAllKids() {
     await fetch("http://localhost:3001/kids/" + user.id, { method: "GET" })
       .then((data) => data.json())
       .then((json) => json)
       .then((json) => setKids(json));
   }
+
+  const deleteHandler = () => {
+    callGetAllKids();
+  }
+
   useEffect(() => {
     if (firstRun) {
       setFirstRun(false);
@@ -42,7 +48,7 @@ function KidOverview(props) {
       <div className="row g-3">
         {kids &&
           kids.map((kids) => (
-            <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} />
+            <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} onDelete={deleteHandler} />
           ))}
       </div>
 

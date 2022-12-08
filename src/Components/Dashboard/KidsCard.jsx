@@ -4,10 +4,33 @@ import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function KidsCard({ title, description, img, date, time, state, kids, id, stars }) {
+function KidsCard({ title, description, img, date, time, state, kids, id, stars, onDelete }) {
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
+
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
+
+  const deleteHandler = (e) => {
+    console.log(id)
+    fetch("http://localhost:3001/kids/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+      },
+    })
+      .then(data => data.json())
+      .then(json => {
+        console.log(json)
+        if (json.success) {
+          console.log(json)
+          onDelete()
+        }
+      })
+      .catch(err => {
+        console.log('error', err)
+      })
+  }
+
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
@@ -63,7 +86,8 @@ function KidsCard({ title, description, img, date, time, state, kids, id, stars 
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button as={NavLink} to={"./edit/id=" + id}>Edit</Button>
+                  <Button as={NavLink} to={"./kids/edit?id=" + id}>Edit</Button>
+                  <Button variant="danger" onClick={deleteHandler}>Delete</Button>
                 </div>
               )}
               {state === "completed" && (

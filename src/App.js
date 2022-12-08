@@ -66,6 +66,7 @@ function App() {
         <Route index element={<ParentKids />} />
         <Route path="kids" element={<ParentKids />} />
         <Route path="kids/add/" element={<KidForm />} />
+        <Route path="kids/edit" element={<KidForm />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
 
