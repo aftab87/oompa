@@ -1,5 +1,5 @@
 import React from "react";
-import KidMissionCard from "../KidMissionCard";
+import KidMissionCard from "../../MissionCard";
 
 function KidMissionsAvailable(props) {
   return (

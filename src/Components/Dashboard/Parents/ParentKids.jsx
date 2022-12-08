@@ -10,8 +10,7 @@ function KidOverview(props) {
   return (
     <section className="overview">
       <div className="d-flex justify-content-between">
-        <SectionHeader title={"Let's See how your kids are doing"} text={"Complete missions to collect stars and exchange them for rewards"} />
-        <StarCounter numStars={16} />
+        <SectionHeader title={"Let's See how your kids are doing"} text={"Here you can ..."} />
       </div>
 
       {/* tab buttons */}
