@@ -39,8 +39,8 @@ function ParentMissions(props) {
       <div className="row g-3">{chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}</div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Testing Edit Reward Object</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>Edit Missions</h3>
+        <p>Make changes and/or delete missions.</p>
 
         <Button variant="primary" as={NavLink} to="/dashboard/missions/34/edit">
           Edit Mission
