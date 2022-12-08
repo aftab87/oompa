@@ -4,8 +4,9 @@ import RewardsCRUDForm from '../RewardCRUDForm'
 export default function AddRewardForm() {
 
   return (
+
     <div>
-        <RewardsCRUDForm />
+        <RewardsCRUDForm title="Add Reward"/>
     </div>
   )
 }

@@ -5,14 +5,12 @@ import InputGroup from "Components/InputGroup";
 import { Button, Form } from "react-bootstrap";
 
 
-
-
 function SignUp() {
 
   const [validated, setValidated] = useState(false);
-  const [dbError, setDbError] = useState(null)
+  const [dbError, setDbError] = useState(null) // For the alert in case of an error
   const [password, setPassword] = useState(null)
-  const [registering, setRegistering] = useState(false)
+  const [busy, setBusy] = useState(false) // Busy if already sent a request to register
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -24,14 +22,14 @@ function SignUp() {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    if (form.checkValidity() === true && !registering) {
+    if (form.checkValidity() === true && !busy) {
       register();
     }
     setValidated(true);
   };
-
+  //FIXME: Default avatar
   const register = () => {
-    setRegistering(true)
+    setBusy(true)
     fetch("http://localhost:3001/Parents", {
       method: "POST",
       body: JSON.stringify({
@@ -47,21 +45,17 @@ function SignUp() {
     })
       .then(data => data.json())
       .then(json => {
-        console.log('json', json)
+        setBusy(false)
         if (json.success)
           navigate('/login')
         else {
           setDbError(json.msg)
         }
-        setRegistering(false)
       })
       .catch(err => {
         console.log('error', err)
-        setRegistering(false)
+        setBusy(false)
       })
-    // .then(data => data.json())
-    // // .then(data => {return {data: data.json(), status: data.status}})
-    // .then(json => console.log(json))
   }
 
 

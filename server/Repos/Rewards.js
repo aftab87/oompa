@@ -4,7 +4,7 @@ const parentsModel = require("../Models/Parents");
 const createRewardsPaths = (app) => {
   // ==========================  REWARDS CRUD ==========================================
   // Reward POST
-  app.post("/rewards", async (req, res) => {
+  app.post("/dashboard/rewards", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
     const kids = req.body.kids;
     const title = req.body.title;
@@ -31,7 +31,7 @@ const createRewardsPaths = (app) => {
   });
 
   // Reward PUT
-  app.put("/rewards/:id", async (req, res) => {
+  app.put("/dashboard/rewards/:id", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
     const id = req.params.id;
     const kids = req.body.kids;
@@ -60,7 +60,7 @@ const createRewardsPaths = (app) => {
   });
 
   // Reward GET
-  app.get("/rewards/:id", async (req, res) => {
+  app.get("/dashboard/rewards/:id", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
     const id = req.params.id;
 
@@ -74,7 +74,7 @@ const createRewardsPaths = (app) => {
     }
   });
 
-  app.get("/rewards/", async (req, res) => {
+  app.get("/dashboard/rewards/", async (req, res) => {
     try {
       const rewards = await rewardsModel.find();
 
@@ -85,7 +85,7 @@ const createRewardsPaths = (app) => {
     }
   });
 
-  app.delete("/rewards/:id", async (req, res) => {
+  app.delete("/dashboard/rewards/:id", async (req, res) => {
     try {
       const id = req.params.id;
       const reward = await rewardsModel.findById(id);

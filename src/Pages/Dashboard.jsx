@@ -16,10 +16,8 @@ function Dashboard(props) {
         <div className="mainArea col">
           <h1> {user.username}</h1>
           <p> {user.type}</p>
-          <div className="border p-5">
-            <p>
-              <b>Outlet area</b>
-            </p>
+          <div className="border p-5 ">
+            <p><b>Outlet area</b></p>
             <Outlet />
           </div>
         </div>

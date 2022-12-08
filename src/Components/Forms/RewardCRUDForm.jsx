@@ -9,12 +9,15 @@ function RewardsCRUDForm(props) {
     const [kids, setKids] = useState(null);
     const [selectedKids, setSelectedKids] = useState([]);
     const [validated, setValidated] = useState(false);
+    const [firstRun, setFirstRun] = useState(true);
+
     const titleRef = useRef();
     const descriptionRef = useRef();
     const imageRef = useRef();
     const pointsRef = useRef();
 
     async function callGetAllKids() {
+        // callGetAllKids
         await fetch("http://localhost:3001/kids", { method: "GET" })
             .then((data) => data.json())
             .then((json) => json)
@@ -23,16 +26,18 @@ function RewardsCRUDForm(props) {
 
 
     useEffect(() => {
-        if (!reward) {
-            callGetAllKids();
-            return
-        } else
-            callGetAllKids();
-        titleRef.current.value = reward.title
-        descriptionRef.current.value = reward.description
-        imageRef.current.value = reward.image
-        pointsRef.current.value = reward.points
-    }, [reward, kids])
+        if (firstRun) {
+            setFirstRun(false)
+            callGetAllKids()
+        }
+        if (reward) {
+            console.log(reward)
+            titleRef.current.value = reward.title
+            descriptionRef.current.value = reward.description
+            imageRef.current.value = reward.image
+            pointsRef.current.value = reward.points
+        }
+    }, [firstRun, reward])
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -49,8 +54,7 @@ function RewardsCRUDForm(props) {
 
 
     const registeringReward = (event) => {
-        const url = reward ? "http://localhost:3001/rewards/" + reward._id : "http://localhost:3001/rewards/"
-        console.log(JSON.stringify(selectedKids))
+        const url = reward ? "http://localhost:3001/dashboard/rewards/" + reward._id : "http://localhost:3001/dashboard/rewards/"
 
         event.preventDefault(); // prevent page reload
         // to fill in based on callPostBody
@@ -89,29 +93,43 @@ function RewardsCRUDForm(props) {
 
     return (
         <div className="container">
-            <div className="text-center my-5">
-                {props.title && <h1>{props.title}</h1>}
-                {props.subtitle && <h3>{props.subtitle}</h3>}
-            </div>
-            <Form noValidate validated={validated} onSubmit={handleSubmit} >
-
-                <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
-                <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
-                {/* TODO:MAKE CUSTOM LABEL */}
-                <Form.Label>Kids</Form.Label>
-                <div className="d-flex gap-3" >
-                    {kids &&
-                        kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid.username} onKidChange={handleKidsSelection} />)
-                    }
+            <div className='form'>
+                <div className="text-center my-5">
+                    {props.title && <h1>{props.title}</h1>}
+                    {props.subtitle && <h3>{props.subtitle}</h3>}
                 </div>
-                {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
-                <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
-                <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
+                {/* <Form noValidate validated={validated} onSubmit={handleSubmit} >
 
-                <Button type="submit" >Submit form</Button>
-            </Form>
-            {/* FIXME: REMOVE THIS LINK */}
-            <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a>
+                    <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
+                    <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
+                    <InputGroup type="checkbox"  label="Select Child" placeholder="Child name..." required ref={childRef} />
+                    <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
+                    <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
+                    <div className='text-center my-5'>
+                        <Button type="submit">Submit form</Button>
+                    </div>
+                </Form>
+            </div> */}
+                <Form noValidate validated={validated} onSubmit={handleSubmit} >
+
+                    <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
+                    <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
+                    {/* TODO:MAKE CUSTOM LABEL */}
+                    <Form.Label>Kids</Form.Label>
+                    <div className="d-flex gap-3" >
+                        {kids &&
+                            kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid.username} onKidChange={handleKidsSelection} />)
+                        }
+                    </div>
+                    {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
+                    <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
+                    <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
+
+                    <Button type="submit" >Submit form</Button>
+                </Form>
+                {/* FIXME: REMOVE THIS LINK */}
+                <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a>
+            </div>
         </div>
     );
 }

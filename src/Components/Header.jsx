@@ -80,7 +80,7 @@ function Header() {
                   </Button>
                 </>
               ) : (
-                <Button onClick={login} variant="primary" className="m-2">
+                <Button as={Link} variant="primary" to="/login" className="m-2">
                   Login
                 </Button>
               )}
