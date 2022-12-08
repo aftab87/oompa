@@ -5,19 +5,22 @@ import DashboardNav from "Components/Dashboard/DashboardNav";
 
 function Dashboard(props) {
   const [user] = useContext(userContext);
+  let date = new Date().toLocaleDateString("fr-US");
 
   return (
-    <main className="dashboard bg-light">
+    <main className="dashboard bg-light justify-content-start py-5">
       <section className="row container-fluid">
         <div className="sidebar col-auto">
           <DashboardNav />
         </div>
 
         <div className="mainArea col">
-          <h1> {user.username}</h1>
-          <p> {user.type}</p>
+          <div className="text-center">
+            <h1>Welcome {user.first_name}!</h1>
+            <p>{date}</p>
+          </div>
+
           <div className="border p-5 ">
-            <p><b>Outlet area</b></p>
             <Outlet />
           </div>
         </div>
