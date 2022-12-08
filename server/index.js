@@ -2,13 +2,13 @@ require("dotenv").config();
 
 const bcrypt = require("bcrypt");
 const validator = require("validator");
-const saltRounds = 10;
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors"); //cross-origin resource sharing
 const parentsModel = require("./Models/Parents");
 const kidsModel = require("./Models/Kids");
+const saltRounds = 10;
 
 const createChoresCompletedPaths = require('./Repos/Chores_completed');
 const createChoresPaths = require('./Repos/Chores');
@@ -57,9 +57,29 @@ app.post("/login", async (req, res) => {
 
         // FIXME: send hashed password to validated login
         if (kidMatch)
-            res.send({ success: true, user: kid, isParent: false })
+            res.send({
+                success: true,
+                user: {
+                    id: kid["_id"],
+                    parent_uid: kid["parent_uid"],
+                    username: kid["username"],
+                    first_name: kid["first_name"],
+                    type: "kid",
+                }
+            })
         else if (parentMatch) {
-            res.send({ success: true, user: parent, isParent: true })
+            const kids = await kidsModel.find({}).where("parent_uid").equals(parent["_id"]);
+
+            res.send({
+                success: true,
+                user: {
+                    id: parent["_id"],
+                    kid: kids,
+                    username: parent["email"],
+                    first_name: parent["appellation"],
+                    type: "parent",
+                }
+            })
         } else {
             res.send({ success: false, msg: "Invalid login" })
         }

@@ -11,7 +11,7 @@ function Home(props) {
   //   // setUser(sessionStorage.getItem("user"));
   // }, []);
 
-  const ctaTitle = user ? "Explore Your Dashboard" : "Do you have an Oompa Account?!";
+  const ctaTitle = user ? "Explore Your Dashboard" : "Are you a parent? Get started here!";
   const ctaButtonLabel = user ? "Dashboard" : "Sign Up";
   const ctaButtonLink = user ? "/dashboard" : "/signup";
   const ctaText = user
