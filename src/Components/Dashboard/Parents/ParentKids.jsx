@@ -1,9 +1,10 @@
 import { userContext } from "App";
 import React, { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import SectionHeader from "Components/Dashboard/SectionHeader";
 import StarCounter from "Components/Dashboard/Kids/StarCounter";
+import { Button } from "react-bootstrap";
 
 function KidOverview(props) {
   const [user] = useContext(userContext);
@@ -11,6 +12,7 @@ function KidOverview(props) {
     <section className="overview">
       <div className="d-flex justify-content-between">
         <SectionHeader title={"Let's See how your kids are doing"} text={"Here you can ..."} />
+        <Button as={NavLink} to={"/dashboard/kids/add"}>Add Kid</Button>
       </div>
 
       {/* tab buttons */}

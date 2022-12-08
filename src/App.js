@@ -64,6 +64,7 @@ function App() {
       <>
         <Route index element={<ParentKids />} />
         <Route path="kids" element={<ParentKids />} />
+        <Route path="kids/add" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
 
