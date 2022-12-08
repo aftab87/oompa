@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import MissionCard from "Components/Dashboard/MissionCard";
 import { userContext } from "App";
+import { getByDisplayValue } from "@testing-library/react";
 
 function ParentMissions(props) {
   const [chores, setChores] = useState(null);
@@ -36,7 +37,9 @@ function ParentMissions(props) {
         <DashboardTabButton label={"Approved"} section={"rewards"} endpoint={"received"} />
       </div>
 
-      <div className="row g-3">{chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}</div>
+      <div className="row g-3">
+        {chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date={new Date().toLocaleString("en-us", { weekday: "long" })} time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
+      </div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Edit Missions</h3>
