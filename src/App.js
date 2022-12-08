@@ -2,6 +2,10 @@ import "./App.scss";
 import "./App.css";
 import React, { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./Components/GlobalStyles";
+import { lightTheme, darkTheme } from "./Components/Theme";
+import MainLayout from "Layouts/MainLayout";
 import Home from "Pages/Home";
 import About from "Pages/About";
 import SignUp from "Pages/SignUp";
@@ -11,10 +15,6 @@ import Dashboard from "Pages/Dashboard";
 import Rewards from "Pages/RewardsForm";
 // import EditRewardsForm from "Pages/EditRewardsFormss";
 import EmailConfirmation from "Pages/EmailConfirmation";
-import MainLayout from "Layouts/MainLayout";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./Components/GlobalStyles";
-import { lightTheme, darkTheme } from "./Components/Theme";
 import ParentKids from "Components/Dashboard/Parents/ParentKids";
 import KidOverview from "Components/Dashboard/Kids/KidOverview";
 import ParentRewards from "Components/Dashboard/Parents/ParentRewards";
@@ -25,6 +25,13 @@ import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
 import EditRewardsForm from "Components/Forms/Parents/EditRewardsForm";
+import KidMissionsAvailable from "Components/Dashboard/Kids/Missions/KidMissionsAvailable";
+import KidMissionsCompleted from "Components/Dashboard/Kids/Missions/KidMissionsCompleted";
+import KidMissionsApproved from "Components/Dashboard/Kids/Missions/KidMissionsApproved";
+import KidRewardsAvailable from "Components/Dashboard/Kids/Rewards/KidRewardsAvailable";
+import KidRewardsClaimed from "Components/Dashboard/Kids/Rewards/KidRewardsClaimed";
+import KidRewardsReceived from "Components/Dashboard/Kids/Rewards/KidRewardsReceived";
+import TestPage from "./Pages/TestPage";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -48,6 +55,7 @@ function App() {
     sessionStorage.setItem("user", JSON.stringify(user));
     !user && sessionStorage.clear();
   }, [darkMode, user]);
+  /******************************** PARENTS ROUTES *******************************/
 
   const ParentDashboardRoutes = () => {
     return (
@@ -69,15 +77,67 @@ function App() {
     );
   };
 
+  // // // TODO: Adapt and add routes
+  // const ParentsMissionsRoutes = () => {
+  //   return (
+  //     <Route path="missions" element={<ParentMissions />}>
+  //       <Route index element={<ParentsMissionsAvailable />} />
+  //       <Route path="available" element={<ParentsMissionsAvailable />} />
+  //       <Route path="completed" element={<ParentsMissionsCompleted />} />
+  //       <Route path="approved" element={<ParentsMissionsApproved />} />
+  //       <Route path="add" element={<ParentsMissionsAdd />} />
+  //       <Route path="edit" element={<ParentsMissionsEdit />} />
+  //       {/* delete > do we need a view for that? */}
+  //     </Route>
+  //   );
+  // };
+
+  // // TODO: Adapt and add routes
+  // const ParentsRewardsRoutes = () => {
+  //   return (
+  //     <Route path="rewards" element={<ParentRewards />}>
+  //       <Route index element={<ParentsRewardsAvailable />} />
+  //       <Route path="available" element={<ParentsRewardsAvailable />} />
+  //       <Route path="claimed" element={<ParentsRewardsClaimed />} />
+  //       <Route path="awarded" element={<ParentsRewardsAwarded />} />
+  //       <Route path="add" element={<ParentsRewardsAdd />} />
+  //       <Route path="edit" element={<ParentsRewardsEdit />} />
+  //       {/* delete > do we need a view for that? */}
+  //     </Route>
+  //   );
+  // };
+
+  /******************************** KIDS ROUTES *******************************/
   const KidsDashboardRoutes = () => {
     return (
       <>
         <Route index element={<KidOverview />} />
         <Route path="adventures" element={<KidOverview />} />
-        <Route path="missions" element={<KidMissions />} />
-        <Route path="rewards" element={<KidRewards />} />
+        {KidsMissionsRoutes()}
+        {KidsRewardsRoutes()}
         <Route path="settings" element={<KidSettings />} />
       </>
+    );
+  };
+  const KidsMissionsRoutes = () => {
+    return (
+      <Route path="missions" element={<KidMissions />}>
+        <Route index element={<KidMissionsAvailable />} />
+        <Route path="available" element={<KidMissionsAvailable />} />
+        <Route path="completed" element={<KidMissionsCompleted />} />
+        <Route path="approved" element={<KidMissionsApproved />} />
+      </Route>
+    );
+  };
+
+  const KidsRewardsRoutes = () => {
+    return (
+      <Route path="rewards" element={<KidRewards />}>
+        <Route index element={<KidRewardsAvailable />} />
+        <Route path="available" element={<KidRewardsAvailable />} />
+        <Route path="claimed" element={<KidRewardsClaimed />} />
+        <Route path="received" element={<KidRewardsReceived />} />
+      </Route>
     );
   };
 
@@ -94,6 +154,7 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
+                <Route path="test" element={<TestPage />} />
                 {user && (
                   <Route path="/dashboard" element={<Dashboard />}>
                     {user.type === "parent" && ParentDashboardRoutes()}

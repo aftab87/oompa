@@ -8,12 +8,12 @@ function Dashboard(props) {
 
   return (
     <main className="dashboard bg-light">
-      <section className="row container">
-        <div className="sidebar col-3 ">
+      <section className="row container-fluid">
+        <div className="sidebar col-auto">
           <DashboardNav />
         </div>
 
-        <div className="mainArea col-9">
+        <div className="mainArea col">
           <h1> {user.username}</h1>
           <p> {user.type}</p>
           <div className="border p-5 ">

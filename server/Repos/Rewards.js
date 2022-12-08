@@ -1,4 +1,5 @@
 const rewardsModel = require("../Models/Rewards");
+const parentsModel = require("../Models/Parents");
 
 const createRewardsPaths = (app) => {
   // ==========================  REWARDS CRUD ==========================================
@@ -12,7 +13,7 @@ const createRewardsPaths = (app) => {
     const points = req.body.points;
     //const parentuid = req.user_id
     const rewards = {
-      // parent_uid: parent_uid,
+      parent_uid: "26",
       kids: kids,
       title: title,
       description: description,
@@ -40,7 +41,7 @@ const createRewardsPaths = (app) => {
     const points = req.body.points;
     //const parentuid = req.user_id
     const rewardData = {
-      // parent_uid: parent_uid,
+      // parent_uid: "26",
       kids: kids,
       title: title,
       description: description,
@@ -64,7 +65,7 @@ const createRewardsPaths = (app) => {
     const id = req.params.id;
 
     try {
-      const reward = await rewardsModel.findById(id);
+      const reward = await rewardsModel.find({}).where("parent_uid").equals(id);
 
       res.send(reward);
     } catch (err) {
