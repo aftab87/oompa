@@ -7,6 +7,11 @@ const createChoresPaths = (app) => {
     const chores = await choresModel.find({}).where("parent_uid").equals(parent_uid);
     res.send(chores);
   });
+  app.get("/Chores/kids/:kids_uid", async (req, res) => {
+    const kids_uid = req.params.kids_uid;
+    const chores = await choresModel.find({ kids: kids_uid });
+    res.send(chores);
+  });
 
   // *********ADD CHORE*******************
 
@@ -31,7 +36,7 @@ const createChoresPaths = (app) => {
     };
     try {
       await choresModel.create(chores);
-      res.send({ success: true, chores })
+      res.send({ success: true, chores });
       return;
     } catch (err) {
       console.log(err);
