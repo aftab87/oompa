@@ -21,7 +21,7 @@ function RewardsForm() {
 
   useEffect(() => {
     // to fill in based on callPostBody
-    fetch("http://localhost:3001/rewards/" + id, {
+    fetch("http://localhost:3001/dashboard/rewards/" + id, {
       method: "GET",
 
       headers: {
@@ -35,7 +35,7 @@ function RewardsForm() {
   return (
     <>
       <RewardsCRUDForm reward={reward} title="Edit Reward" />
-      <button onClick={callDeleteParams}>Delete Button</button>
+      <button onClick={callDeleteParams}>Delete Button </button>
     </>
   );
 }

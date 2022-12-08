@@ -9,7 +9,7 @@ import Login from "Pages/Login";
 import Page404 from "Pages/Page404";
 import Dashboard from "Pages/Dashboard";
 import Rewards from "Pages/RewardsForm";
-import EditRewardsForm from "Pages/EditRewardsForm";
+// import EditRewardsForm from "Pages/EditRewardsFormss";
 import EmailConfirmation from "Pages/EmailConfirmation";
 import MainLayout from "Layouts/MainLayout";
 import { ThemeProvider } from "styled-components";
@@ -24,15 +24,16 @@ import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
+import EditRewardsForm from "Components/Forms/Parents/EditRewardsForm";
 
 export const DarkModeContext = createContext({
   darkMode: false,
-  setDarkMode: () => {},
+  setDarkMode: () => { },
 });
 
 export const userContext = createContext({
   user: null,
-  setUser: () => {},
+  setUser: () => { },
 });
 
 function App() {
@@ -55,10 +56,15 @@ function App() {
         <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
-        {/* NOTE: to be fixed for link to rewards/add */}
-          <Route path="rewards/add" element={<AddRewardForm />} />
-        <Route path="settings" element={<ParentAccountSettings />} />
         
+        {/* NOTE: to be fixed for link to rewards/add */}
+        <Route path="rewards/add" element={<AddRewardForm />} />
+        
+        {/* NOTE: to be fixed for link to rewards/add */}
+        <Route path="rewards/:id/edit" element={<EditRewardsForm />} />
+        
+        <Route path="settings" element={<ParentAccountSettings />} />
+
       </>
     );
   };
@@ -96,8 +102,8 @@ function App() {
                 )}
                 <Route path="emailconfirmation" element={<EmailConfirmation />} />
                 {/* //TODO: Add these routes at the appropriate place */}
-                <Route path="rewards" element={<Rewards />} />
-                <Route path="rewards/:id/edit" element={<EditRewardsForm />} />
+                {/* <Route path="rewards" element={<Rewards />} /> */}
+                {/* <Route path="rewards/:id/edit" element={<EditRewardsForm />} /> */}
 
                 <Route path="*" element={<Page404 />} />
               </Route>

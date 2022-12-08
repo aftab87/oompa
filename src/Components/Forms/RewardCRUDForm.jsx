@@ -39,7 +39,7 @@ function RewardsCRUDForm(props) {
 
 
     const registeringReward = (event) => {
-        const url = reward ? "http://localhost:3001/rewards/" + reward._id : "http://localhost:3001/rewards/"
+        const url = reward ? "http://localhost:3001/dashboard/rewards/" + reward._id : "http://localhost:3001/dashboard/rewards/"
 
         event.preventDefault(); // prevent page reload
         // to fill in based on callPostBody
@@ -60,21 +60,23 @@ function RewardsCRUDForm(props) {
     };
     return (
         <div className="container">
-            <div className="text-center my-5">
-                {props.title && <h1>{props.title}</h1>}
-                {props.subtitle && <h3>{props.subtitle}</h3>}
+            <div className='form'>
+                <div className="text-center my-5">
+                    {props.title && <h1>{props.title}</h1>}
+                    {props.subtitle && <h3>{props.subtitle}</h3>}
+                </div>
+                <Form noValidate validated={validated} onSubmit={handleSubmit} >
+
+                    <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
+                    <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
+                    <InputGroup type="checkbox"  label="Select Child" placeholder="Child name..." required ref={childRef} />
+                    <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
+                    <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
+                    <div className='text-center my-5'>
+                        <Button type="submit">Submit form</Button>
+                    </div>
+                </Form>
             </div>
-            <Form noValidate validated={validated} onSubmit={handleSubmit} >
-
-                <InputGroup type="text" label="Title" placeholder="Name of reward..." required ref={titleRef} />
-                <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
-                <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} />
-                <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
-                <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
-
-                <Button type="submit" >Submit form</Button>
-            </Form>
-            <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"} >link to edit page</a>
         </div>
     );
 }
