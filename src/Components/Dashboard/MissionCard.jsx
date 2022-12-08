@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { Button } from "react-bootstrap";
-import { DarkModeContext, userContext } from "../../../App";
-import StarBadge from "./StarBadge";
+import { Button, ButtonGroup } from "react-bootstrap";
+import { DarkModeContext, userContext } from "../../App";
+import StarBadge from "./Kids/StarBadge";
 
-function KidMissionCard({ title, description, img, date, time, state }) {
+function KidMissionCard({ title, description, img, date, time, state, kids }) {
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
-  const col = " col-12 col-md-6 col-lg-3 ";
+  const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
-      <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column"}>
+      <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
         <StarBadge className="text-dark" numStars={1} />
         <div className="position-relative text-center">
           <img src={`/images/${img ? img : "mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
@@ -23,14 +23,14 @@ function KidMissionCard({ title, description, img, date, time, state }) {
             </h5>
             <p className="card-text fst-italic small mb-0">{description}</p>
           </div>
-          <div className="meta fw-bold d-flex justify-content-between">
+          <div className="meta fw-bold d-flex justify-content-center gap-4">
             <div className="date d-flex align-items-center gap-1">
               <img src="/images/calendar.svg" alt="calendar icon" className="" />
               <span>{date}</span>
             </div>
             <div className="time d-flex align-items-center gap-1">
-              <span>{time}</span>
               <img src="/images/clock.svg" alt="calendar icon" className="" />
+              <span>{time}</span>
             </div>
           </div>
           {user.type === "kid" && (
@@ -53,13 +53,27 @@ function KidMissionCard({ title, description, img, date, time, state }) {
 
           {user.type === "parent" && (
             //Possible Missions Card states for Parents
+
             <>
-              {state === "available" && <Button>Edit</Button>}
-              {state === "completed" && (
-                <>
+              <div className="text-center">
+                <p className="text-secondary  fst-italic small mb-0 ">assigned to:</p>
+                <h5 className="text-center mb-0">{kids}</h5>
+              </div>
+
+              {state === "available" && (
+                <div className="d-flex justify-content-center gap-3">
                   <Button>Edit</Button>
-                  <Button variant="success">Approve</Button>
-                </>
+                </div>
+              )}
+              {state === "completed" && (
+                <div className="d-flex justify-content-center gap-3">
+                  <Button variant="success" className="text-light">
+                    Approve
+                  </Button>
+                  <Button variant="danger" className="text-light w-45">
+                    Reject
+                  </Button>
+                </div>
               )}
 
               {state === "approved" && (
