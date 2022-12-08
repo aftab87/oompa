@@ -14,8 +14,8 @@ function EmailConfirmation(props) {
               <p>We will get back to you as soon as possible!</p>
 
               <div className="text-center my-5">
-                <Button as={Link} to="/login" variant="primary">
-                  Login
+                <Button as={Link} to="/" variant="primary">
+                  Go Back to home
                 </Button>
               </div>
             </div>
