@@ -9,7 +9,7 @@ function EmailConfirmation(props) {
         <div className="container my-5">
           <div className="row justify-content-center align-items-center">
             <div className="col">
-              <h2>Your Email Address has been confirmed</h2>
+              <h2>Thank you for getting in touch!</h2>
               <p>You can now login with your email address and password</p>
 
               <div className="text-center my-5">
