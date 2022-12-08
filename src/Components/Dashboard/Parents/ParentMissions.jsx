@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
-import KidMissionCard from "Components/Dashboard/MissionCard";
+import MissionCard from "Components/Dashboard/MissionCard";
 import { userContext } from "App";
 
 function ParentMissions(props) {
@@ -37,7 +37,7 @@ function ParentMissions(props) {
       </div>
 
       <div className="row g-3">
-        {chores && chores.map((chores) => <KidMissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
+        {chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
         {/* <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
         <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Maria"} img="" date="Monday" time="7:30 pm" state="approved" />
         <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
