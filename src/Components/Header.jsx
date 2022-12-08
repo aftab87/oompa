@@ -43,7 +43,7 @@ function Header() {
       username: "julieta",
     };
 
-    setUser(patrick);
+    setUser(juju);
   }
 
   return (
