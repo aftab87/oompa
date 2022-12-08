@@ -38,43 +38,29 @@ db.once("open", function () {
     console.log("Connected successfully");
 });
 
-
-// app.post("/login", async (req, res) => {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-//     console.log(hashedPassword)
-//     try {
-//         // FIXME: send hashed password to validated login
-//         let promises = [];
-//         promises.push(kidsModel.findOne({ username: email }));
-//         promises.push(parentsModel.findOne({ email: email }));
-
-//         await Promise.all(promises).then(results => {
-//             const isSame = await bcrypt.compare(password, user.password);
-
-//         })
-//     } catch (error) {
-//         res.send({ "error": error })
-//     }
-// });
-
-
 app.post("/login", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
     try {
-        // promises.push(kidsModel.find({}).where("username").equals(email));
-        const user = await parentsModel.findOne({ email: email })
-        const isSame = await bcrypt.compare(password, user.password);
+        const kid = await kidsModel.findOne({ username: email })
+        const kidMatch = kid && await bcrypt.compare(password, kid.password);
 
-        isSame ? res.send({ success: false, user: user }) : res.send({ success: false, msg: "Invalid Login" })
+        const parent = await parentsModel.findOne({ email: email })
+        const parentMatch = parent && await bcrypt.compare(password, parent.password);
+
+        // FIXME: send hashed password to validated login
+        if (kidMatch)
+            res.send({ success: true, user: kid, isParent: false })
+        else if (parentMatch) {
+            res.send({ success: true, user: parent, isParent: true })
+        } else {
+            res.send({ success: false, msg: "Invalid login" })
+        }
     } catch (err) {
-        res.send({ success: false, msg: err.message })
+        res.send({ success: false, msg: 'error: ' + err.message })
     }
 });
-
 
 createChoresCompletedPaths(app)
 createChoresPaths(app)
