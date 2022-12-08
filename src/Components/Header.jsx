@@ -43,7 +43,7 @@ function Header() {
       username: "julieta",
     };
 
-    setUser(aftab);
+    setUser(patrick);
   }
 
   return (
@@ -72,9 +72,9 @@ function Header() {
                   <Nav.Link as={NavLink} to="/dashboard" className="d-flex align-items-center justify-content-center">
                     Dashboard
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="/rewards" className="d-flex align-items-center justify-content-center">
+                  {/* <Nav.Link as={NavLink} to="/rewards" className="d-flex align-items-center justify-content-center">
                     Rewards
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Button onClick={logout} variant="danger" className="m-2">
                     Logout
                   </Button>
