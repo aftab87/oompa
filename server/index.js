@@ -15,6 +15,12 @@ const createChoresPaths = require('./Repos/Chores');
 const createKidsPaths = require('./Repos/Kids');
 const createParentPaths = require('./Repos/Parents');
 const createRewardsPaths = require('./Repos/Rewards');
+const completedChoresModel = require("./Models/Chores_completed");
+
+
+// +++++++++++++++++++++++++++++++++++++++++ Rewards Constants+++++++++++++++++++++++++++++++++
+const rewardsModel = require("./Models/Rewards");
+const RewardsHistoryModel = require("./Models/Rewards_History");
 
 const app = express();
 const port = 3001; // Must be different from the port of the React app
@@ -67,6 +73,57 @@ createChoresPaths(app)
 createKidsPaths(app, validator, bcrypt, saltRounds)
 createParentPaths(app, validator, bcrypt, saltRounds)
 createRewardsPaths(app)
+
+
+//  =================  Rewards History CRUD ======================
+
+app.post("/rewards/kids", async (req, res) => {
+  // const parent_uid = req.body.parent_uid;
+  const reward_uid = req.body.reward_uid;
+  const kids_uid = req.body.kids_uid;
+  const date_redeemed = req.body.date_redeemed;
+  const date_delivered = req.body.date_delivered;
+
+
+  const rewardsHistory = {
+
+    reward_uid: reward_uid,
+    kids_uid: kids_uid,
+    date_redeemed: date_redeemed,
+    date_delivered: date_delivered,
+    should_persist: false
+  };
+  try {
+   const reward=  await RewardsHistoryModel.create(rewardsHistory);
+    res.send(reward);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: err.message })
+  }
+
+});
+
+app.put("/rewards/kids/:id", async (req, res) => {
+  // const parent_uid = req.body.parent_uid;
+  const {id } = req.params
+
+
+  try {
+    // asynchronouse processes are promises
+    const reward = await RewardsHistoryModel.findById(id);
+    
+    await reward.update(req.body)
+
+    
+ 
+    res.send( await RewardsHistoryModel.findById(id));
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: err.message })
+  }
+
+});
+
 
 
 
