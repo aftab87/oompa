@@ -24,24 +24,39 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
         const user = await kidsModel.findOne({ username: username });
         if (user) {
           console.log("Invalid registration - username " + username + " already exists.");
-          res.send({ success: false });
+          res.send({ success: false, msg: `Username ${username} is already taken` });
           return;
         } else {
           const hashedPassword = await bcrypt.hash(password, saltRounds);
           console.log("Registering username " + username);
-          const parent = {
-            kids: [username],
-          };
-          const kid = {
-            parent_uid: parent_uid,
-            username: username,
-            password: hashedPassword,
-            first_name: first_name,
-            avatar: avatar,
-            points: points,
-          };
-          await parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
-          await kidsModel.create(kid);
+          // const kid = {
+          //   parent_uid: parent_uid,
+          //   username: username,
+          //   password: hashedPassword,
+          //   first_name: first_name,
+          //   avatar: avatar,
+          //   points: points,
+          // };
+          // await kidsModel.create(kid);
+          // await parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
+          let kid = new kidsModel()
+          kid.parent_uid = parent_uid
+          kid.username = username
+          kid.password = hashedPassword
+          kid.first_name = first_name
+          kid.avatar = avatar
+          kid.points = points
+          kid.save((err, insertedKid) => {
+            if (err) {
+              res.send({ success: false, msg: err.message })
+              return;
+            }
+            const parent = {
+              kids: [insertedKid._id],
+            };
+            parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
+            res.send({ success: true, kid: insertedKid })
+          })
           return;
         }
       }
