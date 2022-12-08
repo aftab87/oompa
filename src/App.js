@@ -169,7 +169,7 @@ function App() {
                     {user.type === "kid" && KidsDashboardRoutes()}
                   </Route>
                 )}
-                <Route path="emailconfirmation" element={<EmailConfirmation />} />
+                <Route path="contactconfirmation" element={<EmailConfirmation />} />
                 {/* //TODO: Add these routes at the appropriate place */}
                 {/* <Route path="rewards" element={<Rewards />} /> */}
                 {/* <Route path="rewards/:id/edit" element={<EditRewardsForm />} /> */}
