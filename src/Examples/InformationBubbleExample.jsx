@@ -5,7 +5,7 @@ function InformationBubbleExample(props) {
     return (
         <InformationBubble
                 title="Did you know?"
-                text="You can also login via the Kids form. However the forgot password link is only available on this login form."
+                text="You can also login via the Kids form. However, the forgoten password link is only available on this login form."
                 src="./images/FancyBubble.svg" />
     );
 }

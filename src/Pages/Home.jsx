@@ -26,8 +26,7 @@ function Home(props) {
             <div className={"col-12 col-md-8 flex-column p-5 pb-1 gap-2 " + flex_center}>
               <h1>Welcome {user ? user.username : "to Oompa"}!</h1>
               <p className="">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.
-                Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum.
+                A fun and interactive web application design to help kids manage their chores and save time for parents!!!
               </p>
             </div>
             <div className="col-12 col-md-4 d-flex justify-content-center">
