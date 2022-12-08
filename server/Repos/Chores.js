@@ -31,10 +31,12 @@ const createChoresPaths = (app) => {
     };
     try {
       await choresModel.create(chores);
+      res.send({ success: true, chores })
+      return;
     } catch (err) {
       console.log(err);
     }
-    res.send(chores);
+    res.send({ success: false });
   });
 
   // *********UPDATE CHORE*******************

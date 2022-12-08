@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "Components/InputGroup";
 import { userContext } from "App";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function ChoresCRUDForm(props) {
   const { missions } = props;
@@ -12,6 +13,8 @@ function ChoresCRUDForm(props) {
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [user, setUser] = useContext(userContext);
+  
+  const navigate = useNavigate()
 
   const titleRef = useRef();
   const pointsRef = useRef();
@@ -76,7 +79,18 @@ function ChoresCRUDForm(props) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((data) => data.json());
+    })
+    .then(data => data.json())
+    .then(json => {
+        console.log(json)
+        if (json.success) {
+            console.log(json)
+            navigate('/dashboard/missions')
+        }
+    })
+    .catch(err => {
+        console.log('error', err)
+    })
   };
 
   const handleKidsSelection = (username, selected) => {
@@ -126,8 +140,9 @@ function ChoresCRUDForm(props) {
           <InputGroup type="date" label="End Date" placeholder="Enter end date..." required ref={endDateRef} />
           <InputGroup type="number" label="Repitions" placeholder="How many times..." required ref={repetitionRef} />
 
-          <div className="text-center">
+          <div className='text-center d-flex justify-content-center gap-5'>
             <Button type="submit">Submit form</Button>
+            <Button as={NavLink} to={"/dashboard/missions"} variant="danger">Cancel</Button>
           </div>
         </Form>
       </div>

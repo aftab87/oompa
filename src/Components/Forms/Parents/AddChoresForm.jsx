@@ -6,7 +6,7 @@ export default function AddChoresForm() {
   return (
 
     <div>
-        <ChoresCRUDForm title="Add a Mission(s)"/>
+        <ChoresCRUDForm title="Add a Mission"/>
     </div>
   )
 }
