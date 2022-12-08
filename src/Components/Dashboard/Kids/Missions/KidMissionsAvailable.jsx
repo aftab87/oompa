@@ -1,12 +1,12 @@
 import React from "react";
+import KidMissionCard from "../KidMissionCard";
 
 function KidMissionsAvailable(props) {
   return (
     <div className="d-flex gap-4 flex-wrap justify-content-center p-4">
-      <div className="btn-square bg-warning">card placeholder</div>
-      <div className="btn-square bg-warning">card placeholder</div>
-      <div className="btn-square bg-warning">card placeholder</div>
-      <div className="btn-square bg-warning">card placeholder</div>
+      <KidMissionCard stars="1" title="Brush Teeth" description="short description..." img="" date="Monday" time="7:30 pm" state="available" />
+      <KidMissionCard stars="1" title="Brush Teeth" description="short description..." img="" date="Monday" time="7:30 pm" state="completed" />
+      <KidMissionCard stars="1" title="Brush Teeth" description="short description..." img="" date="Monday" time="7:30 pm" state="approved" />
     </div>
   );
 }
