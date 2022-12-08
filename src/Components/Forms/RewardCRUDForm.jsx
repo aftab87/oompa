@@ -9,12 +9,15 @@ function RewardsCRUDForm(props) {
     const [kids, setKids] = useState(null);
     const [selectedKids, setSelectedKids] = useState([]);
     const [validated, setValidated] = useState(false);
+    const [firstRun, setFirstRun] = useState(true);
+
     const titleRef = useRef();
     const descriptionRef = useRef();
     const imageRef = useRef();
     const pointsRef = useRef();
 
     async function callGetAllKids() {
+        // callGetAllKids
         await fetch("http://localhost:3001/kids", { method: "GET" })
             .then((data) => data.json())
             .then((json) => json)
@@ -23,16 +26,18 @@ function RewardsCRUDForm(props) {
 
 
     useEffect(() => {
-        if (!reward) {
-            callGetAllKids();
-            return
-        } else
-            callGetAllKids();
-        titleRef.current.value = reward.title
-        descriptionRef.current.value = reward.description
-        imageRef.current.value = reward.image
-        pointsRef.current.value = reward.points
-    }, [reward, kids])
+        if (firstRun) {
+            setFirstRun(false)
+            callGetAllKids()
+        }
+        if (reward) {
+            console.log(reward)
+            titleRef.current.value = reward.title
+            descriptionRef.current.value = reward.description
+            imageRef.current.value = reward.image
+            pointsRef.current.value = reward.points
+        }
+    }, [firstRun, reward])
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
