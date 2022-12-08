@@ -4,8 +4,9 @@ const parentsModel = require("../Models/Parents");
 const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
   // *********UPDATE KID*******************
   // *********GET KIDS*******************
-  app.get("/kids", async (req, res) => {
-    const kids = await kidsModel.find({}).where("parent_uid").equals("26");
+  app.get("/kids/:parent_uid", async (req, res) => {
+    const parent_uid = req.params.parent_uid;
+    const kids = await kidsModel.find({}).where("parent_uid").equals(parent_uid);
     res.send(kids);
   });
 

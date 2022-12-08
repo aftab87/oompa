@@ -5,7 +5,7 @@ const createRewardsPaths = (app) => {
   // ==========================  REWARDS CRUD ==========================================
   // Reward POST
   app.post("/dashboard/rewards", async (req, res) => {
-    // const parent_uid = req.body.parent_uid;
+    const parent_uid = req.body.parent_uid;
     const kids = req.body.kids;
     const title = req.body.title;
     const description = req.body.description;
@@ -13,7 +13,7 @@ const createRewardsPaths = (app) => {
     const points = req.body.points;
     //const parentuid = req.user_id
     const rewards = {
-      parent_uid: "26",
+      parent_uid: parent_uid,
       kids: kids,
       title: title,
       description: description,
@@ -66,6 +66,19 @@ const createRewardsPaths = (app) => {
 
     try {
       const reward = await rewardsModel.find({}).where("parent_uid").equals(id);
+
+      res.send(reward);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ message: err.message });
+    }
+  });
+  app.get("/dashboard/reward/:reward_id", async (req, res) => {
+    // const parent_uid = req.body.parent_uid;
+    const reward_id = req.params.reward_id;
+
+    try {
+      const reward = await rewardsModel.find({}).where("_id").equals(reward_id);
 
       res.send(reward);
     } catch (err) {
