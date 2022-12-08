@@ -5,8 +5,9 @@ import InputGroup from "Components/InputGroup";
 import { userContext } from "App";
 
 function RewardsCRUDForm(props) {
-  const reward = props;
+  const { reward } = props;
   const [kids, setKids] = useState(null);
+  //   const [reward, setReward] = useState(null);
   const [selectedKids, setSelectedKids] = useState([]);
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
@@ -19,19 +20,28 @@ function RewardsCRUDForm(props) {
 
   async function callGetAllKids() {
     // callGetAllKids
-    await fetch("http://localhost:3001/kids", { method: "GET" })
+
+    await fetch("http://localhost:3001/kids/" + user.id, { method: "GET" })
       .then((data) => data.json())
       .then((json) => json)
       .then((json) => setKids(json));
   }
+  //   async function callGetReward(params) {
+  //     await fetch("http://localhost:3001/dashboard/reward/" + params, { method: "GET" })
+  //       .then((data) => data.json())
+  //       .then((json) => json)
+  //       .then((json) => setReward(json));
+  //   }
 
   useEffect(() => {
     if (firstRun) {
       setFirstRun(false);
       callGetAllKids();
+      const params = new URLSearchParams("reward");
+      //   console.log(params);
+      //   if (params) callGetReward(params);
     }
     if (reward) {
-      console.log(reward);
       titleRef.current.value = reward.title;
       descriptionRef.current.value = reward.description;
       imageRef.current.value = reward.image;
@@ -112,7 +122,7 @@ function RewardsCRUDForm(props) {
           <InputGroup type="text" as="textarea" rows={4} label="Description" placeholder="Please describe reward..." required ref={descriptionRef} />
           {/* TODO:MAKE CUSTOM LABEL */}
           <Form.Label>Kids</Form.Label>
-          <div className="d-flex gap-3">{kids && kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid.username} onKidChange={handleKidsSelection} />)}</div>
+          <div className="d-flex gap-3">{kids && kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid._id} onKidChange={handleKidsSelection} />)}</div>
           {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
           <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
           <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />

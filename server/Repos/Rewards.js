@@ -73,6 +73,19 @@ const createRewardsPaths = (app) => {
       res.status(400).send({ message: err.message });
     }
   });
+  app.get("/dashboard/reward/:reward_id", async (req, res) => {
+    // const parent_uid = req.body.parent_uid;
+    const reward_id = req.params.reward_id;
+
+    try {
+      const reward = await rewardsModel.find({}).where("_id").equals(reward_id);
+
+      res.send(reward);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ message: err.message });
+    }
+  });
 
   app.get("/dashboard/rewards/", async (req, res) => {
     try {

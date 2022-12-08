@@ -46,7 +46,7 @@ function ParentRewards(props) {
       <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Testing Edit Reward Object</h3>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-        <Button variant="primary" as={NavLink} to="/dashboard/rewards/63912e8d5d9afcff48f748d3/edit">
+        <Button variant="primary" as={NavLink} to="/dashboard/rewards/edit?reward=63912e8d5d9afcff48f748d3">
           Edit Test Reward
         </Button>
       </div>
