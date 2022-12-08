@@ -5,7 +5,7 @@ import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import SectionHeader from "Components/Dashboard/SectionHeader";
 import StarCounter from "Components/Dashboard/Kids/StarCounter";
 import { Button } from "react-bootstrap";
-import MissionCard from "Components/Dashboard/MissionCard";
+import KidsCard from "Components/Dashboard/KidsCard";
 
 function KidOverview(props) {
   const [user] = useContext(userContext);
@@ -42,7 +42,7 @@ function KidOverview(props) {
       <div className="row g-3">
         {kids &&
           kids.map((kids) => (
-            <MissionCard key={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} />
+            <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} />
           ))}
       </div>
 

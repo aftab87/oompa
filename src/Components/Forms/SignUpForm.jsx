@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import InputGroup from "Components/InputGroup";
 import { Button, Form } from "react-bootstrap";
@@ -49,7 +49,7 @@ function SignUpForm(props) {
       .then(json => {
         setBusy(false)
         if (json.success)
-          navigate('/login?newUser')
+          navigate(props.edit ? '/dashboard' : '/login?newUser')
         else {
           setDbError(json.msg)
         }
@@ -84,8 +84,9 @@ function SignUpForm(props) {
 
                 {dbError && <p className="alert alert-danger text-center">{dbError}</p>}
 
-                <div className="text-center my-5">
-                  <Button type="submit">Sign Up</Button>
+                <div className='text-center d-flex justify-content-center gap-5'>
+                  <Button type="submit">{props.edit ? "Save" : "Sign Up"}</Button>
+                  {props.edit && <Button as={NavLink} to={"/dashboard/kids"} className="btn-danger">Cancel</Button>}
                 </div>
               </Form>
             </div>
