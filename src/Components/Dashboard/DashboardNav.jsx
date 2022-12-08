@@ -8,11 +8,11 @@ function KidDashNav(props) {
     <div className="d-flex flex-column gap-3">
       {user.type === "parent" ? (
         <>
-        <div className="bg-danger">
-          <ImageButton link={"/dashboard/kids"} imgSrc={"../images/avatar_btn.svg"} label={"Kids"} />
-          <ImageButton link={"/dashboard/missions"} imgSrc={"../images/mission.svg"} label={"Missions"} />
-          <ImageButton link={"/dashboard/rewards"} imgSrc={"../images/gift_btn.svg"} label={"Rewards"} />
-          <ImageButton link={"/dashboard/settings"} imgSrc={"../images/settings_btn.svg"} label={"Settings"} />
+          <div className="bg-danger">
+            <ImageButton link={"/dashboard/kids"} imgSrc={"../images/avatar_btn.svg"} label={"Kids"} />
+            <ImageButton link={"/dashboard/missions"} imgSrc={"../images/mission.svg"} label={"Missions"} />
+            <ImageButton link={"/dashboard/rewards"} imgSrc={"../images/gift_btn.svg"} label={"Rewards"} />
+            <ImageButton link={"/dashboard/settings"} imgSrc={"../images/settings_btn.svg"} label={"Settings"} />
           </div>
         </>
       ) : (
