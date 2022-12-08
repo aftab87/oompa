@@ -17,10 +17,11 @@ function ChoresCRUDForm(props) {
   const days = [
     { name: "sunday", number: 0 },
     { name: "monday", number: 1 },
-    { name: "wednesday", number: 2 },
-    { name: "thursday", number: 3 },
-    { name: "friday", number: 4 },
-    { name: "saturday", number: 5 },
+    { name: "tuesday", number: 2 },
+    { name: "wednesday", number: 3 },
+    { name: "thursday", number: 4 },
+    { name: "friday", number: 5 },
+    { name: "saturday", number: 6 },
   ];
 
   // const [daysObj, setDaysObj] = useState(null);
@@ -41,8 +42,6 @@ function ChoresCRUDForm(props) {
       .then((data) => data.json())
       .then((json) => json)
       .then((json) => setKids(json));
-
-    alert(new Date().getDay().toLocaleString("en-us", { weekday: "long" }));
   }
 
   useEffect(() => {
