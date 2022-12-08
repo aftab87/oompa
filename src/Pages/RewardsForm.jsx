@@ -1,4 +1,4 @@
-import RewardsCRUDForm from "Assets/Forms/RewardCRUDForm";
+import RewardsCRUDForm from "../Components/Forms/RewardCRUDForm";
 import React, { useRef, useState } from 'react';
 
 
