@@ -38,12 +38,12 @@ import KidForm from "Components/Forms/Kids/KidForm";
 
 export const DarkModeContext = createContext({
   darkMode: false,
-  setDarkMode: () => { },
+  setDarkMode: () => {},
 });
 
 export const userContext = createContext({
   user: null,
-  setUser: () => { },
+  setUser: () => {},
 });
 
 function App() {
@@ -65,13 +65,12 @@ function App() {
       <>
         <Route index element={<ParentKids />} />
         <Route path="kids" element={<ParentKids />} />
-        <Route path="kids/add/:id" element={<KidForm />} />
+        <Route path="kids/add" element={<KidForm />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
 
         <Route path="missions/add" element={<AddChoresForm />} />
         <Route path="missions/:id/edit" element={<EditChoresForm />} />
-
 
         {/* NOTE: to be fixed for link to rewards/add */}
         <Route path="rewards/add" element={<AddRewardForm />} />
@@ -80,7 +79,6 @@ function App() {
         <Route path="rewards/:id/edit" element={<EditRewardsForm />} />
 
         <Route path="settings" element={<ParentAccountSettings />} />
-
       </>
     );
   };

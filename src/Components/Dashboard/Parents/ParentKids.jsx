@@ -10,9 +10,11 @@ function KidOverview(props) {
   const [user] = useContext(userContext);
   return (
     <section className="overview">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between align-items-start">
         <SectionHeader title={"Let's See how your kids are doing"} text={"Here you can ..."} />
-        <Button as={NavLink} to={"/dashboard/kids/add"}>Add Kid</Button>
+        <Button as={NavLink} to={"/dashboard/kids/add"}>
+          Add Kid
+        </Button>
       </div>
 
       {/* tab buttons */}
