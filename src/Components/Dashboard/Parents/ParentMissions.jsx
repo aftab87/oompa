@@ -36,16 +36,7 @@ function ParentMissions(props) {
         <DashboardTabButton label={"Approved"} section={"rewards"} endpoint={"received"} />
       </div>
 
-      <div className="row g-3">
-        {chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
-        {/* <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Maria"} img="" date="Monday" time="7:30 pm" state="approved" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Tommy"} img="" date="Monday" time="7:30 pm" state="completed" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Maria"} img="" date="Monday" time="7:30 pm" state="approved" />
-        <KidMissionCard stars="1" title="Brush Teeth" description="short description..." kids={"Maria"} img="" date="Monday" time="7:30 pm" state="approved" /> */}
-      </div>
+      <div className="row g-3">{chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date="Monday" time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}</div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Testing Edit Reward Object</h3>

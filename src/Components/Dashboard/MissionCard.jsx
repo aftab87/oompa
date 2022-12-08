@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function KidMissionCard({ title, description, img, date, time, state, kids }) {
+function MissionCard({ title, description, img, date, time, state, kids }) {
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
@@ -89,4 +89,4 @@ function KidMissionCard({ title, description, img, date, time, state, kids }) {
   );
 }
 
-export default KidMissionCard;
+export default MissionCard;
