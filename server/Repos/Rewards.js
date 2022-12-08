@@ -23,10 +23,10 @@ const createRewardsPaths = (app) => {
     };
     try {
       await rewardsModel.create(rewards);
-      res.send(rewards);
+      res.send({ success: true, rewards: rewards });
     } catch (err) {
       console.log(err);
-      res.status(400).send({ message: err.message });
+      res.status(400).send({ success: false, message: err.message });
     }
   });
 

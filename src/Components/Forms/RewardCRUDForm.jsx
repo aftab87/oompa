@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "Components/InputGroup";
 import { userContext } from "App";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function RewardsCRUDForm(props) {
   const { reward } = props;
@@ -12,6 +13,7 @@ function RewardsCRUDForm(props) {
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [user, setUser] = useContext(userContext);
+  const navigate = useNavigate()
 
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -79,7 +81,18 @@ function RewardsCRUDForm(props) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((data) => data.json());
+    })
+    .then(data => data.json())
+    .then(json => {
+        console.log(json)
+        if (json.success) {
+            console.log(json)
+            navigate('/dashboard/rewards')
+        }
+    })
+    .catch(err => {
+        console.log('error', err)
+    })
   };
 
   const handleKidsSelection = (username, selected) => {
@@ -127,10 +140,13 @@ function RewardsCRUDForm(props) {
           <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
           <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
 
-          <Button type="submit">Submit form</Button>
+          <div className='text-center d-flex justify-content-center gap-5'>
+            <Button type="submit">Submit form</Button>
+            <Button as={NavLink} to={"/dashboard/rewards"} className="btn-danger">Cancel</Button>
+          </div>
         </Form>
         {/* FIXME: REMOVE THIS LINK */}
-        <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"}>link to edit page</a>
+        {/* <a href={"http://localhost:3000/rewards/" + reward?._id + "/edit"}>link to edit page</a> */}
       </div>
     </div>
   );
