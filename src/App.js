@@ -24,6 +24,7 @@ import KidRewards from "Components/Dashboard/Kids/KidRewards";
 import KidSettings from "Components/Dashboard/Kids/KidSettings";
 import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
 import EditRewardsForm from "Components/Forms/Parents/EditRewardsForm";
+
 import KidMissionsAvailable from "Components/Dashboard/Kids/Missions/KidMissionsAvailable";
 import KidMissionsCompleted from "Components/Dashboard/Kids/Missions/KidMissionsCompleted";
 import KidMissionsApproved from "Components/Dashboard/Kids/Missions/KidMissionsApproved";
@@ -32,6 +33,7 @@ import KidRewardsClaimed from "Components/Dashboard/Kids/Rewards/KidRewardsClaim
 import KidRewardsReceived from "Components/Dashboard/Kids/Rewards/KidRewardsReceived";
 import TestPage from "./Pages/TestPage";
 import AddChoresForm from "Components/Forms/Parents/AddChoresForm";
+import EditChoresForm from "Components/Forms/Parents/EditChoresForm";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -64,7 +66,9 @@ function App() {
         <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
+
         <Route path="missions/add" element={<AddChoresForm />} />
+        <Route path="missions/:id/edit" element={<EditChoresForm />} />
 
         
         {/* NOTE: to be fixed for link to rewards/add */}

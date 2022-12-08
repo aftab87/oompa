@@ -20,7 +20,7 @@ function ParentMissions(props) {
         <h3>Testing Edit Reward Object</h3>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
 
-        <Button variant="primary" as={NavLink} to="/dashboard/mission/6390d14d5c1327fd52b89ada/edit">Edit Mission</Button>
+        <Button variant="primary" as={NavLink} to="/dashboard/missions/34/edit">Edit Mission</Button>
 
       </div>
     </div>
