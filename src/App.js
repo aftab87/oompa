@@ -13,7 +13,6 @@ import Login from "Pages/Login";
 import Page404 from "Pages/Page404";
 import Dashboard from "Pages/Dashboard";
 import Rewards from "Pages/RewardsForm";
-// import EditRewardsForm from "Pages/EditRewardsFormss";
 import EmailConfirmation from "Pages/EmailConfirmation";
 import ParentKids from "Components/Dashboard/Parents/ParentKids";
 import KidOverview from "Components/Dashboard/Kids/KidOverview";
@@ -32,6 +31,7 @@ import KidRewardsAvailable from "Components/Dashboard/Kids/Rewards/KidRewardsAva
 import KidRewardsClaimed from "Components/Dashboard/Kids/Rewards/KidRewardsClaimed";
 import KidRewardsReceived from "Components/Dashboard/Kids/Rewards/KidRewardsReceived";
 import TestPage from "./Pages/TestPage";
+import AddChoresForm from "Components/Forms/Parents/AddChoresForm";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -64,6 +64,8 @@ function App() {
         <Route path="kids" element={<ParentKids />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
+        <Route path="missions/add" element={<AddChoresForm />} />
+
         
         {/* NOTE: to be fixed for link to rewards/add */}
         <Route path="rewards/add" element={<AddRewardForm />} />
