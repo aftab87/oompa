@@ -5,10 +5,10 @@ import ImageButton from "./ImageButton";
 function KidDashNav(props) {
   const [user] = useContext(userContext);
   return (
-    <div className="d-flex flex-column gap-3">
+    <div className="">
       {user.type === "parent" ? (
         <>
-          <div className="bg-danger">
+          <div className="d-flex flex-row flex-md-column gap-3">
             <ImageButton link={"/dashboard/kids"} imgSrc={"../images/avatar_btn.svg"} label={"Kids"} />
             <ImageButton link={"/dashboard/missions"} imgSrc={"../images/mission.svg"} label={"Missions"} />
             <ImageButton link={"/dashboard/rewards"} imgSrc={"../images/gift_btn.svg"} label={"Rewards"} />
@@ -17,11 +17,11 @@ function KidDashNav(props) {
         </>
       ) : (
         <>
-          <div className="bg-info">
+          <div className="d-flex flex-column gap-3">
             <ImageButton link={"/dashboard/adventures"} imgSrc={"../images/icon-binoculors.svg"} label={"My Adventures"} />
             <ImageButton link={"/dashboard/missions"} imgSrc={"../images/mission.svg"} label={"Missions"} />
             <ImageButton link={"/dashboard/rewards"} imgSrc={"../images/gift_btn.svg"} label={"Rewards"} />
-            <ImageButton link={"/dashboard/settings"} imgSrc={"../images/settings_btn.svg"} label={"Settings"} />
+            <ImageButton link={"/dashboard/settings"} imgSrc={"../images/avatar_btn.svg"} label={"Settings"} />
           </div>
         </>
       )}
