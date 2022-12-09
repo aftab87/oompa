@@ -1,15 +1,21 @@
 import React, { useEffect, useContext } from "react";
 import FramedScreenshot from "Components/FramedScreenshot";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { userContext } from "App";
 
 function Home(props) {
-  const [user] = useContext(userContext);
+  const [user, setUser] = useContext(userContext);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   // setUser(sessionStorage.getItem("user"));
-  // }, []);
+  useEffect(() => {
+    if (searchParams.get("logout")) {
+      setUser(null);
+      sessionStorage.clear()
+      navigate("/")
+    }
+  }, [navigate, searchParams, setUser, user]);
 
   const ctaTitle = user ? "Explore Your Dashboard" : "Are you a parent? Get started here!";
   const ctaButtonLabel = user ? "Dashboard" : "Sign Up";
