@@ -127,24 +127,24 @@ const createRewardsPaths = (app) => {
   app.put("/dashboard/rewards/:id/claim", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
     const id = req.params.id;
-   
-    const kid_uid = req.body.kid_uid
-  
+
+    const kid_uid = req.body.kid_uid;
+
     //const parentuid = req.user_id
-   
+
     try {
       const reward = await rewardsModel.findById(id);
-      const kid = await kidsModel.findById(kid_uid)
-      kid.points = kid.points - reward.points
-      if(reward.claimed_kids){
-        if(!reward.claimed_kids.includes(kid_uid))
-        {reward.claimed_kids.push(kid_uid)}
-      }else
-      {
-        reward.claimed_kids = [kid_uid]
+      const kid = await kidsModel.findById(kid_uid);
+      kid.points = kid.points - reward.points;
+      if (reward.claimed_kids) {
+        if (!reward.claimed_kids.includes(kid_uid)) {
+          reward.claimed_kids.push(kid_uid);
+        }
+      } else {
+        reward.claimed_kids = [kid_uid];
       }
-      await reward.save()
-      await kid.save()
+      await reward.save();
+      await kid.save();
       res.send(reward);
     } catch (err) {
       console.log(err);

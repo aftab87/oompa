@@ -5,12 +5,11 @@ import InputGroup from "Components/InputGroup";
 import { Button, Form } from "react-bootstrap";
 import { userContext } from "App";
 
-
 function SignUpForm(props) {
   const [validated, setValidated] = useState(false);
-  const [dbError, setDbError] = useState(null) // For the alert in case of an error
-  const [password, setPassword] = useState(null)
-  const [user] = useContext(userContext);
+  const [dbError, setDbError] = useState(null); // For the alert in case of an error
+  const [password, setPassword] = useState(null);
+  const [user, setUser] = useContext(userContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -29,23 +28,22 @@ function SignUpForm(props) {
   };
   //FIXME: Default avatar
   const save = () => {
-    const url = user ? "http://localhost:3001/Parents/" + user.id : "http://localhost:3001/Parents"
-    const method = props.edit ? "PUT" : "POST"
+    const url = user ? "http://localhost:3001/Parents/" + user.id : "http://localhost:3001/Parents";
+    const method = props.edit ? "PUT" : "POST";
 
-    const body = user ?
-      JSON.stringify({
-        password: passwordRef.current["value"],
-        avatar_uid: "100",
-        appellation: appellationRef.current["value"],
-      })
-      :
-      JSON.stringify({
-        email: emailRef.current["value"],
-        password: passwordRef.current["value"],
-        isVerified: false,
-        avatar_uid: "100",
-        appellation: appellationRef.current["value"],
-      })
+    const body = user
+      ? JSON.stringify({
+          password: passwordRef.current["value"],
+          avatar_uid: "100",
+          appellation: appellationRef.current["value"],
+        })
+      : JSON.stringify({
+          email: emailRef.current["value"],
+          password: passwordRef.current["value"],
+          isVerified: false,
+          avatar_uid: "100",
+          appellation: appellationRef.current["value"],
+        });
 
     fetch(url, {
       method: method,
@@ -54,19 +52,23 @@ function SignUpForm(props) {
         "Content-type": "application/json;charset=UTF-8",
       },
     })
-      .then(data => data.json())
-      .then(json => {
-        if (json.success)
-          navigate(props.edit ? '/dashboard' : '/login?newUser')
-        else {
-          setDbError(json.msg)
+      .then((data) => data.json())
+      .then((json) => {
+        if (json.success) {
+          setUser((prevUser) => {
+            let tempUser = { ...prevUser };
+            tempUser.first_name = appellationRef.current["value"];
+            return tempUser;
+          });
+          navigate(props.edit ? "/dashboard" : "/login?newUser");
+        } else {
+          setDbError(json.msg);
         }
       })
-      .catch(err => {
-        console.log('error', err)
-      })
-  }
-
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
 
   return (
     <main className="signup text-center">
@@ -75,9 +77,11 @@ function SignUpForm(props) {
           <div className="row justify-content-center align-items-center">
             <div className="col col-lg-6">
               <h2>{props.edit ? "Account Settings" : "Sign Up"}</h2>
-              {!props.edit && <p>
-                Already have an account? <Link to={"/login"}>Login</Link>
-              </p>}
+              {!props.edit && (
+                <p>
+                  Already have an account? <Link to={"/login"}>Login</Link>
+                </p>
+              )}
 
               <Form noValidate validated={validated} onSubmit={handleSubmit} className="text-start">
                 {/*
@@ -87,13 +91,25 @@ function SignUpForm(props) {
                 {!props.edit && <InputGroup type="text" label="Email" placeholder="email@domain.com" required ref={emailRef} clear_error={setDbError} defaultValue={props.edit ? user.email : ""} />}
                 <InputGroup type="password" label="Password" placeholder="********" required ref={passwordRef} clear_error={setDbError} set_password={setPassword} />
                 <InputGroup type="password" label="Confirm Password" placeholder="********" required clear_error={setDbError} password={password} />
-                <InputGroup type="text" label={"What do you want you kids to call you on Oompa" + (props.edit ? " now?" : "?")} placeholder="Daddy" required ref={appellationRef} clear_error={setDbError} defaultValue={user ? user.first_name : ""} />
+                <InputGroup
+                  type="text"
+                  label={"What do you want you kids to call you on Oompa" + (props.edit ? " now?" : "?")}
+                  placeholder="Daddy"
+                  required
+                  ref={appellationRef}
+                  clear_error={setDbError}
+                  defaultValue={user ? user.first_name : ""}
+                />
 
                 {dbError && <p className="alert alert-danger text-center">{dbError}</p>}
 
-                <div className='text-center d-flex justify-content-center gap-5'>
+                <div className="text-center d-flex justify-content-center gap-5">
                   <Button type="submit">{props.edit ? "Save" : "Sign Up"}</Button>
-                  {props.edit && <Button as={NavLink} to={"/dashboard/kids"} className="btn-danger">Cancel</Button>}
+                  {props.edit && (
+                    <Button as={NavLink} to={"/dashboard/kids"} className="btn-danger">
+                      Cancel
+                    </Button>
+                  )}
                 </div>
               </Form>
             </div>
