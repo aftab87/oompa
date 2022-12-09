@@ -7,7 +7,7 @@ import StarBadge from "./Kids/StarBadge";
 function MissionCard(props) {
   console.log(props);
   const {
-    chore: { title, description, img, time = "7:00PM", kids, _id, points: stars, repitition: date, completedChore },
+    chore: { title, description, image, time = "7:00PM", kids, _id, points: stars, repitition: date, completedChore },
     onDelete,
   } = props;
   const [user] = useContext(userContext);
@@ -44,8 +44,8 @@ function MissionCard(props) {
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
         <StarBadge className="text-dark" numStars={1} />
         <div className="position-relative text-center">
-          <img src={`${img ? img : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
-          {img && <div className="inner-shadow"></div>}
+          <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
+          {image && <div className="inner-shadow"></div>}
         </div>
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
           <div>
