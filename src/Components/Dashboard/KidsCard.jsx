@@ -10,7 +10,7 @@ function KidsCard({ title, description, img, date, time, state, kids, id, stars,
 
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
 
-  const deleteHandler = (e) => {
+  const deleteHandler = () => {
     console.log(id)
     fetch("http://localhost:3001/kids/" + id, {
       method: "DELETE",
@@ -86,8 +86,7 @@ function KidsCard({ title, description, img, date, time, state, kids, id, stars,
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button as={NavLink} to={"./kids/edit?id=" + id}>Edit</Button>
-                  <Button variant="danger" onClick={deleteHandler}>Delete</Button>
+                  <Button as={NavLink} to={"/dashboard/kids/edit?id=" + id}>Edit</Button>
                 </div>
               )}
               {state === "completed" && (

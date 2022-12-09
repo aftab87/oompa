@@ -11,7 +11,8 @@ const KidForm = (props) => {
     const [password, setPassword] = useState(null)
     const [kid, setKid] = useState(null)
     const [firstRun, setFirstRun] = useState(true)
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [showConfirmButton, setShowConfirmButton] = useState(false)
+    const [searchParams] = useSearchParams();
 
     const [user, setUser] = useContext(userContext);
     const navigate = useNavigate()
@@ -31,16 +32,33 @@ const KidForm = (props) => {
             });
     }
 
+    const deleteKid = () => {
+        fetch("http://localhost:3001/kids/" + kid._id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json;charset=UTF-8",
+          },
+        })
+          .then(data => data.json())
+          .then(json => {
+            console.log(json)
+            if (json.success) {
+                navigate('/dashboard/kids')
+            }
+          })
+          .catch(err => {
+            console.log('error', err)
+          })
+      }
+
     useEffect(() => {
-        if (user.type !== "parent")
-            navigate("/")
         if (firstRun) {
             setFirstRun(false)
             const id = searchParams.get("id")
             if (id)
                 getKid(id)
         }
-    }, [navigate, user.type])
+    }, [user.type])
 
     const process = () => {
         if (kid)
@@ -100,8 +118,8 @@ const KidForm = (props) => {
         setValidated(true);
     };
 
-    const onChange = (e) => {
-
+    const deleteHandler = () => {
+        setShowConfirmButton((showing) => !showing)
     }
 
 
@@ -124,7 +142,19 @@ const KidForm = (props) => {
 
                     <div className='text-center d-flex justify-content-center gap-5'>
                         <Button type="submit" >{kid ? "Save" : "Create"}</Button>
+                        {kid && <Button variant="danger" onClick={deleteHandler}>Delete</Button>}
                         <Button as={NavLink} to={"/dashboard/kids"} className="btn-danger">Cancel</Button>
+                    </div>
+                    <div className='text-center d-flex justify-content-center gap-5 mt-5'>
+                        {showConfirmButton &&
+                            <>
+                                <div className="alert alert-danger text-center">
+                                    <h3>Are you sure you want to delete {kid.first_name}'s account?</h3>
+                                    <p>They will lose all the information associated to their account</p>
+                                    <Button variant="danger" onClick={deleteKid}>Delete</Button>
+                                </div>
+                            </>
+                        }
                     </div>
                 </Form>
             </div>
