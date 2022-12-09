@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import "Components/Stylesheets/header.css";
 import { DarkModeContext, userContext } from "../App";
 import { Button } from "react-bootstrap";
@@ -11,6 +11,7 @@ import { Button } from "react-bootstrap";
 // Need to include a dark and light mode
 function Header() {
   const [darkMode, setDarkMode] = useContext(DarkModeContext);
+  const navigate = useNavigate()
 
   const darkModeToggleHandler = (e) => {
     setDarkMode(e.target.checked);
@@ -19,6 +20,7 @@ function Header() {
   const [user, setUser] = useContext(userContext);
 
   function logout() {
+    navigate("/")
     setUser(null);
   }
 
