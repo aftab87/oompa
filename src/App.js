@@ -72,7 +72,7 @@ function App() {
         <Route path="rewards/add" element={<AddRewardForm />} />
 
         {/* NOTE: to be fixed for link to rewards/add */}
-        <Route path="rewards/:id/edit" element={<EditRewardsForm />} />
+        <Route path="rewards/edit" element={<EditRewardsForm />} />
 
         <Route path="settings" element={<ParentAccountSettings />} />
       </>
