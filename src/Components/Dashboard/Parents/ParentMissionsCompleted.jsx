@@ -4,30 +4,29 @@ import { NavLink } from "react-router-dom";
 import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import MissionCard from "Components/Dashboard/MissionCard";
 import { userContext } from "App";
-import { getByDisplayValue } from "@testing-library/react";
+import ParentMissionCard from "./ParentMissionCard";
 
-function ParentMissions(props) {
-  const [chores, setChores] = useState(null);
-  const [user, setUser] = useContext(userContext);
+
+export default function ParentMissionsCompleted(props) {
+  const [choreCompleted, setChoresCompleted] = useState(null);
+  const [user] = useContext(userContext);
   const [firstRun, setFirstRun] = useState(true);
 
   async function callGetAllChores() {
-    await fetch("http://localhost:3001/Chores/" + user.id, { method: "GET" })
+    await fetch("http://localhost:3001/completedchores/?parent_uid=" + user.id, { method: "GET" })
       .then((data) => data.json())
       .then((json) => json)
-      .then((json) => setChores(json));
+      .then((json) => setChoresCompleted(json));
   }
 
-  const deleteHandler = () => {
-    callGetAllChores();
-  };
+
 
   useEffect(() => {
     if (firstRun) {
       setFirstRun(false);
       callGetAllChores();
     }
-  }, [firstRun, chores]);
+  }, [firstRun, choreCompleted]);
 
   // {chores && chores.map((chores) => <h1 key={chores._id}>{chores.title}</h1>)}</>
   return (
@@ -42,18 +41,13 @@ function ParentMissions(props) {
         <DashboardTabButton label={"Approved"} section={"missions"} endpoint={"received"} />
       </div>
 
-      <div className="row g-3">{chores && chores.map((chore) => <MissionCard key={chore._id} chore={chore} onDelete={deleteHandler} />)}</div>
-
-      <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Edit Missions</h3>
-        <p>Make changes and/or delete missions.</p>
-
-        <Button variant="primary" as={NavLink} to="/dashboard/missions/34/edit">
-          Edit Mission
-        </Button>
+    <h2>Completed Missions</h2>
+      <div className="row g-3">
+        {choreCompleted && choreCompleted.map((choreCompleted) => <ParentMissionCard key={choreCompleted._id} choreCompleted={choreCompleted} />)}
       </div>
+
+      
     </div>
   );
 }
 
-export default ParentMissions;

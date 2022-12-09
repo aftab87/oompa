@@ -30,6 +30,7 @@ import TestPage from "./Pages/TestPage";
 import AddChoresForm from "Components/Forms/Parents/AddChoresForm";
 import EditChoresForm from "Components/Forms/Parents/EditChoresForm";
 import KidForm from "Components/Forms/Kids/KidForm";
+import ParentMissionsCompleted from "Components/Dashboard/Parents/ParentMissionsCompleted";
 
 export const DarkModeContext = createContext({
   darkMode: false,
@@ -63,6 +64,7 @@ function App() {
         <Route path="kids/add/" element={<KidForm />} />
         <Route path="kids/edit" element={<KidForm />} />
         <Route path="missions" element={<ParentMissions />} />
+        <Route path="missions/completed" element={<ParentMissionsCompleted />} />
         <Route path="rewards" element={<ParentRewards />} />
         <Route path="missions/add" element={<AddChoresForm />} />
         <Route path="missions/edit" element={<EditChoresForm />} />
