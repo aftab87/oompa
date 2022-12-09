@@ -3,8 +3,10 @@ import { Button } from "react-bootstrap";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ title, description, img, date, time, state, kids }) {
-  console.log(date);
+function RewardCard({ reward, date, time, state }) {
+  console.log(reward);
+  const { description, image, kids, points, title, parent_uid } = reward;
+
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
@@ -14,8 +16,8 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
         <StarBadge className="text-dark" numStars={1} />
         <div className="position-relative text-center">
-          <img src={`${img ? img : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
-          {img && <div className="inner-shadow"></div>}
+          <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
+          {image && <div className="inner-shadow"></div>}
         </div>
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
           <div>
@@ -38,15 +40,15 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
             //Possible Missions Card states for Kids
             <>
               {state === "available" && <Button onClick={markCompleteHandler}>Mark Complete</Button>}
-              {state === "completed" && (
+              {state === "claimed" && (
                 <div>
-                  <p className="text-success fw-bold h5 mb-0">COMPLETED</p>
-                  <p className="text-secondary fw-light fst-italic small mb-0 ">awaiting approval</p>
+                  <p className="text-success fw-bold h5 mb-0">CLAIMED</p>
+                  <p className="text-secondary fw-light fst-italic small mb-0 ">now you wait :)</p>
                 </div>
               )}
               {state === "approved" && (
                 <div>
-                  <p className="text-warning fw-bold h5 mb-0">APPROVED</p>
+                  <p className="text-warning fw-bold h5 mb-0">RECEIVED</p>
                 </div>
               )}
             </>
@@ -66,13 +68,13 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
                   <Button>Edit</Button>
                 </div>
               )}
-              {state === "completed" && (
+              {state === "claimed" && (
                 <div className="d-flex justify-content-center gap-3">
                   <Button variant="success" className="text-light">
-                    Approve
+                    Mark Fulfilled
                   </Button>
                   <Button variant="danger" className="text-light w-45">
-                    Reject
+                    Break promise
                   </Button>
                 </div>
               )}
@@ -90,7 +92,7 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
   );
 }
 
-export default MissionCard;
+export default RewardCard;
 
 function markCompleteHandler() {
   //write logic for what happend when CHILD clicks mark complete

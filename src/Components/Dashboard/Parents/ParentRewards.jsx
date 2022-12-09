@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { userContext } from "App";
+import MissionCard from "../MissionCard";
+import RewardCard from "../RewardCard";
 
 function ParentRewards(props) {
   async function callGetAllRewards() {
@@ -21,30 +23,20 @@ function ParentRewards(props) {
     }
   }, [firstRun, rewards]);
 
-  // {rewards && rewards.map((rewards) => <h1 key={rewards._id}>{rewards.title}</h1>)}</>
-
   return (
     <>
-      {rewards &&
-        rewards.map((rewards) => (
-          <div key={rewards._id} className="p-4 bg-white border m-4 rounded-4">
-            <h3>{rewards.title}</h3>
-            <p>{rewards.description}</p>
-            <Button variant="primary" as={NavLink} to={"/dashboard/rewards/" + rewards._id + "/edit"}>
-              edit this reward
-            </Button>
-          </div>
-        ))}
+      <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
+        Add New Reward
+      </Button>
+
+      {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
+      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="available" />)}</div>
+      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="claimed" />)}</div>
+      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="approved" />)}</div>
+      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="" />)}</div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Add Rewards</h3>
-        <p>add a reward for your child</p>
-        <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
-          Add New Reward
-        </Button>
-      </div>
-      <div className="p-4 bg-white border m-4 rounded-4">
-        <h3>Edit Rewards</h3>
+        <h3>Test Edit Rewards</h3>
         <p>Make changes and/or delete rewards.</p>
         <Button variant="primary" as={NavLink} to="/dashboard/rewards/edit?reward=63912e8d5d9afcff48f748d3">
           Edit Test Reward

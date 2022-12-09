@@ -10,11 +10,24 @@ function ChoresCRUDForm(props) {
   const [kids, setKids] = useState(null);
 
   const [selectedKids, setSelectedKids] = useState([]);
+  const [selectedDays, setSelectedDays] = useState([]);
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [user, setUser] = useContext(userContext);
-  
-  const navigate = useNavigate()
+  const days = [
+    { name: "sunday", number: 0 },
+    { name: "monday", number: 1 },
+    { name: "tuesday", number: 2 },
+    { name: "wednesday", number: 3 },
+    { name: "thursday", number: 4 },
+    { name: "friday", number: 5 },
+    { name: "saturday", number: 6 },
+  ];
+
+  // const [daysObj, setDaysObj] = useState(null);
+  // setDaysObj(JSON.stringify(days));
+
+  const navigate = useNavigate();
 
   const titleRef = useRef();
   const pointsRef = useRef();
@@ -74,23 +87,23 @@ function ChoresCRUDForm(props) {
         kids: selectedKids,
         image: imageRef.current.value,
         points: pointsRef.current.value,
-        repetition: repetitionRef.current.value,
+        repetition: selectedDays,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-    .then(data => data.json())
-    .then(json => {
-        console.log(json)
+      .then((data) => data.json())
+      .then((json) => {
+        console.log(json);
         if (json.success) {
-            console.log(json)
-            navigate('/dashboard/missions')
+          console.log(json);
+          navigate("/dashboard/missions");
         }
-    })
-    .catch(err => {
-        console.log('error', err)
-    })
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
 
   const handleKidsSelection = (username, selected) => {
@@ -105,6 +118,21 @@ function ChoresCRUDForm(props) {
       setSelectedKids((selectedKids) => {
         let temp = [...selectedKids];
         return temp.filter((kid) => kid !== username);
+      });
+    }
+  };
+  const handleDaysSelection = (number, selected) => {
+    if (selected && !selectedDays.includes(number)) {
+      console.log(`adding ${number} to selected`);
+      setSelectedDays((selectedDays) => {
+        let temp = [...selectedDays, number];
+        return temp;
+      });
+    } else if (!selected && selectedDays.includes(number)) {
+      console.log(`removing ${number} from selected`);
+      setSelectedDays((selectedDays) => {
+        let temp = [...selectedDays];
+        return temp.filter((day) => day !== number);
       });
     }
   };
@@ -138,11 +166,17 @@ function ChoresCRUDForm(props) {
           <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
           <InputGroup type="date" label="Start Date" placeholder="Enter start date..." required ref={startDateRef} />
           <InputGroup type="date" label="End Date" placeholder="Enter end date..." required ref={endDateRef} />
-          <InputGroup type="number" label="Repitions" placeholder="How many times..." required ref={repetitionRef} />
+          <div className="d-flex gap-3">
+            {days.map((day) => (
+              <InputGroup type="checkbox" key={day.name} label={day.name} value={day.number} onKidChange={handleDaysSelection} />
+            ))}
+          </div>
 
-          <div className='text-center d-flex justify-content-center gap-5'>
+          <div className="text-center d-flex justify-content-center gap-5">
             <Button type="submit">Submit form</Button>
-            <Button as={NavLink} to={"/dashboard/missions"} variant="danger">Cancel</Button>
+            <Button as={NavLink} to={"/dashboard/missions"} variant="danger">
+              Cancel
+            </Button>
           </div>
         </Form>
       </div>
