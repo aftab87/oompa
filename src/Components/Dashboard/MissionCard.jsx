@@ -4,6 +4,7 @@ import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
 function MissionCard({ title, description, img, date, time, state, kids }) {
+  console.log(date);
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
