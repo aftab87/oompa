@@ -35,7 +35,7 @@ function ProgressBar({ points }) {
           </span>
         </p>
       </div>
-      <div className="d-flex justify-content-center">{percent >= 100 && <Button onClick={markCompleteHandler}>Claim</Button>}</div>
+    
     </>
   );
 }
