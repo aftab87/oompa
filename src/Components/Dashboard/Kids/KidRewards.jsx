@@ -13,10 +13,10 @@ function KidRewards(props) {
       </div>
 
       {/* tab buttons */}
-      <div className="d-flex justify-content-center gap-3 p-4">
+      {/* <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Available"} section={"rewards"} endpoint={"available"} />
        
-      </div>
+      </div> */}
 
       {/* tab content */}
       <Outlet />

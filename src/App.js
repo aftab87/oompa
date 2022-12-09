@@ -87,8 +87,8 @@ function App() {
         <Route path="adventures" element={<KidOverview />} />
         {KidsMissionsRoutes()}
         {KidsRewardsRoutes()}
-        <Route path="missions" element={<KidMissions />} />
-        <Route path="rewards" element={<KidRewards />} />
+        {/* <Route path="missions" element={<KidMissions />} />
+        <Route path="rewards" element={<KidRewards />} /> */}
         <Route path="settings" element={<KidSettings />} />
       </>
     );
