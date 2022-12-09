@@ -86,10 +86,10 @@ function MissionCard(props) {
             //Possible Missions Card states for Parents
 
             <>
-              <div className="text-center">
+              {/* <div className="text-center">
                 <p className="text-secondary  fst-italic small mb-0 ">assigned to:</p>
                 <h5 className="text-center mb-0">{kids[0]}</h5>
-              </div>
+              </div> */}
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
