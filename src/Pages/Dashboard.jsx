@@ -20,7 +20,7 @@ function Dashboard(props) {
             <p>{date}</p>
           </div>
 
-          <div className="border p-5 ">
+          <div className="p-5 border rounded-4">
             <Outlet />
           </div>
         </div>
