@@ -17,7 +17,7 @@ import EmailConfirmation from "Pages/EmailConfirmation";
 import ParentKids from "Components/Dashboard/Parents/ParentKids";
 import KidOverview from "Components/Dashboard/Kids/KidOverview";
 import ParentRewards from "Components/Dashboard/Parents/ParentRewards";
-import ParentMissions from "Components/Dashboard/Parents/ParentMissions";
+import ParentMissions from "Components/Dashboard/Parents/Missions/ParentMissions";
 import ParentAccountSettings from "Components/Dashboard/Parents/ParentAccountSettings";
 import KidMissions from "Components/Dashboard/Kids/KidMissions";
 import KidRewards from "Components/Dashboard/Kids/KidRewards";

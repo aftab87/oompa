@@ -56,9 +56,10 @@ const createChoresCompletedPaths = (app) => {
   });
 
   // *********GET CHORES COMPLETED*******************
-  app.get("/completedchores", async (req, res) => {
-    const CompletedChores = await completedChoresModel.find({}).where("parent_uid").equals("638f90e7a634d211e1791f2c");
-    res.send(CompletedChores);
+  app.get("/completedchores/:parent_uid", async (req, res) => {
+    const parent_uid = req.params.parent_uid;
+    const completedChores = await completedChoresModel.find({ parent_uid: parent_uid });
+    res.send(completedChores);
   });
 };
 
