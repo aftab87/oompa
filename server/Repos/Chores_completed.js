@@ -5,12 +5,12 @@ const choresModel = require("../Models/Chores");
 const createChoresCompletedPaths = (app) => {
   //***************CHORE COMPLETED ADD****************** */
   app.post("/completedchores", async (req, res) => {
+    console.log("/completedchores", JSON.stringify(req.body))
     const chores_completed = {
       ...req.body,
       date_completed: new Date(),
       verified: false,
     };
-
     try {
       const choreCompleted = await completedChoresModel.create(chores_completed);
       res.send(choreCompleted);
@@ -23,7 +23,7 @@ const createChoresCompletedPaths = (app) => {
   //***************CHORE COMPLETED UPDATE****************** */
   app.put("/completedchores/:id/approve", async (req, res) => {
     const choreCompleted = await completedChoresModel.findById(req.params.id);
-    console.log({ choreCompleted });
+    // console.log({ choreCompleted });
     const chore = await choresModel.findById(choreCompleted.chores_uid);
     choreCompleted.verified = true;
     const kid = await kidsModel.findById(choreCompleted.kids_uid);
@@ -45,7 +45,7 @@ const createChoresCompletedPaths = (app) => {
 
   // *********GET CHORES COMPLETED*******************
   app.get("/completedchores", async (req, res) => {
-    console.log({ query: req.query });
+    // console.log({ query: req.query });
     const completedChores = await completedChoresModel.find({ parent_uid: req.query.parent_uid });
     const populatedData = await Promise.all(
       completedChores

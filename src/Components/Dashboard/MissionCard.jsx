@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { DarkModeContext, userContext } from "../../App";
+import { NavLink, useNavigate } from "react-router-dom";
+import { DarkModeContext, userContext } from "App";
 import StarBadge from "./Kids/StarBadge";
 
 function MissionCard(props) {
@@ -9,6 +9,7 @@ function MissionCard(props) {
   const {
     chore: { title, description, image, time = "7:00PM", kids, _id, points: stars, repitition: date, completedChore },
     onDelete,
+    refresh
   } = props;
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
@@ -16,6 +17,7 @@ function MissionCard(props) {
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
   async function markCompleteHandler() {
     //write logic for what happend when CHILD clicks mark complete
+
     const response = await fetch("http://localhost:3001/completedchores", {
       method: "POST",
       body: JSON.stringify({
@@ -26,8 +28,17 @@ function MissionCard(props) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((data) => data.json());
-    console.log({ response });
+    })
+      .then((data) => data.json())
+      .then((json) => {
+        console.log(_id, json)
+        if (json.chores_uid === _id)
+          refresh()
+      })
+    // .then((json) => {
+    //   chore = 
+    // });
+    console.log("responseOnRewardMarkCompleted", { response });
   }
 
   let state = "available";
@@ -42,7 +53,7 @@ function MissionCard(props) {
   return (
     <div className={"custom_card" + col}>
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
-        <StarBadge className="text-dark" numStars={1} />
+        <StarBadge className="text-dark" numStars={stars} />
         <div className="position-relative text-center">
           <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
           {image && <div className="inner-shadow"></div>}
@@ -118,6 +129,7 @@ function MissionCard(props) {
           )}
         </div>
       </div>
+
     </div>
   );
 }
