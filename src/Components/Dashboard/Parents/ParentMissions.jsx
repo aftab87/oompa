@@ -20,7 +20,7 @@ function ParentMissions(props) {
 
   const deleteHandler = () => {
     callGetAllChores();
-  }
+  };
 
   useEffect(() => {
     if (firstRun) {
@@ -42,9 +42,7 @@ function ParentMissions(props) {
         <DashboardTabButton label={"Approved"} section={"rewards"} endpoint={"received"} />
       </div>
 
-      <div className="row g-3">
-        {chores && chores.map((chores) => <MissionCard key={chores._id} id={chores._id} stars={chores.points} title={chores.title} img="" date={new Date().toLocaleString("en-us", { weekday: "long" })} time="7:30 pm" kids={chores.kids} state="available" description={chores.description}  onDelete={deleteHandler} />)}
-      </div>
+      <div className="row g-3">{chores && chores.map((chore) => <MissionCard key={chore._id} chore={chore} date="" time="" state="available" />)}</div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Edit Missions</h3>
