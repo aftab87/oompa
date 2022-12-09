@@ -61,10 +61,10 @@ const KidForm = (props) => {
     }, [user.type])
 
     const process = () => {
-        let url = kid ? "http://localhost:3001/kids/" + kid._id : "http://localhost:3001/kids"
-        let method = kid ? "PUT" : "POST"
+        const url = kid ? "http://localhost:3001/kids/" + kid._id : "http://localhost:3001/kids"
+        const method = kid ? "PUT" : "POST"
 
-        let body = kid ?
+        const body = kid ?
             JSON.stringify({
                 parent_uid: user.id,
                 _id: kid._id,

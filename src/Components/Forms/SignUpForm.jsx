@@ -7,11 +7,9 @@ import { userContext } from "App";
 
 
 function SignUpForm(props) {
-
   const [validated, setValidated] = useState(false);
   const [dbError, setDbError] = useState(null) // For the alert in case of an error
   const [password, setPassword] = useState(null)
-  const [busy, setBusy] = useState(false) // Busy if already sent a request to register
   const [user] = useContext(userContext);
 
   const emailRef = useRef();
@@ -24,30 +22,40 @@ function SignUpForm(props) {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    if (form.checkValidity() === true && !busy) {
+    if (form.checkValidity() === true) {
       save();
     }
     setValidated(true);
   };
   //FIXME: Default avatar
   const save = () => {
-    setBusy(true)
-    fetch("http://localhost:3001/Parents", {
-      method: props.edit ? "PUT" : "POST",
-      body: JSON.stringify({
+    const url = user ? "http://localhost:3001/Parents/" + user.id : "http://localhost:3001/Parents"
+    const method = props.edit ? "PUT" : "POST"
+
+    const body = user ?
+      JSON.stringify({
+        password: passwordRef.current["value"],
+        avatar_uid: "100",
+        appellation: appellationRef.current["value"],
+      })
+      :
+      JSON.stringify({
         email: emailRef.current["value"],
         password: passwordRef.current["value"],
         isVerified: false,
         avatar_uid: "100",
         appellation: appellationRef.current["value"],
-      }),
+      })
+
+    fetch(url, {
+      method: method,
+      body: body,
       headers: {
         "Content-type": "application/json;charset=UTF-8",
       },
     })
       .then(data => data.json())
       .then(json => {
-        setBusy(false)
         if (json.success)
           navigate(props.edit ? '/dashboard' : '/login?newUser')
         else {
@@ -56,7 +64,6 @@ function SignUpForm(props) {
       })
       .catch(err => {
         console.log('error', err)
-        setBusy(false)
       })
   }
 
@@ -80,7 +87,7 @@ function SignUpForm(props) {
                 {!props.edit && <InputGroup type="text" label="Email" placeholder="email@domain.com" required ref={emailRef} clear_error={setDbError} defaultValue={props.edit ? user.email : ""} />}
                 <InputGroup type="password" label="Password" placeholder="********" required ref={passwordRef} clear_error={setDbError} set_password={setPassword} />
                 <InputGroup type="password" label="Confirm Password" placeholder="********" required clear_error={setDbError} password={password} />
-                <InputGroup type="text" label={"What do you want you kids to call you on Oompa" + (props.edit ? " now?" : "?")} placeholder="Daddy" required ref={appellationRef} clear_error={setDbError} />
+                <InputGroup type="text" label={"What do you want you kids to call you on Oompa" + (props.edit ? " now?" : "?")} placeholder="Daddy" required ref={appellationRef} clear_error={setDbError} defaultValue={user ? user.first_name : ""} />
 
                 {dbError && <p className="alert alert-danger text-center">{dbError}</p>}
 

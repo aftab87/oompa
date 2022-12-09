@@ -18,7 +18,6 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
 
   //*********ADD KID ******************* */
   app.post("/kids", async (req, res) => {
-    console.log('post', 'Creating user')
     const parent_uid = req.body.parent_uid;
     const username = req.body.username;
     const password = req.body.password;
@@ -97,8 +96,6 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
       kid.avatar = avatar
     if (points)
       kid.points = points
-
-    console.log(kid)
 
     try {
       await kidsModel.findByIdAndUpdate(req.params.id, kid)
