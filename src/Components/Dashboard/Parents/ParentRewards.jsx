@@ -28,12 +28,13 @@ function ParentRewards(props) {
       <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
         Add New Reward
       </Button>
-
-      {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
-      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="available" />)}</div>
-      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="claimed" />)}</div>
-      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="approved" />)}</div>
-      <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="" />)}</div>
+      <div className="row g-3">
+        {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="available" />)}</div>
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="claimed" />)}</div>
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="approved" />)}</div>
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="" />)}</div>
+      </div>
 
       <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Test Edit Rewards</h3>

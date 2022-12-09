@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { DarkModeContext, userContext } from "../../App";
+import Image from "./Cards/Image";
+import ProgressBar from "./Cards/ProgressBar";
+import TitleAndDescription from "./Cards/TitleAndDescription";
 import StarBadge from "./Kids/StarBadge";
 
 function RewardCard({ reward, date, time, state }) {
@@ -14,28 +17,11 @@ function RewardCard({ reward, date, time, state }) {
   return (
     <div className={"custom_card" + col}>
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
-        <StarBadge className="text-dark" numStars={1} />
-        <div className="position-relative text-center">
-          <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
-          {image && <div className="inner-shadow"></div>}
-        </div>
+        <StarBadge className="text-dark" numStars={points} />
+        <Image image={image} />
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
-          <div>
-            <h5 className="card-title">
-              <b>{title}</b>
-            </h5>
-            <p className="card-text fst-italic small mb-0">{description}</p>
-          </div>
-          <div className="meta fw-bold d-flex justify-content-center gap-4">
-            <div className="date d-flex align-items-center gap-1">
-              <img src="/images/calendar.svg" alt="calendar icon" className="" />
-              <span>{date}</span>
-            </div>
-            <div className="time d-flex align-items-center gap-1">
-              <img src="/images/clock.svg" alt="calendar icon" className="" />
-              <span>{time}</span>
-            </div>
-          </div>
+          <TitleAndDescription title={title} description={description} />
+          <ProgressBar points={points} />
           {user.type === "kid" && (
             //Possible Missions Card states for Kids
             <>
@@ -60,7 +46,11 @@ function RewardCard({ reward, date, time, state }) {
             <>
               <div className="text-center">
                 <p className="text-secondary  fst-italic small mb-0 ">assigned to:</p>
-                <h5 className="text-center mb-0">{kids}</h5>
+                <h5 className="text-center mb-0">
+                  {kids.forEach((element) => {
+                    console.log(element);
+                  })}
+                </h5>
               </div>
 
               {state === "available" && (
@@ -81,7 +71,7 @@ function RewardCard({ reward, date, time, state }) {
 
               {state === "approved" && (
                 <div>
-                  <p className="text-warning fw-bold h5 mb-0">APPROVED</p>
+                  <p className="text-warning fw-bold h5 mb-0">FULFILLED</p>
                 </div>
               )}
             </>
