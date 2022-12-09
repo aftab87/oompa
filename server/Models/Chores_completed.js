@@ -5,7 +5,19 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  parents_uid: {
+  parent_uid: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  points: {
+    type: Number,
+    required: true,
+  },
+  image: {
     type: String,
     required: true,
   },
@@ -13,7 +25,7 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date_completed: {
+  completed_date: {
     type: Date,
     required: true,
   },
