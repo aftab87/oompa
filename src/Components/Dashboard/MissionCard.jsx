@@ -4,10 +4,49 @@ import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ title, description, img, date, time, state, kids, id, onDelete }) {
-  console.log(date);
+function MissionCard({ chore, state }) {
+  const { points, parent_uid, title, image, date, time, kids, _id } = chore;
+  console.log(chore);
+
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
+  console.log(user.id);
+
+  function addCompletedChores() {
+    alert("so it begins...");
+    fetch("http://localhost:3001/completedchores", {
+      method: "POST",
+      body: JSON.stringify({
+        chores_uid: _id,
+        parent_uid: parent_uid,
+        title: title,
+        points: points,
+        image: image,
+        kids_uid: user.id,
+        completed_date: new Date(),
+        verified: false,
+      }),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+      },
+    })
+      .then((data) => data.json())
+      .then((json) => alert(JSON.stringify(json)));
+  }
+
+  function updateCompletedChores() {
+    fetch("http://localhost:3001/completedchores", { method: "PUT" })
+      .then((data) => data.json())
+      .then((json) => alert(JSON.stringify(json)));
+  }
+  //ADDS COMPLETED CHORE TO CHORES COMPLETE
+  function markCompleteHandler() {
+    addCompletedChores();
+  }
+  //MAKES VERIFIED TRUE AND ADDS POINTS TO KIDS TOTAL
+  function verificationHandler() {
+    updateCompletedChores();
+  }
 
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
 
@@ -15,17 +54,17 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
   return (
     <div className={"custom_card" + col}>
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
-        <StarBadge className="text-dark" numStars={1} />
+        <StarBadge className="text-dark" numStars={points} />
         <div className="position-relative text-center">
-          <img src={`${img ? img : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
-          {img && <div className="inner-shadow"></div>}
+          <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
+          {image && <div className="inner-shadow"></div>}
         </div>
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
           <div>
             <h5 className="card-title">
               <b>{title}</b>
             </h5>
-            <p className="card-text fst-italic small mb-0">{description}</p>
+            <p className="card-text fst-italic small mb-0">{points}</p>
           </div>
           <div className="meta fw-bold d-flex justify-content-center gap-4">
             <div className="date d-flex align-items-center gap-1">
@@ -66,7 +105,9 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + id}>Edit</Button>
+                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + _id}>
+                    Edit
+                  </Button>
                 </div>
               )}
               {state === "completed" && (
@@ -74,7 +115,7 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
                   <Button variant="success" className="text-light">
                     Approve
                   </Button>
-                  <Button variant="danger" className="text-light w-45">
+                  <Button onClick={verificationHandler} variant="danger" className="text-light w-45">
                     Reject
                   </Button>
                 </div>
@@ -94,8 +135,3 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
 }
 
 export default MissionCard;
-
-function markCompleteHandler() {
-  //write logic for what happend when CHILD clicks mark complete
-  alert("TODO:execute mark complete logic");
-}
