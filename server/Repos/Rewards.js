@@ -59,13 +59,27 @@ const createRewardsPaths = (app) => {
     }
   });
 
-  // Reward GET
+  // Reward GET by PARENT
   app.get("/dashboard/rewards/:id", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
     const id = req.params.id;
 
     try {
       const reward = await rewardsModel.find({}).where("parent_uid").equals(id);
+
+      res.send(reward);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ message: err.message });
+    }
+  });
+
+  // Reward GET by KIDS
+  app.get("/dashboard/rewards/kids/:kid_uid", async (req, res) => {
+    const kid_uid = req.params.kid_uid;
+
+    try {
+      const reward = await rewardsModel.find({ kids: kid_uid });
 
       res.send(reward);
     } catch (err) {
