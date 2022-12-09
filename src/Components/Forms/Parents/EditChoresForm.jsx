@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import ChoresCRUDForm from "../ChoresCRUDForm";
 
 
 
 export default function EditChoresForm() {
-
-
-  const { id } = useParams();
-
   const [mission, setMission] = useState();
+  const navigate = useNavigate();
+  const [firstRun, setFirstRun] = useState(true)
+  const [searchParams] = useSearchParams();
 
 
 
-  function callDeleteParams() {
-    fetch("http://localhost:3001/dashboard/missions/" + id, { method: "DELETE" })
+  async function getMission(id) {
+    await fetch("http://localhost:3001/chore/" + id, { method: "GET" })
       .then((data) => data.json())
-      .then((json) => alert(JSON.stringify(json)));
+      .then((json) => json)
+      .then((json) => {
+        console.log(json)
+        setMission(json.mission)
+      });
   }
 
-
   useEffect(() => {
-    // to fill in based on callPostBody
-    fetch("http://localhost:3001/dashboard/missions/" + id, {
-      method: "GET",
-
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((data) => data.json()).then((data) => { setMission(data) })
-  }, [id])
+    if (firstRun) {
+      setFirstRun(false)
+      const id = searchParams.get("id")
+      if (id)
+        getMission(id)
+    }
+  }, [])
 
   return (
-
     <>
-      <ChoresCRUDForm mission={mission} title="Edit Reward" />
-      <div className='text-center m-3'>
-        <Button variant="danger" as={NavLink} onClick={callDeleteParams}>DELETE</Button>
-      </div>
+      {mission && (
+        <>
+          <ChoresCRUDForm mission={mission} title="Edit Mission" />
+        </>
+      )}
     </>
   )
 }

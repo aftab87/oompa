@@ -34,22 +34,22 @@ const KidForm = (props) => {
 
     const deleteKid = () => {
         fetch("http://localhost:3001/kids/" + kid._id, {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json;charset=UTF-8",
-          },
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+            },
         })
-          .then(data => data.json())
-          .then(json => {
-            console.log(json)
-            if (json.success) {
-                navigate('/dashboard/kids')
-            }
-          })
-          .catch(err => {
-            console.log('error', err)
-          })
-      }
+            .then(data => data.json())
+            .then(json => {
+                console.log(json)
+                if (json.success) {
+                    navigate('/dashboard/kids')
+                }
+            })
+            .catch(err => {
+                console.log('error', err)
+            })
+    }
 
     useEffect(() => {
         if (firstRun) {
@@ -61,8 +61,6 @@ const KidForm = (props) => {
     }, [user.type])
 
     const process = () => {
-        if (kid)
-            console.log(kid)
         let url = kid ? "http://localhost:3001/kids/" + kid._id : "http://localhost:3001/kids"
         let method = kid ? "PUT" : "POST"
 

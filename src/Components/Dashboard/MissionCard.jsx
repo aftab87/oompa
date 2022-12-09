@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ title, description, img, date, time, state, kids }) {
+function MissionCard({ title, description, img, date, time, state, kids, id, onDelete }) {
   console.log(date);
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
+
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
+
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
@@ -63,7 +66,7 @@ function MissionCard({ title, description, img, date, time, state, kids }) {
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button>Edit</Button>
+                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + id}>Edit</Button>
                 </div>
               )}
               {state === "completed" && (

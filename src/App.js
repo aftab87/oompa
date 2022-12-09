@@ -71,7 +71,7 @@ function App() {
         <Route path="rewards" element={<ParentRewards />} />
 
         <Route path="missions/add" element={<AddChoresForm />} />
-        <Route path="missions/:id/edit" element={<EditChoresForm />} />
+        <Route path="missions/edit" element={<EditChoresForm />} />
 
         {/* NOTE: to be fixed for link to rewards/add */}
         <Route path="rewards/add" element={<AddRewardForm />} />
