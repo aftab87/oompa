@@ -10,27 +10,6 @@ function KidsCard({ title, description, img, date, time, state, kids, id, stars,
 
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
 
-  const deleteHandler = () => {
-    console.log(id)
-    fetch("http://localhost:3001/kids/" + id, {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json;charset=UTF-8",
-      },
-    })
-      .then(data => data.json())
-      .then(json => {
-        console.log(json)
-        if (json.success) {
-          console.log(json)
-          onDelete()
-        }
-      })
-      .catch(err => {
-        console.log('error', err)
-      })
-  }
-
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>

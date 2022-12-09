@@ -17,6 +17,11 @@ function ParentMissions(props) {
       .then((json) => json)
       .then((json) => setChores(json));
   }
+
+  const deleteHandler = () => {
+    callGetAllChores();
+  }
+
   useEffect(() => {
     if (firstRun) {
       setFirstRun(false);
@@ -38,7 +43,7 @@ function ParentMissions(props) {
       </div>
 
       <div className="row g-3">
-        {chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date={new Date().toLocaleString("en-us", { weekday: "long" })} time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
+        {chores && chores.map((chores) => <MissionCard key={chores._id} id={chores._id} stars={chores.points} title={chores.title} img="" date={new Date().toLocaleString("en-us", { weekday: "long" })} time="7:30 pm" kids={chores.kids} state="available" description={chores.description}  onDelete={deleteHandler} />)}
       </div>
 
       <div className="p-4 bg-white border m-4 rounded-4">

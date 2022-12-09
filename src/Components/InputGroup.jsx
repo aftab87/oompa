@@ -27,7 +27,7 @@ const InputGroup = React.forwardRef((props, ref) => {
         if (isRequired() && !value) {
             e.target.classList.add("is-invalid")
             e.target.classList.remove("is-valid")
-            setError(props.label + " is required")
+            setError(props.label + (props.type === "number" ? " takes digits only" :  " is required"))
         } else if (!checkRegex(value)) {
             e.target.classList.add("is-invalid")
             e.target.classList.remove("is-valid")

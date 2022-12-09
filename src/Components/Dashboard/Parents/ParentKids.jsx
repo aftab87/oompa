@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import SectionHeader from "Components/Dashboard/SectionHeader";
-import StarCounter from "Components/Dashboard/Kids/StarCounter";
 import { Button } from "react-bootstrap";
 import KidsCard from "Components/Dashboard/KidsCard";
 
