@@ -21,11 +21,11 @@ function RewardCard({ reward, date, time, state }) {
         <Image image={image} />
         <div className={"card-body bg-white text-dark text-center d-flex flex-column gap-3" + (darkMode ? " bg-dark" : "")}>
           <TitleAndDescription title={title} description={description} />
-          <ProgressBar points={points} />
+
           {user.type === "kid" && (
             //Possible Missions Card states for Kids
             <>
-              {state === "available" && <Button onClick={markCompleteHandler}>Mark Complete</Button>}
+              {state === "available" && <ProgressBar points={points} />}
               {state === "claimed" && (
                 <div>
                   <p className="text-success fw-bold h5 mb-0">CLAIMED</p>
