@@ -35,23 +35,23 @@ function ParentMissions(props) {
       <Button variant="primary" as={NavLink} to="/dashboard/missions/add">
         Add New Mission
       </Button>
-
+      {/* 
       <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Available"} section={"missions"} endpoint={"available"} />
         <DashboardTabButton label={"Completed"} section={"missions"} endpoint={"completed"} />
         <DashboardTabButton label={"Approved"} section={"missions"} endpoint={"received"} />
-      </div>
+      </div> */}
 
       <div className="row g-3">{chores && chores.map((chore) => <MissionCard key={chore._id} chore={chore} onDelete={deleteHandler} />)}</div>
 
-      <div className="p-4 bg-white border m-4 rounded-4">
+      {/* <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Edit Missions</h3>
         <p>Make changes and/or delete missions.</p>
 
         <Button variant="primary" as={NavLink} to="/dashboard/missions/34/edit">
           Edit Mission
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

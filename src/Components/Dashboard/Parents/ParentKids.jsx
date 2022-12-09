@@ -39,12 +39,12 @@ function KidOverview(props) {
       </div>
 
       {/* tab buttons */}
-      <div className="d-flex justify-content-center gap-3 p-4">
+      {/* <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Tommy"} section={"missions"} endpoint={"available"} />
         <DashboardTabButton label={"John"} section={"missions"} endpoint={"completed"} />
         <DashboardTabButton label={"Jane"} section={"missions"} endpoint={"approved"} />
       </div>
-      <div className="row g-3">{kids && kids.map((kids) => <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} onDelete={deleteHandler} />)}</div>
+      <div className="row g-3">{kids && kids.map((kids) => <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} onDelete={deleteHandler} />)}</div> */}
 
       {/* tab content */}
       <Outlet />
