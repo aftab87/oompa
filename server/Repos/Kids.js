@@ -102,49 +102,12 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
 
     try {
       await kidsModel.findByIdAndUpdate(req.params.id, kid)
+      
       res.send({ success: true })
     } catch (err) {
       console.log(err);
       res.send({ success: false });
     }
-    // kid.save((err, insertedKid) => {
-    //   if (err) {
-    //     res.send({ success: false, msg: err.message })
-    //     return;
-    //   }
-    //   const parent = {
-    //     kids: [insertedKid._id],
-    //   };
-    //   // parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
-    //   res.send({ success: true, kid: insertedKid })
-    // })
-
-
-
-    // if (username && validator.isAlphanumeric(username) && password) {
-    //   // Check to see if the user already exists. If not, then create it.
-    //   const user = await kidsModel.findOne({ username: username });
-    //   if (user) {
-    //     console.log("Invalid registration - username " + username + " already exists.");
-    //     res.send({ success: false });
-    //     return;
-    //   } else {
-    //     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    //     console.log("Registering username " + username);
-
-    //     const update = {
-    //       parent_uid: parent_uid,
-    //       username: username,
-    //       password: hashedPassword,
-    //       first_name: first_name,
-    //       avatar: avatar,
-    //       points: points,
-    //     };
-
-    //     await kidsModel.findOneAndUpdate(filter, update);
-    //     return;
-    //   }
-    // }
   });
 
   //*********DELETE KID******************* */
