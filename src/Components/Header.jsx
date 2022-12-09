@@ -20,8 +20,7 @@ function Header() {
   const [user, setUser] = useContext(userContext);
 
   function logout() {
-    navigate("/")
-    setUser(null);
+    navigate("/?logout=true")
   }
 
   function login() {
