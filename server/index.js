@@ -64,6 +64,7 @@ app.post("/login", async (req, res) => {
           username: kid["username"],
           first_name: kid["first_name"],
           points: kid["points"],
+          avatar: kid["avatar"],
           type: "kid",
         },
       });

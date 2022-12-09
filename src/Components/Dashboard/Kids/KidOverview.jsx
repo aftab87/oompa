@@ -14,15 +14,19 @@ function KidOverview(props) {
         <StarCounter numStars={16} />
       </div>
 
-      {/* tab buttons */}
-      <div className="d-flex justify-content-center gap-3 p-4">
-        <DashboardTabButton label={"Available"} section={"missions"} endpoint={"available"} />
-        <DashboardTabButton label={"Completed"} section={"missions"} endpoint={"completed"} />
-        <DashboardTabButton label={"Approved"} section={"missions"} endpoint={"approved"} />
-      </div>
+      {/* prettier-ignore */}
+      <div className="row">
+        <div className="col-12 col-md-6 text-center">
+        <img src={`/images/avatar${user.avatar}.svg`} alt="main avatar" width="250" className="img-fluid" />
+        <h2>You can select your avatar</h2>
+        </div>
+        <div className=" col-12 col-md-6 d-flex justify-content-start">
+          <div className="row">
 
-      {/* tab content */}
-      <Outlet />
+         
+        </div>
+          </div>
+      </div>
     </section>
   );
 }

@@ -21,7 +21,7 @@ function KidDashNav(props) {
             <ImageButton link={"/dashboard/adventures"} imgSrc={"../images/icon-binoculors.svg"} label={"My Adventures"} />
             <ImageButton link={"/dashboard/missions"} imgSrc={"../images/mission.svg"} label={"Missions"} />
             <ImageButton link={"/dashboard/rewards"} imgSrc={"../images/gift_btn.svg"} label={"Rewards"} />
-            <ImageButton link={"/dashboard/settings"} imgSrc={"../images/avatar_btn.svg"} label={"Settings"} />
+            <ImageButton link={"/dashboard/settings"} imgSrc={"../images/settings_btn.svg"} label={"Settings"} />
           </div>
         </>
       )}

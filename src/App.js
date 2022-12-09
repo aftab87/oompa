@@ -12,7 +12,6 @@ import SignUp from "Pages/SignUp";
 import Login from "Pages/Login";
 import Page404 from "Pages/Page404";
 import Dashboard from "Pages/Dashboard";
-import Rewards from "Pages/RewardsForm";
 import EmailConfirmation from "Pages/EmailConfirmation";
 import ParentKids from "Components/Dashboard/Parents/ParentKids";
 import KidOverview from "Components/Dashboard/Kids/KidOverview";
@@ -26,11 +25,7 @@ import AddRewardForm from "Components/Forms/Parents/AddRewardForm";
 import EditRewardsForm from "Components/Forms/Parents/EditRewardsForm";
 
 import KidMissionsAvailable from "Components/Dashboard/Kids/Missions/KidMissionsAvailable";
-import KidMissionsCompleted from "Components/Dashboard/Kids/Missions/KidMissionsCompleted";
-import KidMissionsApproved from "Components/Dashboard/Kids/Missions/KidMissionsApproved";
 import KidRewardsAvailable from "Components/Dashboard/Kids/Rewards/KidRewardsAvailable";
-import KidRewardsClaimed from "Components/Dashboard/Kids/Rewards/KidRewardsClaimed";
-import KidRewardsReceived from "Components/Dashboard/Kids/Rewards/KidRewardsReceived";
 import TestPage from "./Pages/TestPage";
 import AddChoresForm from "Components/Forms/Parents/AddChoresForm";
 import EditChoresForm from "Components/Forms/Parents/EditChoresForm";
@@ -69,10 +64,8 @@ function App() {
         <Route path="kids/edit" element={<KidForm />} />
         <Route path="missions" element={<ParentMissions />} />
         <Route path="rewards" element={<ParentRewards />} />
-
         <Route path="missions/add" element={<AddChoresForm />} />
         <Route path="missions/edit" element={<EditChoresForm />} />
-
         {/* NOTE: to be fixed for link to rewards/add */}
         <Route path="rewards/add" element={<AddRewardForm />} />
 
@@ -84,36 +77,6 @@ function App() {
     );
   };
 
-  // // // TODO: Adapt and add routes
-  // const ParentsMissionsRoutes = () => {
-  //   return (
-  //     <Route path="missions" element={<ParentMissions />}>
-  //       <Route index element={<ParentsMissionsAvailable />} />
-  //       <Route path="available" element={<ParentsMissionsAvailable />} />
-  //       <Route path="completed" element={<ParentsMissionsCompleted />} />
-  //       <Route path="approved" element={<ParentsMissionsApproved />} />
-  //       <Route path="add" element={<ParentsMissionsAdd />} />
-  //       <Route path="edit" element={<ParentsMissionsEdit />} />
-  //       {/* delete > do we need a view for that? */}
-  //     </Route>
-  //   );
-  // };
-
-  // // TODO: Adapt and add routes
-  // const ParentsRewardsRoutes = () => {
-  //   return (
-  //     <Route path="rewards" element={<ParentRewards />}>
-  //       <Route index element={<ParentsRewardsAvailable />} />
-  //       <Route path="available" element={<ParentsRewardsAvailable />} />
-  //       <Route path="claimed" element={<ParentsRewardsClaimed />} />
-  //       <Route path="awarded" element={<ParentsRewardsAwarded />} />
-  //       <Route path="add" element={<ParentsRewardsAdd />} />
-  //       <Route path="edit" element={<ParentsRewardsEdit />} />
-  //       {/* delete > do we need a view for that? */}
-  //     </Route>
-  //   );
-  // };
-
   /******************************** KIDS ROUTES *******************************/
   const KidsDashboardRoutes = () => {
     return (
@@ -122,28 +85,28 @@ function App() {
         <Route path="adventures" element={<KidOverview />} />
         {KidsMissionsRoutes()}
         {KidsRewardsRoutes()}
+        <Route path="missions" element={<KidMissions />} />
+        <Route path="rewards" element={<KidRewards />} />
         <Route path="settings" element={<KidSettings />} />
       </>
     );
   };
+
+  //TODO: Delete These once
   const KidsMissionsRoutes = () => {
     return (
       <Route path="missions" element={<KidMissions />}>
         <Route index element={<KidMissionsAvailable />} />
         <Route path="available" element={<KidMissionsAvailable />} />
-        <Route path="completed" element={<KidMissionsCompleted />} />
-        <Route path="approved" element={<KidMissionsApproved />} />
       </Route>
     );
   };
-
+  //TODO: Delete These
   const KidsRewardsRoutes = () => {
     return (
       <Route path="rewards" element={<KidRewards />}>
         <Route index element={<KidRewardsAvailable />} />
         <Route path="available" element={<KidRewardsAvailable />} />
-        <Route path="claimed" element={<KidRewardsClaimed />} />
-        <Route path="received" element={<KidRewardsReceived />} />
       </Route>
     );
   };
@@ -169,10 +132,6 @@ function App() {
                   </Route>
                 )}
                 <Route path="contactconfirmation" element={<EmailConfirmation />} />
-                {/* //TODO: Add these routes at the appropriate place */}
-                {/* <Route path="rewards" element={<Rewards />} /> */}
-                {/* <Route path="rewards/:id/edit" element={<EditRewardsForm />} /> */}
-
                 <Route path="*" element={<Page404 />} />
               </Route>
             </Routes>
