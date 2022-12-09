@@ -14,7 +14,7 @@ function ChoresCRUDForm(props) {
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [user, setUser] = useContext(userContext);
-  const [showConfirmButton, setShowConfirmButton] = useState(false)
+  const [showConfirmButton, setShowConfirmButton] = useState(false);
   const days = [
     { name: "sunday", number: 0 },
     { name: "monday", number: 1 },
@@ -52,16 +52,16 @@ function ChoresCRUDForm(props) {
         "Content-type": "application/json;charset=UTF-8",
       },
     })
-      .then(data => data.json())
-      .then(json => {
-        console.log(json)
+      .then((data) => data.json())
+      .then((json) => {
+        console.log(json);
         if (json.success) {
-          navigate('/dashboard/missions')
+          navigate("/dashboard/missions");
         }
       })
-      .catch(err => {
-        console.log('error', err)
-      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   }
 
   useEffect(() => {
@@ -69,8 +69,7 @@ function ChoresCRUDForm(props) {
       setFirstRun(false);
       callGetAllKids();
 
-      if (mission)
-        console.log("test", mission.repetition)
+      if (mission) console.log("test", mission.repetition);
     }
   }, [firstRun]);
 
@@ -85,12 +84,12 @@ function ChoresCRUDForm(props) {
   };
 
   const deleteHandler = () => {
-    setShowConfirmButton((showing) => !showing)
-  }
+    setShowConfirmButton((showing) => !showing);
+  };
 
   const registeringReward = () => {
     const url = mission ? "http://localhost:3001/chores/" + mission._id : "http://localhost:3001/chores/";
-    let method = mission ? "PUT" : "POST"
+    let method = mission ? "PUT" : "POST";
 
     let body = JSON.stringify({
       parent_uid: user.id,
@@ -101,7 +100,7 @@ function ChoresCRUDForm(props) {
       image: imageRef.current.value,
       points: pointsRef.current.value,
       repetition: selectedDays,
-    })
+    });
 
     // to fill in based on callPostBody
     fetch(url, {
@@ -156,8 +155,8 @@ function ChoresCRUDForm(props) {
   };
 
   return (
-    <div className="container">
-      <div className="form">
+    <div className="container my-5 row justify-content-center align-items-center">
+      <div className="form col col-lg-9">
         <div className="text-center my-5">
           <h1>{mission ? props.title : "Add a Mission"}</h1>
         </div>
@@ -178,30 +177,50 @@ function ChoresCRUDForm(props) {
           <InputGroup type="number" label="Points" placeholder="Please enter # points" required ref={pointsRef} defaultValue={mission ? mission.points : ""} />
           {/* TODO:MAKE CUSTOM LABEL */}
           <Form.Label>Kids</Form.Label>
-          <div className="d-flex gap-3">{kids && kids.map((kid) => <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid._id} onKidChange={handleKidsSelection} defaultChecked={mission ? mission.kids.includes(kid._id) : false} />)}</div>
+          <div className="d-flex gap-3">
+            {kids &&
+              kids.map((kid) => (
+                <InputGroup type="checkbox" key={kid._id} label={kid.first_name} value={kid._id} onKidChange={handleKidsSelection} defaultChecked={mission ? mission.kids.includes(kid._id) : false} />
+              ))}
+          </div>
           {/* <InputGroup type="text" label="Select Child" placeholder="Child name..." required ref={childRef} /> */}
           <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} defaultValue={mission ? mission.image : ""} />
           <InputGroup type="date" label="Start Date" placeholder="Enter start date..." required ref={startDateRef} defaultValue={mission ? mission.start_date.substring(0, 10) : ""} />
           <InputGroup type="date" label="End Date" placeholder="Enter end date..." required ref={endDateRef} defaultValue={mission ? mission.end_date.substring(0, 10) : ""} />
           <div className="d-flex gap-3">
             {days.map((day) => (
-              <InputGroup type="checkbox" key={day.name} label={day.name} value={day.number} onKidChange={handleDaysSelection} defaultChecked={mission ? mission.repetition.includes(day.number) : false} />
+              <InputGroup
+                type="checkbox"
+                key={day.name}
+                label={day.name}
+                value={day.number}
+                onKidChange={handleDaysSelection}
+                defaultChecked={mission ? mission.repetition.includes(day.number) : false}
+              />
             ))}
           </div>
 
           <div className="text-center d-flex justify-content-center gap-5">
-            <Button type="submit" >{mission ? "Save" : "Create"}</Button>
-            {mission && <Button variant="danger" onClick={deleteHandler}>Delete</Button>}
-            <Button as={NavLink} to={"/dashboard/missions"} className="btn-danger">Cancel</Button>
+            <Button type="submit">{mission ? "Save" : "Create"}</Button>
+            {mission && (
+              <Button variant="danger" onClick={deleteHandler}>
+                Delete
+              </Button>
+            )}
+            <Button as={NavLink} to={"/dashboard/missions"} className="btn-danger">
+              Cancel
+            </Button>
           </div>
-          <div className='text-center d-flex justify-content-center gap-5 mt-5'>
-            {showConfirmButton &&
+          <div className="text-center d-flex justify-content-center gap-5 mt-5">
+            {showConfirmButton && (
               <div className="alert alert-danger text-center">
                 <h3>Are you sure you want to delete {mission.first_name}'s account?</h3>
                 <p>They will lose all the information associated to their account</p>
-                <Button variant="danger" onClick={deleteMission}>Delete</Button>
+                <Button variant="danger" onClick={deleteMission}>
+                  Delete
+                </Button>
               </div>
-            }
+            )}
           </div>
         </Form>
       </div>
