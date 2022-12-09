@@ -5,7 +5,7 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  parents_uid: {
+  parent_uid: {
     type: String,
     required: true,
   },
@@ -21,6 +21,7 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+
 });
 
 const ChoresCompleted = mongoose.model("Chores_Completed", ChoresCompletedSchema);

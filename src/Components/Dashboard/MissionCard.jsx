@@ -4,13 +4,41 @@ import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ title, description, img, date, time, state, kids, id, onDelete }) {
-  console.log(date);
+function MissionCard(props) {
+  console.log(props);
+  const {chore: { title, description, img, time="7:00PM", kids, _id, points: stars, repitition: date, completedChore  }, onDelete, }= props
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
 
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
+  async function markCompleteHandler() {
+    //write logic for what happend when CHILD clicks mark complete
+   const response = await fetch("http://localhost:3001/completedchores", {
+    method: "POST", 
+    body: JSON.stringify({
+      parent_uid: user.parent_uid,
+      chores_uid: _id,
+      kids_uid: user.id,
+        
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+   }).then(data=>data.json())
+   console.log({response})
 
+
+  }
+
+  let state="available"
+  if(completedChore){
+    if(!completedChore.verified){
+      state ="completed"
+    }else
+    {
+      state="approved"
+    }
+  }
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
@@ -66,7 +94,7 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + id}>Edit</Button>
+                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + _id}>Edit</Button>
                 </div>
               )}
               {state === "completed" && (
@@ -95,7 +123,4 @@ function MissionCard({ title, description, img, date, time, state, kids, id, onD
 
 export default MissionCard;
 
-function markCompleteHandler() {
-  //write logic for what happend when CHILD clicks mark complete
-  alert("TODO:execute mark complete logic");
-}
+

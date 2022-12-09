@@ -10,7 +10,7 @@ function SignUpForm(props) {
   const [validated, setValidated] = useState(false);
   const [dbError, setDbError] = useState(null) // For the alert in case of an error
   const [password, setPassword] = useState(null)
-  const [user] = useContext(userContext);
+  const [user, setUser] = useContext(userContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -56,9 +56,14 @@ function SignUpForm(props) {
     })
       .then(data => data.json())
       .then(json => {
-        if (json.success)
+        if (json.success){
+          setUser((prevUser) => {
+            let tempUser = {...prevUser}
+            tempUser.first_name = appellationRef.current["value"]
+            return tempUser;
+          })
           navigate(props.edit ? '/dashboard' : '/login?newUser')
-        else {
+        }else {
           setDbError(json.msg)
         }
       })

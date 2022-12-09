@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+//
+
 // ***********CHORES SCHEMA ****************
 const ChoresSchema = new mongoose.Schema({
   parent_uid: {
@@ -34,6 +36,7 @@ const ChoresSchema = new mongoose.Schema({
     type: [Number],
     required: true,
   },
+ 
 });
 
 // Mongoose will assume there is a collection called the plural of this name (i.e.,

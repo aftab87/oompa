@@ -20,9 +20,11 @@ function KidMissionsAvailable(props) {
     }
   }, [firstRun, chores]);
 
+let state = "available"
+
   return (
     <div className="d-flex gap-4 flex-wrap justify-content-center p-4">
-      {chores && chores.map((chores) => <MissionCard key={chores._id} stars={chores.points} title={chores.title} img="" date={chores.repetition} time="7:30 pm" kids={chores.kids} state="available" description={chores.description} />)}
+      {chores && chores.map((chore) => <MissionCard key={chore._id}  chore={chore} time="7:30 pm"   />)}
       {/* <MissionCard stars="1" title="Brush Teeth" img="" date="Monday" time="7:30 pm" state="available" description="short description..." />
       <MissionCard stars="2" title="Brush Hair" img="" date="Tuesday" time="7:30 pm" state="completed" description="short description..." />
       <MissionCard stars="2" title="Brush Hair" img="" date="Tuesday" time="7:30 pm" state="approved" description="short description..." /> */}

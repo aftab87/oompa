@@ -30,35 +30,6 @@ const createRewardsPaths = (app) => {
     }
   });
 
-  // Reward PUT
-  app.put("/dashboard/rewards/:id", async (req, res) => {
-    // const parent_uid = req.body.parent_uid;
-    const id = req.params.id;
-    const kids = req.body.kids;
-    const title = req.body.title;
-    const description = req.body.description;
-    const image = req.body.image;
-    const points = req.body.points;
-    //const parentuid = req.user_id
-    const rewardData = {
-      // parent_uid: "26",
-      kids: kids,
-      title: title,
-      description: description,
-      image: image,
-      points: points,
-      //parent_uid: parentuid
-    };
-    try {
-      const reward = await rewardsModel.findById(id);
-      await reward.update(rewardData);
-      res.send(reward.populate());
-    } catch (err) {
-      console.log(err);
-      res.status(400).send({ message: err.message });
-    }
-  });
-
   // Reward GET
   app.get("/dashboard/rewards/:id", async (req, res) => {
     // const parent_uid = req.body.parent_uid;
@@ -98,7 +69,36 @@ const createRewardsPaths = (app) => {
     }
   });
 
-  app.delete("/dashboard/rewards/:id", async (req, res) => {
+  // Reward PUT
+  app.put("/dashboard/rewards/:id", async (req, res) => {
+    // const parent_uid = req.body.parent_uid;
+    const id = req.params.id;
+    const kids = req.body.kids;
+    const title = req.body.title;
+    const description = req.body.description;
+    const image = req.body.image;
+    const points = req.body.points;
+    //const parentuid = req.user_id
+    const rewardData = {
+      // parent_uid: "26",
+      kids: kids,
+      title: title,
+      description: description,
+      image: image,
+      points: points,
+      //parent_uid: parentuid
+    };
+    try {
+      const reward = await rewardsModel.findById(id);
+      await reward.update(rewardData);
+      res.send(reward.populate());
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ message: err.message });
+    }
+  });
+
+  app.delete("/rewards/:id", async (req, res) => {
     try {
       const id = req.params.id;
       const reward = await rewardsModel.findById(id);
