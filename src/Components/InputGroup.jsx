@@ -33,7 +33,6 @@ const InputGroup = React.forwardRef((props, ref) => {
             e.target.classList.remove("is-valid")
             setError(props.pattern_message)
         } else if (props.password && value !== props.password) {
-            console.log(value + ' - ' + props.password)
             e.target.classList.add("is-invalid")
             e.target.classList.remove("is-valid")
             setError("Passwords must match")
@@ -58,7 +57,6 @@ const InputGroup = React.forwardRef((props, ref) => {
     }
 
     const onCheckboxValueChanged = (e) => {
-        console.log('onCheckboxValueChanged')
         props.onKidChange(e.target.value, e.target.checked)
     }
 

@@ -81,8 +81,6 @@ const createChoresPaths = (app) => {
     if (repetition)
       chore.repetition = repetition
 
-    console.log(chore)
-
     try {
       await choresModel.findByIdAndUpdate(req.params.id, chore)
 
