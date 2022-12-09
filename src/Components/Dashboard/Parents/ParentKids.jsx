@@ -51,7 +51,7 @@ function KidOverview(props) {
               id={kids._id}
               stars={kids.points}
               title={kids.username}
-              img=""
+              img={kids.avatar}
               date="Monday"
               time="7:30 pm"
               kids={kids.first_name}
