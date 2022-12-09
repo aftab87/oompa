@@ -88,7 +88,7 @@ function MissionCard(props) {
             <>
               <div className="text-center">
                 <p className="text-secondary  fst-italic small mb-0 ">assigned to:</p>
-                <h5 className="text-center mb-0">{kids}</h5>
+                <h5 className="text-center mb-0">{kids[0]}</h5>
               </div>
 
               {state === "available" && (
