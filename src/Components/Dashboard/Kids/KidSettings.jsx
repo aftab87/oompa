@@ -1,16 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { Button } from "react-bootstrap";
 import { userContext } from "App";
 
 function KidSettings(props) {
   const [user, setUser] = useContext(userContext);
   const [avatar, setAvatar] = useState(user.avatar);
+  const [isSaved, setIsSaved] = useState(true);
 
+  function updateAvatar() {
+    fetch("http://localhost:3001/kidsavatar/" + user.id, {
+      method: "PUT",
+      body: JSON.stringify({
+        avatar: avatar.toString(),
+      }),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+      },
+    }).then((data) => data.json());
+  }
+
+  function saveAvatar() {
+    updateAvatar();
+    setIsSaved(false);
+  }
   useEffect(() => {});
 
   function change(n) {
     setAvatar(n);
-    const temp = user;
-    temp.avatar = avatar;
+    console.log(n);
+    // const temp = user;
+    // temp.avatar = avatar;
     setUser(user);
   }
 
@@ -19,7 +38,7 @@ function KidSettings(props) {
       {/* prettier-ignore */}
       <div className="row">
         <div className="col-12 col-md-6 text-center">
-        <img src={`/images/avatar${user.avatar}.svg`} alt="main avatar" width="250" className="img-fluid" />
+        <img src={`/images/avatar${avatar}.svg`} alt="main avatar" width="250" className="img-fluid" />
         <h2>You can select your avatar</h2>
         </div>
         <div className=" col-12 col-md-6 d-flex justify-content-start">
@@ -35,6 +54,7 @@ function KidSettings(props) {
           <img className="col-6 col-md-4 col-lg-3 btn btn-outline-primary" src="/images/avatar8.svg" width="150" alt="avatar 8" onClick={()=>{change(8)}}/>
           <img className="col-6 col-md-4 col-lg-3 btn btn-outline-primary" src="/images/avatar9.svg" width="150" alt="avatar 9" onClick={()=>{change(9)}}/>
           <img className="col-6 col-md-4 col-lg-3 btn btn-outline-primary" src="/images/avatar10.svg" width="150" alt="avatar 10" onClick={()=>{change(10)}}/>
+          { isSaved ?<Button className="primary" onClick={saveAvatar}>Save</Button> : <Button className="primary" onClick={saveAvatar}>Saved!</Button>}
         </div>
           </div>
       </div>

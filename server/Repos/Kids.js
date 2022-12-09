@@ -12,7 +12,7 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
 
   app.get("/kid/:uid", async (req, res) => {
     const uid = req.params.uid;
-    const kids = await kidsModel.findById(uid)
+    const kids = await kidsModel.findById(uid);
     res.send(kids);
   });
 
@@ -45,24 +45,24 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
           // };
           // await kidsModel.create(kid);
           // await parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
-          let kid = new kidsModel()
-          kid.parent_uid = parent_uid
-          kid.username = username
-          kid.password = hashedPassword
-          kid.first_name = first_name
-          kid.avatar = avatar
-          kid.points = points
+          let kid = new kidsModel();
+          kid.parent_uid = parent_uid;
+          kid.username = username;
+          kid.password = hashedPassword;
+          kid.first_name = first_name;
+          kid.avatar = avatar;
+          kid.points = points;
           kid.save((err, insertedKid) => {
             if (err) {
-              res.send({ success: false, msg: err.message })
+              res.send({ success: false, msg: err.message });
               return;
             }
             const parent = {
               kids: [insertedKid._id],
             };
             parentsModel.findOneAndUpdate({ _id: parent_uid }, { $addToSet: parent });
-            res.send({ success: true, kid: insertedKid })
-          })
+            res.send({ success: true, kid: insertedKid });
+          });
           return;
         }
       }
@@ -82,25 +82,35 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    let kid = {}
+    let kid = {};
 
-    if (parent_uid)
-      kid.parent_uid = parent_uid
-    if (username)
-      kid.username = username
-    if (password && hashedPassword)
-      kid.password = hashedPassword
-    if (first_name)
-      kid.first_name = first_name
-    if (avatar)
-      kid.avatar = avatar
-    if (points)
-      kid.points = points
+    if (parent_uid) kid.parent_uid = parent_uid;
+    if (username) kid.username = username;
+    if (password && hashedPassword) kid.password = hashedPassword;
+    if (first_name) kid.first_name = first_name;
+    if (avatar) kid.avatar = avatar;
+    if (points) kid.points = points;
 
     try {
-      await kidsModel.findByIdAndUpdate(req.params.id, kid)
-      
-      res.send({ success: true })
+      await kidsModel.findByIdAndUpdate(req.params.id, kid);
+
+      res.send({ success: true });
+    } catch (err) {
+      console.log(err);
+      res.send({ success: false });
+    }
+  });
+  app.put("/kidsavatar/:id", async (req, res) => {
+    const filter = req.params.id;
+    const avatar = req.body.avatar;
+    let kid = {
+      avatar: avatar,
+    };
+
+    try {
+      await kidsModel.findByIdAndUpdate(filter, kid);
+
+      res.send({ success: true });
     } catch (err) {
       console.log(err);
       res.send({ success: false });
@@ -110,7 +120,7 @@ const createKidsPaths = (app, validator, bcrypt, saltRounds) => {
   //*********DELETE KID******************* */
 
   app.delete("/kids/:id", async (req, res) => {
-    const results = await kidsModel.findByIdAndRemove(req.params.id)
+    const results = await kidsModel.findByIdAndRemove(req.params.id);
     res.send({ success: true, kid: results });
   });
 };
