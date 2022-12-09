@@ -5,6 +5,7 @@ import DashboardTabButton from "Components/Dashboard/DashboardTabButton";
 import MissionCard from "Components/Dashboard/MissionCard";
 import { userContext } from "App";
 import { getByDisplayValue } from "@testing-library/react";
+import SectionHeader from "../SectionHeader";
 
 function ParentMissions(props) {
   const [chores, setChores] = useState(null);
@@ -32,9 +33,13 @@ function ParentMissions(props) {
   // {chores && chores.map((chores) => <h1 key={chores._id}>{chores.title}</h1>)}</>
   return (
     <div>
-      <Button variant="primary" as={NavLink} to="/dashboard/missions/add">
-        Add New Mission
-      </Button>
+      <div className="d-flex justify-content-between align-items-start pb-5">
+        <SectionHeader title={"Assign Missions"} text={"Here you can create assign and approve missions"} />
+        <Button variant="primary" as={NavLink} to="/dashboard/missions/add">
+          Add New Mission
+        </Button>
+      </div>
+
       {/* 
       <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Available"} section={"missions"} endpoint={"available"} />

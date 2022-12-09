@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { userContext } from "App";
 import MissionCard from "../MissionCard";
 import RewardCard from "../RewardCard";
+import SectionHeader from "../SectionHeader";
 
 function ParentRewards(props) {
   async function callGetAllRewards() {
@@ -25,9 +26,13 @@ function ParentRewards(props) {
 
   return (
     <>
-      <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
-        Add New Reward
-      </Button>
+      <div className="d-flex justify-content-between align-items-start pb-5">
+        <SectionHeader title={"Assign Missions"} text={"Here you can create assign and approve missions"} />
+        <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
+          Add New Reward
+        </Button>
+      </div>
+
       <div className="row g-3">
         {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
         <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" />)}</div>
