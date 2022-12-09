@@ -8,9 +8,9 @@ function Dashboard(props) {
   let date = new Date().toLocaleDateString("fr-US");
 
   return (
-    <main className="dashboard bg-light justify-content-start  py-5">
+    <main className="dashboard bg-light justify-content-start py-5">
       <section className="row container-fluid justify-content-center">
-        <div className="sidebar col-auto">
+        <div className="sidebar col-12 col-md-auto">
           <DashboardNav />
         </div>
 
