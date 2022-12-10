@@ -13,7 +13,6 @@ const createChoresPaths = (app) => {
       return {...chore, completedChore}
     }))
     res.send(populatedChores);
-    res.send(chores);
   });
 
   app.get("/chore/:uid", async (req, res) => {
