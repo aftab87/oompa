@@ -11,6 +11,10 @@ const RewardsSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  claimed_kids: {
+    type:[String],
+    required: false
+  },
   title: {
     type: String,
     required: true,

@@ -20,7 +20,7 @@ function ParentMissions(props) {
 
   const deleteHandler = () => {
     callGetAllChores();
-  }
+  };
 
   useEffect(() => {
     if (firstRun) {
