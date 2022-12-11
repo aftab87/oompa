@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ chore, state }) {
-  const { points, parent_uid, title, image, date, time, kids, _id } = chore;
+function MissionCard({ chore }) {
+  const { points, parent_uid, title, image, date, time, kids, _id, completedChore } = chore;
   console.log(chore);
 
   const [user] = useContext(userContext);
@@ -39,10 +39,7 @@ function MissionCard({ chore, state }) {
       .then((data) => data.json())
       .then((json) => alert(JSON.stringify(json)));
   }
-  //ADDS COMPLETED CHORE TO CHORES COMPLETE
-  function markCompleteHandler() {
-    addCompletedChores();
-  }
+
   //MAKES VERIFIED TRUE AND ADDS POINTS TO KIDS TOTAL
   function verificationHandler() {
     updateCompletedChores();
@@ -132,13 +129,7 @@ function MissionCard({ chore, state }) {
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
-<<<<<<< HEAD
                   <Button as={NavLink} to={"/dashboard/missions/edit?id=" + _id}>Edit</Button>
-=======
-                  <Button as={NavLink} to={"/dashboard/missions/edit?id=" + _id}>
-                    Edit
-                  </Button>
->>>>>>> rewards-fixes
                 </div>
               )}
               {state === "completed" && (
@@ -166,8 +157,5 @@ function MissionCard({ chore, state }) {
 }
 
 export default MissionCard;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> rewards-fixes

@@ -13,7 +13,7 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  completed_date: {
+  date_completed: {
     type: Date,
     required: true,
   },
