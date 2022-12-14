@@ -9,28 +9,8 @@ const ChoresCompletedSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  points: {
-    type: Number,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
   kids_uid: {
     type: String,
-    required: true,
-  },
-  completed_date: {
-    type: Date,
-    required: true,
-  },
-  verified: {
-    type: Boolean,
     required: true,
   },
 });

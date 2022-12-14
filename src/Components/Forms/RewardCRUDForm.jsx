@@ -13,7 +13,7 @@ function RewardsCRUDForm(props) {
   const [validated, setValidated] = useState(false);
   const [firstRun, setFirstRun] = useState(true);
   const [user, setUser] = useContext(userContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const titleRef = useRef();
   const descriptionRef = useRef();
@@ -82,17 +82,17 @@ function RewardsCRUDForm(props) {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-    .then(data => data.json())
-    .then(json => {
-        console.log(json)
+      .then((data) => data.json())
+      .then((json) => {
+        console.log(json);
         if (json.success) {
-            console.log(json)
-            navigate('/dashboard/rewards')
+          console.log(json);
+          navigate("/dashboard/rewards");
         }
-    })
-    .catch(err => {
-        console.log('error', err)
-    })
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
 
   const handleKidsSelection = (username, selected) => {
@@ -112,8 +112,8 @@ function RewardsCRUDForm(props) {
   };
 
   return (
-    <div className="container">
-      <div className="form">
+    <div className="container my-5 row justify-content-center align-items-center">
+      <div className="form col col-lg-6">
         <div className="text-center my-5">
           {props.title && <h1>{props.title}</h1>}
           {props.subtitle && <h3>{props.subtitle}</h3>}
@@ -140,9 +140,11 @@ function RewardsCRUDForm(props) {
           <InputGroup type="text" label="Image" placeholder="Insert image..." required ref={imageRef} />
           <InputGroup type="number" label="Points" placeholder="Number of points..." required ref={pointsRef} />
 
-          <div className='text-center d-flex justify-content-center gap-5'>
+          <div className="text-center d-flex justify-content-center gap-5">
             <Button type="submit">Submit form</Button>
-            <Button as={NavLink} to={"/dashboard/rewards"} className="btn-danger">Cancel</Button>
+            <Button as={NavLink} to={"/dashboard/rewards"} className="btn-danger">
+              Cancel
+            </Button>
           </div>
         </Form>
         {/* FIXME: REMOVE THIS LINK */}

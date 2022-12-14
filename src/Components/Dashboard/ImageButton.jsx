@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function ImageButton({ imgSrc, label, link }) {
   return (
     // <Button as={NavLink} variant="primary" to={"/dashboard/missions"} className="m-2" >
-    <Button as={NavLink} variant="outline-primary" to={link} className="p-3 btn-square border rounded-4 d-flex flex-column justify-content-center align-items-center gap-2 fw-bold shadow">
+    <Button as={NavLink} variant="outline-primary" to={link} className="p-xs-1 p-md-2 btn-square border rounded-4 d-flex flex-column justify-content-center align-items-center gap-2 fw-bold shadow">
       <img className="img-fluid" src={imgSrc} alt="button icon" />
       {label}
     </Button>

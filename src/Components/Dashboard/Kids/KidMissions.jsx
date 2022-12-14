@@ -13,11 +13,11 @@ function KidMissions(props) {
       </div>
 
       {/* tab buttons */}
-      <div className="d-flex justify-content-center gap-3 p-4">
+      {/* <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Available"} section={"missions"} endpoint={"available"} />
         <DashboardTabButton label={"Completed"} section={"missions"} endpoint={"completed"} />
         <DashboardTabButton label={"Approved"} section={"missions"} endpoint={"approved"} />
-      </div>
+      </div> */}
 
       {/* tab content */}
       <Outlet />

@@ -1,18 +1,34 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { DarkModeContext, userContext } from "../../App";
 import Image from "./Cards/Image";
 import ProgressBar from "./Cards/ProgressBar";
 import TitleAndDescription from "./Cards/TitleAndDescription";
 import StarBadge from "./Kids/StarBadge";
 
-function RewardCard({ reward, date, time, state }) {
+function RewardCard({ reward, date, time, refresh, _id }) {
   console.log(reward);
-  const { description, image, kids, points, title, parent_uid } = reward;
+  const { description, image, kids, points, title, parent_uid, claimed_kids } = reward;
 
-  const [user] = useContext(userContext);
+  const [user, setUser] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
   const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
+  const state = claimed_kids.find((k) => k._id === user._id) ? "claimed" : "available";
+
+  const claimReward = async () => {
+    await fetch(`http://localhost:3001/dashboard/rewards/${reward._id}/claim`, {
+      body: JSON.stringify({ kid_uid: user.id }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      method: "put",
+    });
+    setUser({ ...user, points: user.points - points });
+    if (refresh) {
+      refresh();
+    }
+  };
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
@@ -26,15 +42,15 @@ function RewardCard({ reward, date, time, state }) {
             //Possible Missions Card states for Kids
             <>
               {state === "available" && <ProgressBar points={points} />}
+              {state === "available" && user.points > points && (
+                <div className="d-flex justify-content-center">
+                  {" "}
+                  <Button onClick={claimReward}>Claim</Button>
+                </div>
+              )}
               {state === "claimed" && (
                 <div>
                   <p className="text-success fw-bold h5 mb-0">CLAIMED</p>
-                  <p className="text-secondary fw-light fst-italic small mb-0 ">now you wait :)</p>
-                </div>
-              )}
-              {state === "approved" && (
-                <div>
-                  <p className="text-warning fw-bold h5 mb-0">RECEIVED</p>
                 </div>
               )}
             </>
@@ -53,12 +69,20 @@ function RewardCard({ reward, date, time, state }) {
                 </h5>
               </div>
 
-              {state === "available" && (
+              {(claimed_kids.length < kids.length || kids.length === 0) && (
                 <div className="d-flex justify-content-center gap-3">
-                  <Button>Edit</Button>
+                  {console.log("IDDDD" + reward._id) /* <Button>Edit</Button> */}
+
+                  <Button as={NavLink} to={"/dashboard/rewards/edit?id=" + reward._id}>
+                    Edit
+                  </Button>
                 </div>
               )}
-              {state === "claimed" && (
+              <div>
+                {claimed_kids.length}/ {kids.length} kids claimed
+              </div>
+
+              {/* {state === "claimed" && (
                 <div className="d-flex justify-content-center gap-3">
                   <Button variant="success" className="text-light">
                     Mark Fulfilled
@@ -73,7 +97,7 @@ function RewardCard({ reward, date, time, state }) {
                 <div>
                   <p className="text-warning fw-bold h5 mb-0">FULFILLED</p>
                 </div>
-              )}
+              )} */}
             </>
           )}
         </div>

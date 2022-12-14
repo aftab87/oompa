@@ -12,7 +12,7 @@ function KidOverview(props) {
   const [firstRun, setFirstRun] = useState(true);
 
   async function callGetAllKids() {
-    await fetch("http://localhost:3001/kidsavatar/" + user.id, { method: "GET" })
+    await fetch("http://localhost:3001/kids/" + user.id, { method: "GET" })
       .then((data) => data.json())
       .then((json) => json)
       .then((json) => setKids(json));
@@ -31,22 +31,37 @@ function KidOverview(props) {
 
   return (
     <section className="overview">
-      <div className="d-flex justify-content-between align-items-start">
+      <div className="d-flex justify-content-between align-items-start pb-5">
         <SectionHeader title={"Let's See how your kids are doing"} text={"Here you can ..."} />
         <Button as={NavLink} to={"/dashboard/kids/add"}>
           Add Kid
         </Button>
       </div>
-
       {/* tab buttons */}
-      <div className="d-flex justify-content-center gap-3 p-4">
+      {/* <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Tommy"} section={"missions"} endpoint={"available"} />
         <DashboardTabButton label={"John"} section={"missions"} endpoint={"completed"} />
         <DashboardTabButton label={"Jane"} section={"missions"} endpoint={"approved"} />
+      </div> */}
+      <div className="row g-3">
+        {kids &&
+          kids.map((kids) => (
+            <KidsCard
+              key={kids._id}
+              id={kids._id}
+              stars={kids.points}
+              title={kids.username}
+              img={kids.avatar}
+              date="Monday"
+              time="7:30 pm"
+              kids={kids.first_name}
+              state="available"
+              description={kids.description}
+              onDelete={deleteHandler}
+            />
+          ))}
       </div>
-      <div className="row g-3">{kids && kids.map((kids) => <KidsCard key={kids._id} id={kids._id} stars={kids.points} title={kids.username} img="" date="Monday" time="7:30 pm" kids={kids.first_name} state="available" description={kids.description} onDelete={deleteHandler} />)}</div>
-
-      {/* tab content */}
+      {/* /* tab content */}
       <Outlet />
     </section>
   );

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { userContext } from "App";
 import MissionCard from "../MissionCard";
 import RewardCard from "../RewardCard";
+import SectionHeader from "../SectionHeader";
 
 function ParentRewards(props) {
   async function callGetAllRewards() {
@@ -25,24 +26,28 @@ function ParentRewards(props) {
 
   return (
     <>
-      <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
-        Add New Reward
-      </Button>
-      <div className="row g-3">
-        {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
-        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="available" />)}</div>
-        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="claimed" />)}</div>
-        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="approved" />)}</div>
-        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="" />)}</div>
+      <div className="d-flex justify-content-between align-items-start pb-5">
+        <SectionHeader title={"Assign Missions"} text={"Here you can create assign and approve missions"} />
+        <Button variant="primary" as={NavLink} to="/dashboard/rewards/add">
+          Add New Reward
+        </Button>
       </div>
 
-      <div className="p-4 bg-white border m-4 rounded-4">
+      <div className="row g-3">
+        {/*!!!!!!!!!!! Temp mapping multiple times to pass missing data as props. Once we know what we need, we can adjust the model */}
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" />)}</div>
+        {/* <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="claimed" />)}</div>
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="approved" />)}</div>
+        <div className="row g-3">{rewards && rewards.map((reward) => <RewardCard key={reward._id} reward={reward} date="" time="" state="" />)}</div> */}
+      </div>
+
+      {/* <div className="p-4 bg-white border m-4 rounded-4">
         <h3>Test Edit Rewards</h3>
         <p>Make changes and/or delete rewards.</p>
         <Button variant="primary" as={NavLink} to="/dashboard/rewards/edit?reward=63912e8d5d9afcff48f748d3">
           Edit Test Reward
         </Button>
-      </div>
+      </div> */}
     </>
   );
 }

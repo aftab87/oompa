@@ -5,60 +5,60 @@ const choresModel = require("../Models/Chores");
 const createChoresCompletedPaths = (app) => {
   //***************CHORE COMPLETED ADD****************** */
   app.post("/completedchores", async (req, res) => {
-    const chores_uid = req.body.chores_uid;
-    const parent_uid = req.body.parent_uid;
-    const title = req.body.title;
-    const points = req.body.points;
-    const image = req.body.image;
-    const kids = req.body.kids_uid;
-    const completed_date = new Date();
-    const verified = req.body.verified;
+    console.log("/completedchores", JSON.stringify(req.body))
     const chores_completed = {
-      chores_uid: chores_uid,
-      parent_uid: parent_uid,
-      title: title,
-      points: points,
-      image: image,
-      kids_uid: kids,
-      completed_date: completed_date,
-      verified: verified,
+      ...req.body,
+      date_completed: new Date(),
+      verified: false,
     };
     try {
-      await completedChoresModel.create(chores_completed);
+      const choreCompleted = await completedChoresModel.create(chores_completed);
+      res.send(choreCompleted);
     } catch (err) {
       console.log(err);
+      res.send({ error: err.message });
     }
-    res.send(chores_completed);
   });
 
   //***************CHORE COMPLETED UPDATE****************** */
-  app.put("/completedchores", async (req, res) => {
-    const completedChoreFilter = { _id: "638fc3fe0c705dfbfc2dbab6" };
-    const kidsFilter = { _id: "638f78b0654917c51566c027" };
-    const chore = await choresModel.findById({ _id: "638ec59468ff75d89808c139" });
-    const kid = await kidsModel.findById(kidsFilter);
+  app.put("/completedchores/:id/approve", async (req, res) => {
+    const choreCompleted = await completedChoresModel.findById(req.params.id);
+    // console.log({ choreCompleted });
+    const chore = await choresModel.findById(choreCompleted.chores_uid);
+    choreCompleted.verified = true;
+    const kid = await kidsModel.findById(choreCompleted.kids_uid);
+    kid.points = kid.points + chore.points;
 
-    const newScore = kid.points + chore.points;
-    const update = {
-      verified: true,
-    };
     // const newScore{
     //     points: //////////////TODO
 
     // };
     try {
-      await kidsModel.findOneAndUpdate(kidsFilter, { points: newScore });
-      await completedChoresModel.findOneAndUpdate(completedChoreFilter, update);
+      await choreCompleted.save();
+      await kid.save();
+      res.send(choreCompleted);
     } catch (err) {
       console.log(err);
+      res.send({ error: err.message }).status(400);
     }
-    res.send(update);
   });
 
   // *********GET CHORES COMPLETED*******************
   app.get("/completedchores", async (req, res) => {
-    const CompletedChores = await completedChoresModel.find({}).where("parent_uid").equals("638f90e7a634d211e1791f2c");
-    res.send(CompletedChores);
+    // console.log({ query: req.query });
+    const completedChores = await completedChoresModel.find({ parent_uid: req.query.parent_uid });
+    const populatedData = await Promise.all(
+      completedChores
+        .map((c) => c.toObject())
+        .map(async (completedChore) => {
+          return {
+            ...completedChore,
+            kid: await kidsModel.findById(completedChore.kids_uid),
+            chore: await choresModel.findById(completedChore.chores_uid),
+          };
+        })
+    );
+    res.send(populatedData);
   });
 };
 

@@ -1,60 +1,59 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { DarkModeContext, userContext } from "../../App";
+import { NavLink, useNavigate } from "react-router-dom";
+import { DarkModeContext, userContext } from "App";
 import StarBadge from "./Kids/StarBadge";
 
-function MissionCard({ chore, state }) {
-  const { points, parent_uid, title, image, date, time, kids, _id } = chore;
-  console.log(chore);
-
+function MissionCard(props) {
+  console.log(props);
+  const {
+    chore: { title, description, image, time = "7:00PM", kids, _id, points: stars, repitition: date, completedChore },
+    onDelete,
+    refresh
+  } = props;
   const [user] = useContext(userContext);
   const [darkMode] = useContext(DarkModeContext);
-  console.log(user.id);
 
-  function addCompletedChores() {
-    alert("so it begins...");
-    fetch("http://localhost:3001/completedchores", {
+  const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
+  async function markCompleteHandler() {
+    //write logic for what happend when CHILD clicks mark complete
+
+    const response = await fetch("http://localhost:3001/completedchores", {
       method: "POST",
       body: JSON.stringify({
+        parent_uid: user.parent_uid,
         chores_uid: _id,
-        parent_uid: parent_uid,
-        title: title,
-        points: points,
-        image: image,
         kids_uid: user.id,
-        completed_date: new Date(),
-        verified: false,
       }),
       headers: {
-        "Content-type": "application/json;charset=UTF-8",
+        "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((data) => data.json())
-      .then((json) => alert(JSON.stringify(json)));
+      .then((json) => {
+        console.log(_id, json)
+        if (json.chores_uid === _id)
+          refresh()
+      })
+    // .then((json) => {
+    //   chore = 
+    // });
+    console.log("responseOnRewardMarkCompleted", { response });
   }
 
-  function updateCompletedChores() {
-    fetch("http://localhost:3001/completedchores", { method: "PUT" })
-      .then((data) => data.json())
-      .then((json) => alert(JSON.stringify(json)));
+  let state = "available";
+  if (completedChore) {
+    if (!completedChore.verified) {
+      state = "completed";
+    } else {
+      state = "approved";
+    }
   }
-  //ADDS COMPLETED CHORE TO CHORES COMPLETE
-  function markCompleteHandler() {
-    addCompletedChores();
-  }
-  //MAKES VERIFIED TRUE AND ADDS POINTS TO KIDS TOTAL
-  function verificationHandler() {
-    updateCompletedChores();
-  }
-
-  const col = " col-12 col-md-6 col-xl-4 col-xxl-3";
-
   // TODO : Extract the Card into a Component for DarkMode
   return (
     <div className={"custom_card" + col}>
       <div className={"drop-shadow bg-white p-3 rounded-4 gap-3 d-flex d-flex flex-column h-100"}>
-        <StarBadge className="text-dark" numStars={points} />
+        <StarBadge className="text-dark" numStars={stars} />
         <div className="position-relative text-center">
           <img src={`${image ? image : "/images/mission.svg"}`} className="devImages img-fluid" alt="Developers Heroes" />
           {image && <div className="inner-shadow"></div>}
@@ -64,7 +63,7 @@ function MissionCard({ chore, state }) {
             <h5 className="card-title">
               <b>{title}</b>
             </h5>
-            <p className="card-text fst-italic small mb-0">{points}</p>
+            <p className="card-text fst-italic small mb-0">{description}</p>
           </div>
           <div className="meta fw-bold d-flex justify-content-center gap-4">
             <div className="date d-flex align-items-center gap-1">
@@ -98,10 +97,10 @@ function MissionCard({ chore, state }) {
             //Possible Missions Card states for Parents
 
             <>
-              <div className="text-center">
+              {/* <div className="text-center">
                 <p className="text-secondary  fst-italic small mb-0 ">assigned to:</p>
-                <h5 className="text-center mb-0">{kids}</h5>
-              </div>
+                <h5 className="text-center mb-0">{kids[0]}</h5>
+              </div> */}
 
               {state === "available" && (
                 <div className="d-flex justify-content-center gap-3">
@@ -115,7 +114,7 @@ function MissionCard({ chore, state }) {
                   <Button variant="success" className="text-light">
                     Approve
                   </Button>
-                  <Button onClick={verificationHandler} variant="danger" className="text-light w-45">
+                  <Button variant="danger" className="text-light w-45">
                     Reject
                   </Button>
                 </div>
@@ -130,6 +129,7 @@ function MissionCard({ chore, state }) {
           )}
         </div>
       </div>
+
     </div>
   );
 }
