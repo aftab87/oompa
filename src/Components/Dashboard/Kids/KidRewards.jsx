@@ -15,8 +15,7 @@ function KidRewards(props) {
       {/* tab buttons */}
       <div className="d-flex justify-content-center gap-3 p-4">
         <DashboardTabButton label={"Available"} section={"rewards"} endpoint={"available"} />
-        <DashboardTabButton label={"Claimed"} section={"rewards"} endpoint={"claimed"} />
-        <DashboardTabButton label={"Received"} section={"rewards"} endpoint={"received"} />
+       
       </div>
 
       {/* tab content */}

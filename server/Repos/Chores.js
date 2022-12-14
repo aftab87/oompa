@@ -1,10 +1,18 @@
 const choresModel = require("../Models/Chores");
+const choresCompletedModel = require("../Models/Chores_completed");
 
 const createChoresPaths = (app) => {
   // *********GET CHORE*******************
   app.get("/Chores/:parent_uid", async (req, res) => {
     const parent_uid = req.params.parent_uid;
     const chores = await choresModel.find({}).where("parent_uid").equals(parent_uid);
+    const populatedChores = await Promise.all( chores.map(chore=>chore.toObject()).map(async (chore)=>{
+      
+      const completedChore= await choresCompletedModel.findOne({chores_uid:chore._id.toString()})
+      console.log({chore_uid:chore._id.toString(), completedChore})
+      return {...chore, completedChore}
+    }))
+    res.send(populatedChores);
     res.send(chores);
   });
 
@@ -17,7 +25,13 @@ const createChoresPaths = (app) => {
   app.get("/Chores/kids/:kids_uid", async (req, res) => {
     const kids_uid = req.params.kids_uid;
     const chores = await choresModel.find({ kids: kids_uid });
-    res.send(chores);
+    const populatedChores = await Promise.all( chores.map(chore=>chore.toObject()).map(async (chore)=>{
+      
+      const completedChore= await choresCompletedModel.findOne({chores_uid:chore._id.toString()})
+      console.log({chore_uid:chore._id.toString(), completedChore})
+      return {...chore, completedChore}
+    }))
+    res.send(populatedChores);
   });
 
   // *********ADD CHORE*******************
@@ -130,6 +144,11 @@ const createChoresPaths = (app) => {
   //   const results = await choresModel.deleteOne({ _id: "638e50e3f865950f20bf73f0" });
   //   res.send(results);
   // });
+
+  //Mark a chore's status as completed
+
+
+
 };
 
 module.exports = createChoresPaths;
